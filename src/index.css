@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -35,17 +36,23 @@
   --color-text: #ffff;
   --color-radio: #d9d9d9;
 
-  --font-family: 
-
   /* custome theme */
   --width-min: 320px;
-  --width-max: 1000px;
+  --width-max: 1440px;
 }
 
 @layer components {
   .container__div {
-    @apply mx-auto w-full max-w-(--width-max) min-w-(--width-min); 
+    @apply mx-auto w-full max-w-(--width-max) min-w-(--width-min);
   }
 }
 
+@layer base {
+  body {
+    font-family: "Noto Sans", "Noto Sans Thai", sans-serif;
+  }
+}
 
+*{
+outline: red solid 1px;
+}

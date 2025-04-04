@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div>
+    <div className="bg-gray-500">
       <div className="container__div">
       <div className="footer flex flex-col gap-5 md:pb-10 lg:flex-row">
         <div className="md:w-[60%]">
