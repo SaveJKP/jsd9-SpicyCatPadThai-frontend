@@ -1,0 +1,51 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  /* //build-in utility theme
+  --color-*: intitial;
+  --font-*: intitial;
+  --text-*: intitial;
+  --font-weight-*: intitial;
+  --tracking-*: intitial;
+  --leading-*: intitial;
+  --breakpoint-*: intitial;
+  --container-*: intitial;
+  --spacing-*: intitial;
+  --radius-*: intitial;
+  --shadow-*: intitial;
+  --inset-shadow-*: intitial;
+  --drop-shadow-*: intitial;
+  --blur-*: intitial;
+  --perspective-*: intitial;
+  --aspect-*: intitial;
+  --ease-*: intitial;
+  --animate-*: intitial; */
+  --breakpoint-sm: 320px;
+  --breakpoint-md: 728px;
+  --breakpoint-lg: 1440px;
+
+  --color-background: #232a25;
+  --color-box: #5b7362;
+  --color-buttonBlue: #2e648e;
+  --color-banner: #0d0d0d;
+  --color-buttonBrown: #bc7142;
+  --color-text: #ffff;
+  --color-radio: #d9d9d9;
+
+  --font-family: 
+
+  /* custome theme */
+  --width-min: 320px;
+  --width-max: 1000px;
+}
+
+@layer components {
+  .container__div {
+    @apply mx-auto w-full max-w-(--width-max) min-w-(--width-min); 
+  }
+}
+
+
