@@ -116,9 +116,7 @@ const Layout = () => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="auto"
-            height="auto"
-            class="h-32 w-12"
+            class="h-auto w-12"
             viewBox="0 0 24 24"
             fill="var(--color-text)"
           >
