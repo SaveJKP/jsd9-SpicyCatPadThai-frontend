@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
+import Cart from "./Cart";
 
 const Layout = () => {
   const token = localStorage.getItem("token");
@@ -110,10 +111,7 @@ const Layout = () => {
           </>
         )}
 
-        <button
-          class="flex items-center"
-          onclick="window.location.href='/purchase.html';"
-        >
+        <Link class="flex items-center" to={Cart}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-auto w-12"
@@ -136,10 +134,10 @@ const Layout = () => {
             />
           </svg>
 
-          <span class="mb-[30px] basis-5 justify-self-center rounded-lg bg-[var(--color-box)] text-xs">
+          <span class="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
             1
           </span>
-        </button>
+        </Link>
       </div>
     </div>
   );
