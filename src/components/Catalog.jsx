@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 export default function Catalog() {
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState(null);
+  const [serie, setSerie] = useState("");
+  const [picture, setPicture] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [volume, setVolume] = useState([]);
   return (
     <div
       className="fixed inset-0 z-10 flex w-[100%] items-start justify-center backdrop-blur-sm"
@@ -17,8 +26,8 @@ export default function Catalog() {
           magnam laboriosam officiis, optio adipisci doloribus omnis. Saepe
           totam provident cumque.
         </p>
-        <div className="bg-background w-full p-6">
-          <h3>Volume</h3>
+        <div className="bg-greenBackground w-full p-6">
+          <p>Volume</p>
           <select
             name="sdfdsfs"
             id="dsfsf"
