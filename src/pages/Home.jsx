@@ -27,9 +27,8 @@ export default function Home() {
 
         <div className="bg-greenBackground">
           <div className="container__div">
-              <CardSlider name="New Release"/>
-              <CardSlider name="Best Seller"/>
           </div>
+          <ShowAll/>
         </div>
     </main>
   )

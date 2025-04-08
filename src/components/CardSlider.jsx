@@ -12,7 +12,7 @@ export default function CardSlider({name}) {
     <Carousel className="w-[100%] md:w-[95%] h-auto">
       <h1 className="text-text mb-2 font-semibold">{name}</h1>
 
-      <CarouselContent className="ml-1 gap-6 w-70 md:w-100">
+      <CarouselContent className="ml-1 gap-6 w-70 md:w-90">
 
         <CarouselItem className="bg-box rounded-2xl">
           <div className="w-full flex flex-col justify-center items-center p-4 gap-2">
@@ -26,7 +26,7 @@ export default function CardSlider({name}) {
           <div className="w-full flex flex-col justify-center items-center p-4 gap-2">
             <img src="/src/assets/foodstriker_4.jpg" alt=""
             className="w-[100%] rounded-2xl"/>
-            <h3 className="text-text">Food Striker</h3>
+            <h3 className="s">Food Striker</h3>
           </div>
         </CarouselItem>
 
@@ -35,6 +35,14 @@ export default function CardSlider({name}) {
             <img src="/src/assets/hikarilove.jpg" alt=""
             className="w-[100%] rounded-2xl"/>
             <h3 className="text-text">Hikari Love</h3>
+          </div>
+        </CarouselItem>
+
+        <CarouselItem className="bg-box rounded-2xl">
+          <div className="w-full flex flex-col justify-center items-center p-4 gap-2">
+            <img src="/src/assets/katanaway.jpg" alt=""
+            className="w-[100%] rounded-2xl"/>
+            <h3 className="text-text">Katanaway</h3>
           </div>
         </CarouselItem>
 
