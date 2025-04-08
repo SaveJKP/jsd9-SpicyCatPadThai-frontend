@@ -6,7 +6,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-
 export default function CardSlider({name}) {
   return <div className="flex justify-end items-start w-[100%] h-[100%] px-6 py-8">
     <Carousel className="w-[100%] md:w-[90%] h-auto">
@@ -22,5 +21,5 @@ export default function CardSlider({name}) {
       {/* <CarouselPrevious />
       <CarouselNext /> */}
     </Carousel>
-  </div>;
+  </div>
 }

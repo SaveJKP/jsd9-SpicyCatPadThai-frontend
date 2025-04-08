@@ -6,10 +6,20 @@ import {
     CarouselPrevious,
   } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
+import React, { useRef } from 'react'
+import Autoplay from 'embla-carousel-autoplay'
 
   export default function BannerSlider() {
+    const plugin = React.useRef(
+        Autoplay({ delay: 4000, stopOnInteraction: true })
+      )
+
     return <div className="flex justify-center items-center w-full h-fit bg-banner">
-    <Carousel className="w-[100%] h-[100%]">
+    <Carousel className="w-[100%] h-[100%]"
+     plugins={[plugin.current]}
+     onMouseEnter={plugin.current.stop}
+     onMouseLeave={plugin.current.reset}
+     >
         <CarouselContent>
             <CarouselItem className="flex flex-row justify-between items-center w-[100%]">
                 <div className="flex flex-col md:w-1/3 px-6 py-8 lg:w-1/2">
