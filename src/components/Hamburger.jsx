@@ -4,7 +4,7 @@ export default function Hamburger() {
   return (
     <>
       {!token ? (
-        <div className="relative overflow-hidden text-sm text-[var(--color-text)]">
+        <div className="relative overflow-hidden text-sm text-[var(--color-text)] min-[1024px]:hidden">
           <div className="bg-[var(--color-background)] pt-10 pb-30 leading-4 no-underline">
             <a
               href="/logout"
