@@ -12,7 +12,7 @@ export default function AddToCart() {
     price: 160,
     img: "https://placehold.co/350x450",
     description: "Sample description",
-    genre: ["Fiction", "Adventure"],
+    genre: ["Fiction", "Adventure", "Fantasy"],
   };
 
   const totalPrice = product.price * quantity;
@@ -63,6 +63,49 @@ export default function AddToCart() {
   useEffect(() => {
     console.log("Updated cart:", cartItems);
   }, [cartItems]);
+
+  const genreTags = product.genre.map((genre, index) => (
+    <span
+      key={index}
+      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+    >
+      {genre}
+    </span>
+  ));
+
+  const similarBooks = [
+    {
+      title: "Similar Book 1",
+      author: "Author 1",
+      price: 150,
+      img: "https://placehold.co/100x150",
+    },
+    {
+      title: "Similar Book 2",
+      author: "Author 2",
+      price: 200,
+      img: "https://placehold.co/100x150",
+    },
+    {
+      title: "Similar Book 3",
+      author: "Author 3",
+      price: 180,
+      img: "https://placehold.co/100x150",
+    },
+  ].map((book, index) => (
+    <div key={index} className="flex flex-col items-center">
+      <img
+        src={book.img}
+        alt="book-cover"
+        className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+      />
+      <p className="flex flex-col justify-center md:text-center">
+        <span>{book.title}</span>
+        <span>{book.author}</span>
+        <span>฿{book.price}</span>
+      </p>
+    </div>
+  ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -122,35 +165,14 @@ export default function AddToCart() {
 
             {/* fetching product.genre */}
             <h4 class="mb-4 text-lg font-bold">Genre</h4>
-            <div className="flex flex-row flex-wrap gap-2">
-              <span class="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm">
-                "product.genre"
-              </span>
-              <span class="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm">
-                "product.genre"
-              </span>
-              <span class="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm">
-                "product.genre"
-              </span>
-            </div>
+            <div className="flex flex-row flex-wrap gap-2">{genreTags}</div>
           </div>
 
           {/* //same genre */}
           <div class="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
-            <div class="grid grid-cols-1 gap-2 md:flex md:flex-row md:py-5">
-              <div>
-                <img
-                  src="https://placehold.co/100x150" //product.img
-                  alt="book-cover"
-                  class="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
-                />
-                <p class="flex flex-col justify-center md:text-center">
-                  <span>"product.title" </span>
-                  <span>"product.author"</span>
-                  <span>"product.price"</span>
-                </p>
-              </div>
+            <div class="grid grid-cols-1 place-content-between gap-5 md:flex md:flex-row md:py-5">
+              {similarBooks}
             </div>
           </div>
         </div>
