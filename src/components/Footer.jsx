@@ -22,7 +22,7 @@ export default function Footer() {
           <Link>Return & Refund</Link>
         </div>
         <div className="md:w-[60%]">
-          <Link href="/about.html">
+          <Link to="/about">
             <h3>About Us</h3>
           </Link>
           <p className="w-[90%]">
@@ -32,7 +32,7 @@ export default function Footer() {
           </p>
         </div>
         <div className="md:w-[60%]">
-          <Link href="/about.html">
+          <Link to="/about">
             <h3>Contact Us</h3>
           </Link>
           <p className="w-[90%]">
