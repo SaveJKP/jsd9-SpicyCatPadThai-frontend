@@ -4,13 +4,13 @@ export default function AddToCart() {
   return (
     <div className="container__div text-[var(--color-text)]">
       <div>
-        <div class="grid grid-cols-1 gap-4 md:gap-10 md:p-10 md:px-20 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 min-[1024px]:grid-cols-2 md:gap-10 md:p-10 md:px-20">
           {/* show product */}
           <div class="grid grid-cols-1">
             <img
               src="https://placehold.co/350x450" //product.img
               alt="book-cover"
-              class="max-w-[50%] place-self-center object-cover shadow-lg"
+              class="max-w-[100%] place-self-center object-cover shadow-lg"
             />
           </div>
           <div class="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
@@ -87,7 +87,8 @@ export default function AddToCart() {
           </div>
         </div>
       </div>
-      <div class="sticky bottom-0 flex w-full flex-row justify-between overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-background)] px-[16px] lg:hidden">
+      {/* Sticky AddToCart Button */}
+      <div class="sticky bottom-0 flex w-full flex-row justify-between overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] px-[16px] lg:hidden">
         <p class="p-2 text-2xl text-[var(--color-text]">฿9,999.99</p>
         <button class="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:bg-[#2e648ecc]">
           Add to Cart
