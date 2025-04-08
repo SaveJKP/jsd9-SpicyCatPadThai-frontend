@@ -33,46 +33,8 @@ export default function Footer() {
 
           <Link href="#enquiry">
             <h3>Enquiry</h3>
-
-          <Link href="#faq">
-            <h3>FAQ</h3>
-          </Link>
-
-          <Link href="#help">
-            <h3>Help</h3>
-          </Link>
-
-          <Link href="#privacy">
-            <h3>Privacy Notice</h3>
-          </Link>
-
-          <Link href="#cookies">
-            <h3>Cookies Notice</h3>
-          </Link>
-
-          <Link href="#terms">
-            <h3>Terms & Conditions</h3>
-          </Link>
-
-          <Link href="#enquiry">
-            <h3>Enquiry</h3>
           </Link>
         </div>
-        <div className="mt-[16px] flex flex-row items-center min-[1024px]:justify-self-center">
-          <img
-            src={logo_katsubook_notext}
-            alt="logo_bookstore"
-            className="h-[30px] max-sm:hidden"
-          />
-          <img
-            src={logo_katsubook_text}
-            alt="logo_bookstore"
-            className="h-[30px] max-sm:hidden"
-          />
-        </div>
-        <p className="py-[10px] min-[1024px]:justify-self-center">
-          &copy; 2025 KatsuBook. All Rights Reserved
-        </p>
         <div className="mt-[16px] flex flex-row items-center min-[1024px]:justify-self-center">
           <img
             src={logo_katsubook_notext}
