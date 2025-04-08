@@ -4,12 +4,8 @@ export default function Hamburger() {
   return (
     <>
       {!token ? (
-<<<<<<< HEAD
         <div className="relative overflow-hidden text-sm text-[var(--color-text)] min-[1024px]:hidden">
-=======
-        <div className="relative overflow-hidden text-sm text-[var(--color-text)]">
->>>>>>> c0e47aebacf29c7f156210f0002dd32389f42e33
-          <div className="bg-[var(--color-background)] pt-10 pb-30 leading-4 no-underline">
+          <div className="bg-[var(--color-greenBackground)] pt-10 pb-30 leading-4 no-underline">
             <a
               href="/logout"
               className="mx-15 mb-6 block items-center rounded-xl bg-[var(--color-buttonBrown)] p-3 text-center hover:bg-[#dcd7c97c]"

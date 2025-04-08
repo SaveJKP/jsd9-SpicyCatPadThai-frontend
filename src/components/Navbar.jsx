@@ -20,7 +20,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="flex h-[64px] flex-row justify-between bg-[var(--color-background)] px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-0">
+      <div className="flex h-[64px] flex-row justify-between bg-[var(--color-greenBackground)] px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-0">
         <div class="flex flex-row">
           {/* Hamburger Menu */}
           <svg
