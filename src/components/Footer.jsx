@@ -4,7 +4,7 @@ import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
 
 export default function Footer() {
   return (
-    <div className="bg-[var(--color-background)] text-[var(--color-text)]">
+    <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
       <div className="container__div px-[16px]">
         <div className="flex-wrp flex flex-col justify-center space-y-[16px] py-[16px] min-[1024px]:flex-row min-[1024px]:gap-5 md:pb-10">
           <Link href="/about">
