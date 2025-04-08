@@ -22,14 +22,18 @@ export default function Home() {
           </div>
           <div className="hidden md:flex w-1/2 text-text">
           <img src="/src/assets/bangkoklegacy_banner.jpg" alt=""
-          className="h-auto w-full"/>
+          className="h-auto w-[100%]"/>
           </div>
         </article>
 
         {/* Card Slider Section */}
-        <section className="w-full h-150 bg-greenBackground">
-          <CardSlider />
+        <section className="w-full h-fit bg-greenBackground px-6 py-8 gap-4">
+          <CardSlider name="New Release"/>
+          <CardSlider name="Best Seller"/>
         </section>
+
+
+
 
         {/* Promote Section */}
         <article
