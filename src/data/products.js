@@ -1,5 +1,6 @@
 export const books = [
   {
+    id:"1",
     title: "Generation Thailand JSD9",
     price: 999,
     volume: "1",
@@ -9,6 +10,7 @@ export const books = [
     banner: "/src/assets/jsd.jpg",
   },
   {
+    id:"2",
     title: "Generation Thailand JSD9",
     price: 999,
     volume: "2",
@@ -18,6 +20,7 @@ export const books = [
     banner: "/src/assets/jsd_2.jpg",
   },
   {
+    id:"3",
     title: "Generation Thailand JSD9",
     price: 999,
     volume: "3",
@@ -27,6 +30,7 @@ export const books = [
     banner: "/src/assets/jsd_3.jpg",
   },
   {
+    id:"4",
     title: "Generation Thailand JSD9",
     price: 999,
     volume: "4",
@@ -36,6 +40,7 @@ export const books = [
     banner: "/src/assets/jsd_4.jpg",
   },
   {
+    id:"5",
     title: "Generation Thailand JSD9",
     price: 999,
     volume: "5",
@@ -45,6 +50,7 @@ export const books = [
     banner: "/src/assets/jsd_5.jpg",
   },
   {
+    id:"6",
     title: "Bangkok Legacy",
     price: 99,
     volume: "1",
@@ -54,6 +60,7 @@ export const books = [
     banner: "/src/assets/bangkoklegacy.jpg",
   },
   {
+    id:"7",
     title: "Bangkok Legacy",
     price: 99,
     volume: "2",
@@ -63,6 +70,7 @@ export const books = [
     banner: "/src/assets/bangkoklegacy_2.jpg",
   },
   {
+    id:"8",
     title: "Bangkok Legacy",
     price: 99,
     volume: "3",
@@ -72,6 +80,7 @@ export const books = [
     banner: "/src/assets/bangkoklegacy_3.jpg",
   },
   {
+    id:"9",
     title: "Food Striker",
     price: 79,
     volume: "1",
@@ -81,6 +90,7 @@ export const books = [
     banner: "/src/assets/foodstriker.jpg",
   },
   {
+    id:"10",
     title: "Food Striker",
     price: 79,
     volume: "2",
@@ -90,6 +100,7 @@ export const books = [
     banner: "/src/assets/foodstriker_2.jpg",
   },
   {
+    id:"11",
     title: "Food Striker",
     price: 79,
     volume: "3",
@@ -99,6 +110,7 @@ export const books = [
     banner: "/src/assets/foodstriker_3.jpg",
   },
   {
+    id:"12",
     title: "Food Striker",
     price: 79,
     volume: "4",

@@ -19,7 +19,7 @@ export function BookCard({title, banner}) {
                         className="w-[100%] rounded-2xl"/>
                     </CardContent>
                     <CardFooter>
-                        <CardTitle className="text-xl font-bold">{title}</CardTitle>
+                        <CardTitle className="text-lg font-semibold text-text">{title}</CardTitle>
                     </CardFooter>
                 </Card>
             </div>

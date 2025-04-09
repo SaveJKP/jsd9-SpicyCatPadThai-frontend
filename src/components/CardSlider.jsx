@@ -26,7 +26,7 @@ export default function CardSlider({name}) {
           <div className="w-full flex flex-col justify-center items-center p-4 gap-2">
             <img src="/src/assets/foodstriker_4.jpg" alt=""
             className="w-[100%] rounded-2xl"/>
-            <h3 className="s">Food Striker</h3>
+            <h3 className="text-text">Food Striker</h3>
           </div>
         </CarouselItem>
 
