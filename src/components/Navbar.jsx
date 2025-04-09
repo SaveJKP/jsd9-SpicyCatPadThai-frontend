@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
-import Cart from "./Cart";
 import Hamburger from "./Hamburger";
 
 const Layout = () => {
@@ -13,6 +12,7 @@ const Layout = () => {
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
   };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -49,27 +49,40 @@ const Layout = () => {
                   class="h-[60%]"
                 />
               </Link>
-              <a href="/index.html" class="flex flex-row items-center">
+              <Link to="/" class="flex flex-row items-center">
                 <img
                   src={logo_katsubook_notext}
                   alt="LOGO"
-                  class="max-h-10 place-self-center md:hidden"
+                  className="max-h-10 place-self-center md:hidden"
                 />
-              </a>
+              </Link>
 
-              <div className="flex w-[50%] flex-row items-center justify-center sm:max-md:hidden">
+              {/* <div classNameName="flex w-[50%] flex-row items-center justify-center sm:max-md:hidden">
                 <input
                   type="text"
                   placeholder="Search"
-                  class="border-lightgray hover:border-lightgray mx-4 h-[45px] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
+                  className="border-lightgray hover:border-lightgray mx-4 h-[45px] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
                 />
-              </div>
+              </div> */}
             </div>
 
-            <div class="flex flex-row justify-end gap-5">
+            <div className="flex flex-row justify-end gap-5">
               {!token ? (
                 <>
-                  <div class="flex max-w-[120px] flex-row items-center">
+                  {/* search icon */}
+                  <Link to={"/search"}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mx-[16px] sm:max-[1024px]:hidden"
+                      height="auto"
+                      viewBox="0 -960 960 960"
+                      width="40px"
+                      fill="#e3e3e3"
+                    >
+                      <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                    </svg>
+                  </Link>
+                  <div className="flex max-w-[120px] flex-row items-center">
                     <Link to={"/user/:userId"}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -84,14 +97,14 @@ const Layout = () => {
                     </Link>
                     <Link
                       to="/user/:userId"
-                      class="my-2 w-[10rem] p-[8px] text-[16px] min-[1024px]:block min-sm:hidden"
+                      className="my-2 w-[10rem] p-[8px] text-[16px] min-[1024px]:block min-sm:hidden"
                     >
                       Account
                     </Link>
                   </div>
                   <Link
                     to="/purchase"
-                    class="my-2 w-[12rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-[12rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
                   >
                     My Purchase
                   </Link>
@@ -106,23 +119,23 @@ const Layout = () => {
                 <>
                   <Link
                     to="/login"
-                    class="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
                   >
                     Log in
                   </Link>
                   <Link
                     to="/register"
-                    class="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
                   >
                     Register
                   </Link>
                 </>
               )}
 
-              <Link class="flex items-center" to={Cart}>
+              <Link className="flex items-center" to={"/purchase"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-auto w-12"
+                  className="h-auto w-12"
                   viewBox="0 0 24 24"
                   fill="var(--color-text)"
                 >
@@ -142,7 +155,7 @@ const Layout = () => {
                   />
                 </svg>
 
-                <span class="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
+                <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
                   1
                 </span>
               </Link>
