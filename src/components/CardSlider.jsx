@@ -12,7 +12,7 @@ export default function CardSlider({name}) {
     <Carousel className="w-[100%] md:w-[95%] h-auto">
       <h1 className="text-text mb-2 font-semibold">{name}</h1>
 
-      <CarouselContent className="ml-1 gap-6 w-70 md:w-90">
+      <CarouselContent className="ml-1 gap-4 w-70 md:w-90">
 
         <CarouselItem className="bg-box rounded-2xl">
           <div className="w-full flex flex-col justify-center items-center p-4 gap-2">
