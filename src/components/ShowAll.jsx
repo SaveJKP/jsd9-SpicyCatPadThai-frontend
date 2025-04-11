@@ -13,7 +13,7 @@ import { useState } from "react";
 
 export default function ShowAll() {
   {/* set page */}
-  const itemsPerPage = 12
+  const itemsPerPage = 8
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(books.length / itemsPerPage)
 
