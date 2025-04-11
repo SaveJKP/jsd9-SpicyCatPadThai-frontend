@@ -3,26 +3,26 @@ import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 
 export default function AddToCart() {
-  const { productId } = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState([]);
 
   // Fetch product by ID from mock data
+
   useEffect(() => {
     const fetchMockProduct = () => {
-      const data = products.find((p) => p.id === productId);
+      const data = products.find((p) => p.id === id);
       setProduct(data);
     };
     fetchMockProduct();
-  }, [productId]);
+  }, [id]);
 
   // Load cart from localStorage when the app initializes
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
+    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+    setCart(parsedCart);
   }, []);
 
   // Save cart to localStorage whenever it changes
@@ -37,6 +37,10 @@ export default function AddToCart() {
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
+      if (!Array.isArray(prevCart)) {
+        console.error("Cart is not an array:", prevCart);
+        return [];
+      }
       const existingItem = prevCart.find((item) => item.id === product.id);
       let updatedCart;
 
@@ -71,25 +75,39 @@ export default function AddToCart() {
     console.log("Updated cart:", cart);
   }, [cart]);
 
-  if (!product) return <div>Product not found.</div>;
+  if (!product) {
+    return <div className="p-10 text-xl text-red-500">Product not found</div>;
+  }
 
-  const genreTags = product.genre.map((genre, index) => (
-    <span
-      key={`${genre}-${index}`}
-      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-    >
-      {genre}
-    </span>
-  ));
+  const genreTags = Array.isArray(product.category)
+    ? product.category.map((category, index) => (
+        <span
+          key={`${category}-${index}`}
+          className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+        >
+          {category}
+        </span>
+      ))
+    : [];
 
-  const getRandomBooks = (category) =>
-    category?.sort(() => Math.random() - 0.5).slice(0, 3);
+  const getRandomBooks = (products, category) => {
+    // Filter products by checking if the category exists in the product's category array
+    const filteredBooks = products.filter(
+      (product) =>
+        Array.isArray(product.category) && product.category.includes(category),
+    );
 
-  const similarBooks = getRandomBooks(product?.category || []).map(
-    (book, index) => (
+    // Shuffle and pick random ones
+    return filteredBooks.sort(() => Math.random() - 0.5).slice(0, 3);
+  };
+
+  const similarBooks = product.category
+    .flatMap((category) => getRandomBooks(products, category))
+    .slice(0, 3) // Limit total results to three
+    .map((book, index) => (
       <div key={index} className="flex flex-col items-center">
         <img
-          src={book.img || "https://placehold.co/200x250"}
+          src={book.img}
           alt={book.title}
           className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
         />
@@ -99,8 +117,7 @@ export default function AddToCart() {
           <span>฿{book.price}</span>
         </p>
       </div>
-    ),
-  );
+    ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
