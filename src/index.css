@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @layer theme, base, components, utilities;
@@ -54,16 +55,16 @@
 @layer base {
   body {
     font-family: "Noto Sans", "Noto Sans Thai", sans-serif;
+    color: var(--color-text)
   }
-  h1 {@apply text-3xl text-(--color-text) ;}
-  h2 {@apply text-2xl text-(--color-text);}
-  h3 {@apply text-xl text-(--color-text);}
-  p {@apply text-base text-(--color-text);}
+  h1 {@apply text-3xl}
+  h2 {@apply text-2xl}
+  h3 {@apply text-xl}
 }
 
-*{
+/* *{
 outline: red solid 1px;
-}
+} */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
