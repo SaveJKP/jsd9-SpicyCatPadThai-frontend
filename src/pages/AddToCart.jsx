@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
+import { Link } from "react-router-dom";
 
 export default function AddToCart() {
   const { id } = useParams();
@@ -24,11 +25,6 @@ export default function AddToCart() {
     const parsedCart = storedCart ? JSON.parse(storedCart) : [];
     setCart(parsedCart);
   }, []);
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   const totalPrice = product ? product.price * quantity : 0;
 
@@ -64,16 +60,13 @@ export default function AddToCart() {
           },
         ];
       }
-
+      // 💾 Save to localStorage immediately
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
     });
 
     setQuantity(1);
   };
-
-  useEffect(() => {
-    console.log("Updated cart:", cart);
-  }, [cart]);
 
   if (!product) {
     return <div className="p-10 text-xl text-red-500">Product not found</div>;
@@ -90,6 +83,12 @@ export default function AddToCart() {
       ))
     : [];
 
+  const handleReload = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000); // Reload after 3 seconds
+  };
+
   const getRandomBooks = (products, category) => {
     // Filter products by checking if the category exists in the product's category array
     const filteredBooks = products.filter(
@@ -98,7 +97,7 @@ export default function AddToCart() {
     );
 
     // Shuffle and pick random ones
-    return filteredBooks.sort(() => Math.random() - 0.5).slice(0, 3);
+    return filteredBooks.sort(() => Math.random() - 1).slice(0, 3);
   };
 
   const similarBooks = product.category
@@ -106,11 +105,13 @@ export default function AddToCart() {
     .slice(0, 3) // Limit total results to three
     .map((book, index) => (
       <div key={index} className="flex flex-col items-center">
-        <img
-          src={book.img}
-          alt={book.title}
-          className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
-        />
+        <Link to={`/add-to-cart/${book.id}`}>
+          <img
+            src={book.img}
+            alt={book.title}
+            className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+          />
+        </Link>
         <p className="flex flex-col justify-center md:text-center">
           <span>{book.title}</span>
           <span>{book.author}</span>
@@ -167,7 +168,10 @@ export default function AddToCart() {
 
             <button
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
-              onClick={handleAddToCart}
+              onClick={() => {
+                handleAddToCart();
+                handleReload();
+              }}
             >
               Add to Cart
             </button>
@@ -197,7 +201,10 @@ export default function AddToCart() {
           <p className="p-2 text-2xl">฿{totalPrice}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:bg-[#2e648ecc]"
-            onClick={handleAddToCart}
+            onClick={() => {
+              handleAddToCart();
+              handleReload();
+            }}
           >
             Add to Cart
           </button>
