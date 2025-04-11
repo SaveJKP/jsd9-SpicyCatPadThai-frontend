@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
 
-export const Cart = ({ cart, setCart }) => {
+export const Cart = () => {
   const [showCheckout, setShowCheckout] = useState(false);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   const updateCartQuantity = (itemId, newQuantity) => {
     if (newQuantity < 1) {
-      // Remove the item from the cart if the quantity is less than 1
       setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
       return;
     }
 
-    // Update the quantity for the matching item
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === itemId ? { ...item, quantity: newQuantity } : item,
@@ -23,48 +25,33 @@ export const Cart = ({ cart, setCart }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const totalPrice = (Array.isArray(cart) ? cart : []).reduce(
+  const totalPrice = cart.reduce(
     (total, item) => total + (item?.price || 0) * (item?.quantity || 0),
     0,
   );
-  console.log("Total price:", totalPrice);
 
-  const totalQuantity = (Array.isArray(cart) ? cart : []).reduce(
+  const totalQuantity = cart.reduce(
     (total, item) => total + (item?.quantity || 0),
     0,
   );
-  console.log("Total quantity:", totalQuantity);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const handleReload = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 100); // Reload page
+  };
 
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
-    setShowCheckout(false); // Hide the checkout form
+    setShowCheckout(false);
     alert("Thank you for your purchase!");
+    handleReload();
   };
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      try {
-        const parsedCart = JSON.parse(storedCart);
-        if (Array.isArray(parsedCart)) {
-          setCart(parsedCart);
-        }
-      } catch (error) {
-        console.error("Failed to parse cart from localStorage:", error);
-      }
-    }
-  }, []);
-  useEffect(() => {
-    const clearCart = () => {
-      if (Array.isArray(cart) && cart.length === 0) {
-        localStorage.removeItem("cart");
-      } else {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
-    };
-
-    clearCart(); // Call the function inside useEffect
-  }, [cart]); // Dependency array ensures this runs whenever `cart` changes
   return (
     <>
       {Array.isArray(cart) && cart.length === 0 ? (
@@ -72,13 +59,13 @@ export const Cart = ({ cart, setCart }) => {
           <p className="p-4 text-center text-white">Your cart is empty.</p>
         </div>
       ) : (
-        cart.map((item) => (
-          <div className="bg-[#e2e2e2] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
+        <div className="bg-[#e2e2e2] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
+          {cart.map((item) => (
             <div key={item.id} className="my-[32px] flex flex-col px-[32px]">
               <div className="flex flex-row">
                 <img
                   src={item.img}
-                  className="h-auto w-[50%] object-contain object-top px-[8px]"
+                  className="w-[30%] object-contain object-top px-[8px]"
                   alt={item.title}
                 />
                 <div className="flex w-[55%] flex-col px-[8px]">
@@ -96,9 +83,10 @@ export const Cart = ({ cart, setCart }) => {
                         width="20px"
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
-                        onClick={() =>
-                          updateCartQuantity(item.id, item.quantity - 1)
-                        }
+                        onClick={() => {
+                          updateCartQuantity(item.id, item.quantity - 1);
+                          handleReload();
+                        }}
                       >
                         <path d="M200-440v-80h560v80H200Z" />
                       </svg>
@@ -112,9 +100,10 @@ export const Cart = ({ cart, setCart }) => {
                         width="20px"
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
-                        onClick={() =>
-                          updateCartQuantity(item.id, item.quantity + 1)
-                        }
+                        onClick={() => {
+                          updateCartQuantity(item.id, item.quantity + 1);
+                          handleReload();
+                        }}
                       >
                         <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                       </svg>
@@ -127,7 +116,10 @@ export const Cart = ({ cart, setCart }) => {
                         width="25px"
                         fill="#1e1e1e"
                         className="cursor-pointer"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => {
+                          removeFromCart(item.id);
+                          handleReload();
+                        }}
                       >
                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                       </svg>
@@ -136,8 +128,8 @@ export const Cart = ({ cart, setCart }) => {
                 </div>
               </div>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
 
       {Array.isArray(cart) && cart.length > 0 && (
@@ -156,19 +148,13 @@ export const Cart = ({ cart, setCart }) => {
             </p>
             <button
               className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e] md:mt-[200px]"
-              onClick={() => setShowCheckout(true)}
+              onClick={() => {
+                setShowCheckout(true);
+                handleCheckoutComplete();
+              }}
             >
               Check out
             </button>
-            {showCheckout && (
-              <div className="mt-6 w-full max-w-5xl">
-                <Checkout
-                  cart={cart}
-                  totalPrice={totalPrice}
-                  onCheckoutComplete={handleCheckoutComplete}
-                />
-              </div>
-            )}
           </div>
         </div>
       )}

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { Cart } from "../components/Cart";
 
 export default function Purchase() {
