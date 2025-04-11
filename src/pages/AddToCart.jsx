@@ -89,6 +89,8 @@ export default function AddToCart() {
     }, 1000); // Reload after 3 seconds
   };
 
+  const excludeId = id; // This can change dynamically
+
   const getRandomBooks = (products, category) => {
     // Filter products by checking if the category exists in the product's category array
     const filteredBooks = products.filter(
@@ -97,12 +99,14 @@ export default function AddToCart() {
     );
 
     // Shuffle and pick random ones
-    return filteredBooks.sort(() => Math.random() - 1).slice(0, 3);
+    return filteredBooks
+      .sort(() => Math.random() - 0.5)
+      .filter((item) => item.id !== excludeId);
   };
 
   const similarBooks = product.category
     .flatMap((category) => getRandomBooks(products, category))
-    .slice(0, 3) // Limit total results to three
+    .slice(0, 4) // Limit total results to three
     .map((book, index) => (
       <div key={index} className="flex flex-col items-center">
         <Link to={`/add-to-cart/${book.id}`}>
@@ -178,7 +182,7 @@ export default function AddToCart() {
           </div>
 
           {/* Product description */}
-          <div className="space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
+          <div className="col-span-2 h-[100%] space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
             <h3 className="text-xl font-bold">Description</h3>
             <p className="mb-5">{product.description}</p>
             <h4 className="mb-4 text-lg font-bold">Genre</h4>
@@ -186,7 +190,7 @@ export default function AddToCart() {
           </div>
 
           {/* Similar books */}
-          <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
+          <div className="col-span-2 mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
               {similarBooks}
