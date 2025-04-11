@@ -7,18 +7,38 @@ import Hamburger from "./Hamburger";
 import Cart from "./Cart";
 const Layout = () => {
   const token = localStorage.getItem("token");
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
     setHamburgerOpen(!hamburgerOpen);
   };
-  const [cartState] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
+  useEffect(() => {
+    // Fetch cart from localStorage when the component mounts
+    const storedCart = localStorage.getItem("cart");
+    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+    setCart(parsedCart);
+  }, []); // Runs only once when the component mounts
 
+  // Log quantity of each item
+  cart.map((item) => console.log(item.quantity));
+
+  // Calculate total quantity
+  const totalQuantity = cart.reduce(
+    (total, item) => total + (item.quantity || 0),
+    0,
+  );
+
+  const handleReload = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000); // Reload after 3 seconds
+  };
   return (
     <>
       <div className="bg-[var(--color-greenBackground)]">
@@ -133,7 +153,11 @@ const Layout = () => {
                 </>
               )}
 
-              <Link className="flex items-center" to={"/purchase"}>
+              <Link
+                className="flex items-center"
+                to={"/purchase"}
+                onClick={handleReload}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-auto w-12"
@@ -157,7 +181,7 @@ const Layout = () => {
                 </svg>
 
                 <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
-                  {cartState.quantity}
+                  {totalQuantity}
                 </span>
               </Link>
             </div>
