@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -9,25 +9,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* //build-in utility theme
-  --color-*: intitial;
-  --font-*: intitial;
-  --text-*: intitial;
-  --font-weight-*: intitial;
-  --tracking-*: intitial;
-  --leading-*: intitial;
-  --breakpoint-*: intitial;
-  --container-*: intitial;
-  --spacing-*: intitial;
-  --radius-*: intitial;
-  --shadow-*: intitial;
-  --inset-shadow-*: intitial;
-  --drop-shadow-*: intitial;
-  --blur-*: intitial;
-  --perspective-*: intitial;
-  --aspect-*: intitial;
-  --ease-*: intitial;
-  --animate-*: intitial; */
   --breakpoint-sm: 320px;
   --breakpoint-md: 728px;
   --breakpoint-lg: 1440px;
