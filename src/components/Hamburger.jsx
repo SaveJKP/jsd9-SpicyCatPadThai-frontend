@@ -15,7 +15,7 @@ export default function Hamburger() {
   return (
     <>
       {!token ? (
-        <div className="relative overflow-hidden text-sm text-[var(--color-text)] min-[1024px]:hidden">
+        <div className="relative text-sm text-[var(--color-text)] min-[1024px]:hidden">
           <div className="bg-[var(--color-greenBackground)] pt-10 pb-30 leading-4 no-underline">
             {/* search icon */}
             <Link to={"/search"}>
