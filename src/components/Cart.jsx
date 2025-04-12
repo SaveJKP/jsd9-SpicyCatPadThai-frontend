@@ -70,8 +70,15 @@ export const Cart = () => {
   return (
     <>
       {Array.isArray(cart) && cart.length === 0 ? (
-        <div className="md:w-[100%]">
+        <div className="flex flex-col items-center space-y-10 text-2xl md:w-[100%]">
           <p className="p-4 text-center text-white">Your cart is empty.</p>
+          <Link
+            to="/"
+            className="rounded-2xl bg-[var(--color-buttonBrown)] px-[58px] py-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e]"
+            onClick={handleReload}
+          >
+            Continue Shopping
+          </Link>
         </div>
       ) : (
         <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">

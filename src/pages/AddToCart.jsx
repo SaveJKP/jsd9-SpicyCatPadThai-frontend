@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function AddToCart() {
   const { id } = useParams();
@@ -79,7 +82,7 @@ export default function AddToCart() {
   const handleReload = () => {
     setTimeout(() => {
       window.location.reload();
-    }, 100);
+    }, 2000);
   };
 
   const excludeId = id;
@@ -93,7 +96,7 @@ export default function AddToCart() {
 
     // Shuffle and pick random ones
     return filteredBooks
-      .sort(() => Math.random() - 0.5)
+      .sort(() => Math.random())
       .filter((item) => item.id !== excludeId);
   };
 
@@ -172,6 +175,7 @@ export default function AddToCart() {
               onClick={() => {
                 handleAddToCart();
                 handleReload();
+                toast("Added to cart!");
               }}
             >
               Add to Cart
@@ -207,6 +211,7 @@ export default function AddToCart() {
             onClick={() => {
               handleAddToCart();
               handleReload();
+              toast("Added to cart!");
             }}
           >
             Add to Cart
