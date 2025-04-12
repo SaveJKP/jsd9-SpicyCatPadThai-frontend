@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
-  const [showCheckout, setShowCheckout] = useState(false);
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const updateCartQuantity = (itemId, newQuantity) => {
     if (newQuantity < 1) {
@@ -44,14 +45,28 @@ export const Cart = () => {
       window.location.reload();
     }, 100); // Reload page
   };
-
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
-    setShowCheckout(false);
-    alert("Thank you for your purchase!");
-    handleReload();
+    setShowCheckout(true);
   };
 
+  if (showCheckout) {
+    return (
+      <div className="flex flex-col items-center space-y-10 md:w-[100%]">
+        <p className="pt-10 text-center text-2xl text-white">
+          Thank you for shopping with us! Your order has been processed.
+        </p>
+
+        <Link
+          to="/"
+          className="rounded-2xl bg-[var(--color-buttonBrown)] px-[58px] py-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e]"
+          onClick={handleReload}
+        >
+          Go to Home
+        </Link>
+      </div>
+    );
+  }
   return (
     <>
       {Array.isArray(cart) && cart.length === 0 ? (
@@ -59,20 +74,18 @@ export const Cart = () => {
           <p className="p-4 text-center text-white">Your cart is empty.</p>
         </div>
       ) : (
-        <div className="bg-[#e2e2e2] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
+        <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
           {cart.map((item) => (
-            <div key={item.id} className="my-[32px] flex flex-col px-[32px]">
-              <div className="flex flex-row">
+            <div key={item.id} className="my-[32px] flex flex-col">
+              <div className="flex flex-row justify-center">
                 <img
                   src={item.img}
-                  className="w-[30%] object-contain object-top px-[8px]"
+                  className="max-w-[40%] object-contain object-top px-[8px]"
                   alt={item.title}
                 />
                 <div className="flex w-[55%] flex-col px-[8px]">
-                  <h3 className="pb-[8px] text-sm font-bold">{item.title}</h3>
-                  <p className="pb-[8px]">
-                    {item.price.toFixed(2)} × {item.quantity}
-                  </p>
+                  <h3 className="pb-[8px] text-xl font-bold">{item.title}</h3>
+                  <p className="pb-[8px]">{item.price.toFixed(2)}</p>
                   <p>฿{(item.price * item.quantity).toFixed(2)}</p>
                   <div className="grid grid-cols-2 place-content-between py-4">
                     <div className="flex flex-row items-center gap-2">
@@ -133,10 +146,10 @@ export const Cart = () => {
       )}
 
       {Array.isArray(cart) && cart.length > 0 && (
-        <div className="bg-[#F5F5F5] pb-3 max-sm:rounded-b-2xl md:w-[45%] md:rounded-2xl md:py-[50px]">
+        <div className="bg-[#F5F5F5] pb-3 max-sm:rounded-b-2xl md:h-[45%] md:w-[45%] md:rounded-2xl md:py-[50px]">
           <div className="mx-8 text-xl leading-10 max-sm:mx-4">
-            <h2 className="text-4xl font-bold max-sm:hidden md:mb-14">
-              Order List
+            <h2 className="text-4xl font-bold sm:max-md:hidden md:mb-14">
+              Order Summary
             </h2>
             <p className="flex justify-between">
               Quantity
@@ -149,7 +162,6 @@ export const Cart = () => {
             <button
               className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e] md:mt-[200px]"
               onClick={() => {
-                setShowCheckout(true);
                 handleCheckoutComplete();
               }}
             >
