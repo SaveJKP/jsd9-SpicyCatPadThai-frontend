@@ -40,33 +40,36 @@ export default function UserProfile() {
         </div>
 
         {/* 3.User Info - User Profile */}
-        <div className="bg-(--color-box) px-16 py-8 rounded-lg mt-4 md:w-1/2 md:px-8 lg:px-16">
-          <div className=" profile-detail-text flex flex-col justify-center">
-            <p className="mt-2"><span className="font-bold w-28">Name:</span> <br></br> {user.first_name} {user.last_name}</p>
-            <p className="mt-2"><span className="font-bold w-28">Email:</span> </p> {user.email}
-            <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city}, {user.country}
-            <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phone_number}
-            <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday}
+        <div className ="px-16 mt-4 md:w-1/2 md:px-8 lg:px-16">
+            <div className="bg-(--color-box) px-6 rounded-lg md:px-6 py-4">
+              <div className=" profile-detail-text flex flex-col justify-center">
+                <p className="mt-2"><span className="font-bold">Name:</span> <br></br> {user.first_name} {user.last_name}</p>
+                <p className="mt-2"><span className="font-bold">Email:</span> </p> {user.email}
+                <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city}, {user.country}
+                <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phone_number}
+                <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday}
+              </div>
+
+              <Link to = "/add-to-cart">
+                <GreenButton
+                className="w-full mb-2 mt-4"
+                text="Your Cart →"
+                onclick=""
+                />
+              </Link>
+
+
+              <GreenButton
+                className="w-full mb-2"
+                text="Your Orders →"
+                onclick=""
+              />
+
+
+
           </div>
-
-          <Link to = "/add-to-cart">
-            <GreenButton
-            className="w-full mb-2 mt-4"
-            text="Your Cart →"
-            onclick=""
-            />
-          </Link>
-
-
-          <GreenButton
-            className="w-full mb-2"
-            text="Your Orders →"
-            onclick=""
-          />
-
-
-
         </div>
+        
       </div>
     </div>
   );

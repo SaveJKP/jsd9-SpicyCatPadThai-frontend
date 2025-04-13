@@ -84,8 +84,8 @@ export default function UserProfile() {
 
         </div> */}
         {/* test shadcn */}
-        <div>
-          <Tabs defaultValue="account" className=" px-16 py-8 mt-4 md:w-[400px] md:px-0 md:py-0">
+        <div className ="mt-4 px-16 md:w-1/2 md:px-8 lg:px-16">
+          <Tabs defaultValue="account" className="">
             <TabsList className="grid w-full grid-cols-2  bg-(--color-box) mb-1">
               <TabsTrigger value="account" className ="text-(--color-text)">Account</TabsTrigger>
               <TabsTrigger value="password" className ="text-(--color-text)">Password</TabsTrigger>
@@ -109,7 +109,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button>Save changes</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer">Save changes</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
@@ -132,7 +132,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button>Save password</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer">Save password</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
