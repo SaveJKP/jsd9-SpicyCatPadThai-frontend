@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
 import Hamburger from "./Hamburger";
-import Cart from "./Cart";
+
 const Layout = () => {
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);

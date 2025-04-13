@@ -1,16 +1,18 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function AddToCart() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState([]);
+  let [cart, setCart] = useState([]);
 
   // Fetch product by ID from mock data
-
   useEffect(() => {
     const fetchMockProduct = () => {
       const data = products.find((p) => p.id === id);
@@ -33,15 +35,10 @@ export default function AddToCart() {
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      if (!Array.isArray(prevCart)) {
-        console.error("Cart is not an array:", prevCart);
-        return [];
-      }
       const existingItem = prevCart.find((item) => item.id === product.id);
-      let updatedCart;
 
       if (existingItem) {
-        updatedCart = prevCart.map((item) =>
+        cart = prevCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
@@ -51,7 +48,7 @@ export default function AddToCart() {
             : item,
         );
       } else {
-        updatedCart = [
+        cart = [
           ...prevCart,
           {
             ...product,
@@ -60,12 +57,11 @@ export default function AddToCart() {
           },
         ];
       }
-      // 💾 Save to localStorage immediately
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      return updatedCart;
+      // Save to localStorage BEFORE updating state
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setCart(cart); // Now update the state
+      setQuantity(1);
     });
-
-    setQuantity(1);
   };
 
   if (!product) {
@@ -86,10 +82,10 @@ export default function AddToCart() {
   const handleReload = () => {
     setTimeout(() => {
       window.location.reload();
-    }, 1000); // Reload after 3 seconds
+    }, 2000);
   };
 
-  const excludeId = id; // This can change dynamically
+  const excludeId = id;
 
   const getRandomBooks = (products, category) => {
     // Filter products by checking if the category exists in the product's category array
@@ -100,13 +96,13 @@ export default function AddToCart() {
 
     // Shuffle and pick random ones
     return filteredBooks
-      .sort(() => Math.random() - 0.5)
+      .sort(() => Math.random())
       .filter((item) => item.id !== excludeId);
   };
 
   const similarBooks = product.category
     .flatMap((category) => getRandomBooks(products, category))
-    .slice(0, 4) // Limit total results to three
+    .slice(0, 4) // Limit total results to four
     .map((book, index) => (
       <div key={index} className="flex flex-col items-center">
         <Link to={`/add-to-cart/${book.id}`}>
@@ -114,6 +110,11 @@ export default function AddToCart() {
             src={book.img}
             alt={book.title}
             className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+            onClick={() => {
+              if (quantity > 1) {
+                handleReload(); // Call handleReload if quantity > 1
+              }
+            }}
           />
         </Link>
         <p className="flex flex-col justify-center md:text-center">
@@ -129,14 +130,13 @@ export default function AddToCart() {
       <div className="container__div text-[var(--color-text)]">
         <div className="grid grid-cols-1 gap-4 min-[1024px]:grid-cols-2 md:gap-10 md:p-10 md:px-20">
           {/* Product image */}
-          <div className="grid grid-cols-1">
+          <div className="w-[60%] place-self-center">
             <img
               src={product.img || "https://placehold.co/200x250"}
               alt="book-cover"
-              className="max-w-[100%] place-self-center object-cover shadow-lg"
+              className="max-w-[100%] place-self-center shadow-lg"
             />
           </div>
-
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
             <p className="text-2xl font-bold md:text-3xl">{product.title}</p>
@@ -175,14 +175,18 @@ export default function AddToCart() {
               onClick={() => {
                 handleAddToCart();
                 handleReload();
+                toast("Added to cart!");
               }}
             >
               Add to Cart
             </button>
           </div>
-
+        </div>
+      </div>
+      <div className="flex flex-col justify-center">
+        <div className="container__div space-y-10 text-[var(--color-text)] min-[1024px]:px-[72px]">
           {/* Product description */}
-          <div className="col-span-2 h-[100%] space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
+          <div className="mt-[16px] rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
             <h3 className="text-xl font-bold">Description</h3>
             <p className="mb-5">{product.description}</p>
             <h4 className="mb-4 text-lg font-bold">Genre</h4>
@@ -190,7 +194,7 @@ export default function AddToCart() {
           </div>
 
           {/* Similar books */}
-          <div className="col-span-2 mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
+          <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
               {similarBooks}
@@ -198,7 +202,6 @@ export default function AddToCart() {
           </div>
         </div>
       </div>
-
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)]">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
@@ -208,6 +211,7 @@ export default function AddToCart() {
             onClick={() => {
               handleAddToCart();
               handleReload();
+              toast("Added to cart!");
             }}
           >
             Add to Cart
