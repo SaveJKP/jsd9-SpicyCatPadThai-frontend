@@ -61,9 +61,9 @@
   h3 {@apply text-xl}
 }
 
-/* *{
-outline: red solid 1px;
-} */
+* {
+  outline: red solid 1px;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
