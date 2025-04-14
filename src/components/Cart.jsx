@@ -48,6 +48,7 @@ export const Cart = () => {
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
     setShowCheckout(true);
+    // placeholder for posting to the server
   };
 
   if (showCheckout) {
@@ -82,6 +83,9 @@ export const Cart = () => {
         </div>
       ) : (
         <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
+          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[1024px]:hidden md:mb-14">
+            Order Summary
+          </h2>
           {cart.map((item) => (
             <div key={item.id} className="my-[32px] flex flex-col">
               <div className="flex flex-row justify-center">
@@ -153,7 +157,7 @@ export const Cart = () => {
       )}
 
       {Array.isArray(cart) && cart.length > 0 && (
-        <div className="bg-[#F5F5F5] pb-3 max-sm:rounded-b-2xl md:h-[45%] md:w-[45%] md:rounded-2xl md:py-[50px]">
+        <div className="bg-[#ffff] pb-3 max-sm:rounded-b-2xl md:h-[45%] md:w-[45%] md:rounded-2xl md:py-[50px]">
           <div className="mx-8 text-xl leading-10 max-sm:mx-4">
             <h2 className="text-4xl font-bold sm:max-md:hidden md:mb-14">
               Order Summary

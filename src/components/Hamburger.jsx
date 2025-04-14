@@ -15,14 +15,13 @@ export default function Hamburger() {
   return (
     <>
       {!token ? (
-        <div className="relative overflow-hidden text-sm text-[var(--color-text)] min-[1024px]:hidden">
+        <div className="relative text-sm text-[var(--color-text)] min-[1024px]:hidden">
           <div className="bg-[var(--color-greenBackground)] pt-10 pb-30 leading-4 no-underline">
             {/* search icon */}
             <Link to={"/search"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="mb-[16px] justify-self-center min-[1024px]:hidden"
-                height="auto"
                 viewBox="0 -960 960 960"
                 width="40px"
                 fill="#e3e3e3"
