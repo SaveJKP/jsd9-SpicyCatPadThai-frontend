@@ -20,6 +20,8 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+
+
 export default function UserProfile() {
   const { userId } = useParams();
   const user = users.find(u => u.user_id === Number(userId));
@@ -29,13 +31,13 @@ export default function UserProfile() {
 
   return (
     <div className ="h-full bg-(--color-greenBackground) text-(--color-text) pb-8 md:px-12 lg:px-72 " >
-      {/* 1. Heading - User Profile */}
+      {/* 1. Heading - User Profile Setting */}
       <section className ="py-8 px-16 ">
         <h1 className="font-bold text-center">Settings</h1>
       </section>
           
       <div className="container__div py-0 md:flex ">
-        {/* 2. User display + logout - User Profile */}
+        {/* 2. User display + logout - User Profile Setting */}
         <div className="flex flex-col text-center items-center md:w-1/2">
           <img
             src="/src/assets/logo_cat.jpg"
@@ -57,33 +59,8 @@ export default function UserProfile() {
           </Link>
         </div>
 
-        {/* 3.User Info - User Profile */}
-        {/* <div className="bg-(--color-box) px-16 py-8 rounded-lg mt-4 md:w-1/2 md:px-8 lg:px-16">
-          <div className=" profile-detail-text flex flex-col justify-center">
-            <p className="mt-2"><span className="font-bold w-28">Name:</span> <br></br> {user.first_name} {user.last_name}</p>
-            <p className="mt-2"><span className="font-bold w-28">Email:</span> </p> {user.email}
-            <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city}, {user.country}
-            <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phone_number}
-            <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday}
-          </div>
+        {/* 3.account and password setting - User Profile Setting*/}
 
-          <Link to = "/add-to-cart">
-            <GreenButton
-            className="w-full mb-2 mt-4"
-            text="Your Cart →"
-            onclick=""
-            />
-          </Link>
-
-
-          <GreenButton
-            className="w-full mb-2"
-            text="Your Orders →"
-            onclick=""
-          />
-
-        </div> */}
-        {/* test shadcn */}
         <div className ="mt-4 px-16 md:w-1/2 md:px-8 lg:px-16">
           <Tabs defaultValue="account" className="">
             <TabsList className="grid w-full grid-cols-2  bg-(--color-box) mb-1">
@@ -101,11 +78,20 @@ export default function UserProfile() {
                 <CardContent className="space-y-2">
                   <div className="space-y-1">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" defaultValue="Pedro Duarte" />
+                    <Input id="name" defaultValue={`${user.first_name} ${user.last_name}`} />
                   </div>
                   <div className="space-y-1">
-                    <Label htmlFor="username">Username</Label>
-                    <Input id="username" defaultValue="@peduarte" />
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" defaultValue= {user.email} />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="address">Address</Label>
+                    <Input id="address" defaultValue={`${user.address}, ${user.city}, ${user.country}`}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="email">Phone</Label>
+                    <Input id="email" defaultValue= {user.phone_number} />
                   </div>
                 </CardContent>
                 <CardFooter>
