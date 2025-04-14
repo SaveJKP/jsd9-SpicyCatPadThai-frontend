@@ -3,8 +3,7 @@ import { GetData } from "../utils/API";
 import { Banner } from "../data/products";
 import { useNavigate } from "react-router-dom";
 
-export default function Catalog() {
-  const [open, setOpen] = useState(true);
+export default function Catalog({ onClose }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [products, setProducts] = useState([]);
@@ -17,20 +16,12 @@ export default function Catalog() {
     setProducts(Banner.products);
   }, []);
 
-  const openModal = () => {
-    setOpen(true);
-  };
-  const closeModal = () => {
-    setOpen(false);
-  };
-
-
   return (
     <>
       {open && (
         <div
           className="fixed inset-0 z-10 flex w-[100%] items-start justify-center backdrop-blur-sm"
-          onClick={closeModal}
+          onClick={onClose}
         >
           <div
             onClick={(e) => e.stopPropagation()}

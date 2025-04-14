@@ -6,21 +6,26 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 import { books } from "../data/products";
 import { BookCard } from "./BookCard";
 import { useState } from "react";
 
 export default function ShowAll() {
-  {/* set page */}
-  const itemsPerPage = 8
+  {
+    /* set page */
+  }
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(books.length / itemsPerPage)
+  const totalPages = Math.ceil(books.length / itemsPerPage);
+  const [open, setOpen] = useState(false);
 
-  {/* set index items to show book */}
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const currentBooks = books.slice(startIndex, endIndex)
+  {
+    /* set index items to show book */
+  }
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentBooks = books.slice(startIndex, endIndex);
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -36,44 +41,49 @@ export default function ShowAll() {
     }
   };
 
-  return <div>
-          <section className="flex flex-row flex-wrap justify-center items-center p-8 gap-4">
-          {currentBooks.map((book) => (
-          <BookCard key={book.id} title={book.title} banner={book.banner} author={book.author} />
+  return (
+    <div>
+      <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
+        {currentBooks.map((book) => (
+          <BookCard
+            key={book.id}
+            title={book.title}
+            banner={book.banner}
+            author={book.author}
+          />
         ))}
-          </section>
+      </section>
 
-          {totalPages > 1 && (
-          <Pagination className="p-8">
-            <PaginationContent>
-              <PaginationItem>
-                {/* Previous Page */}
-                <PaginationPrevious
-                  href="#"
-                  className="text-text text-xl"
-                  onClick={handlePreviousPage}
-                />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink
-                  href="#"
-                  className="text-banner text-xl"
-                  isActive>{currentPage}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis className="text-text text-xl"/>
-              </PaginationItem>
-              <PaginationItem>
-                {/* Next Page */}
-                <PaginationNext
-                  href="#"
-                  className="text-text text-xl"
-                  onClick={handleNextPage}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-          )}
-  </div>;
+      {totalPages > 1 && (
+        <Pagination className="p-8">
+          <PaginationContent>
+            <PaginationItem>
+              {/* Previous Page */}
+              <PaginationPrevious
+                href="#"
+                className="text-text text-xl"
+                onClick={handlePreviousPage}
+              />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" className="text-banner text-xl" isActive>
+                {currentPage}
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis className="text-text text-xl" />
+            </PaginationItem>
+            <PaginationItem>
+              {/* Next Page */}
+              <PaginationNext
+                href="#"
+                className="text-text text-xl"
+                onClick={handleNextPage}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
+    </div>
+  );
 }
