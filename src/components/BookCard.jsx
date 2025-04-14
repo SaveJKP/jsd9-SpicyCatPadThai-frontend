@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Catalog from "./Catalog";
+// import Catalog from "./Catalog";
 import { useState } from "react";
 
 export function BookCard({ title, banner, author }) {
