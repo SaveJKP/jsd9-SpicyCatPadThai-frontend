@@ -1,34 +1,32 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { products } from "../data/products";
+import { products } from "../data/products";
+import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function AddToCart() {
-  const { productId } = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState([]);
+  let [cart, setCart] = useState([]);
 
   // Fetch product by ID from mock data
   useEffect(() => {
     const fetchMockProduct = () => {
-      const data = products.find((p) => p.id === productId);
+      const data = products.find((p) => p.id === id);
       setProduct(data);
     };
     fetchMockProduct();
-  }, [productId]);
+  }, [id]);
 
   // Load cart from localStorage when the app initializes
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
+    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+    setCart(parsedCart);
   }, []);
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   const totalPrice = product ? product.price * quantity : 0;
 
@@ -38,10 +36,9 @@ export default function AddToCart() {
   const handleAddToCart = () => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
-      let updatedCart;
 
       if (existingItem) {
-        updatedCart = prevCart.map((item) =>
+        cart = prevCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
@@ -51,7 +48,7 @@ export default function AddToCart() {
             : item,
         );
       } else {
-        updatedCart = [
+        cart = [
           ...prevCart,
           {
             ...product,
@@ -60,61 +57,86 @@ export default function AddToCart() {
           },
         ];
       }
-
-      return updatedCart;
+      // Save to localStorage BEFORE updating state
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setCart(cart); // Now update the state
+      setQuantity(1);
     });
-
-    setQuantity(1);
   };
 
-  useEffect(() => {
-    console.log("Updated cart:", cart);
-  }, [cart]);
+  if (!product) {
+    return <div className="p-10 text-xl text-red-500">Product not found</div>;
+  }
 
-  if (!product) return <div>Product not found.</div>;
+  const genreTags = Array.isArray(product.category)
+    ? product.category.map((category, index) => (
+        <span
+          key={`${category}-${index}`}
+          className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+        >
+          {category}
+        </span>
+      ))
+    : [];
 
-  const genreTags = product.genre.map((genre, index) => (
-    <span
-      key={`${genre}-${index}`}
-      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-    >
-      {genre}
-    </span>
-  ));
+  const handleReload = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
 
-  const getRandomBooks = (category) =>
-    category?.sort(() => Math.random() - 0.5).slice(0, 3);
+  const excludeId = id;
 
-  const similarBooks = getRandomBooks(product?.category || []).map(
-    (book, index) => (
+  const getRandomBooks = (products, category) => {
+    // Filter products by checking if the category exists in the product's category array
+    const filteredBooks = products.filter(
+      (product) =>
+        Array.isArray(product.category) && product.category.includes(category),
+    );
+
+    // Shuffle and pick random ones
+    return filteredBooks
+      .sort(() => Math.random())
+      .filter((item) => item.id !== excludeId);
+  };
+
+  const similarBooks = product.category
+    .flatMap((category) => getRandomBooks(products, category))
+    .slice(0, 4) // Limit total results to four
+    .map((book, index) => (
       <div key={index} className="flex flex-col items-center">
-        <img
-          src={book.img || "https://placehold.co/200x250"}
-          alt={book.title}
-          className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
-        />
+        <Link to={`/add-to-cart/${book.id}`}>
+          <img
+            src={book.img}
+            alt={book.title}
+            className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+            onClick={() => {
+              if (quantity > 1) {
+                handleReload(); // Call handleReload if quantity > 1
+              }
+            }}
+          />
+        </Link>
         <p className="flex flex-col justify-center md:text-center">
           <span>{book.title}</span>
           <span>{book.author}</span>
           <span>฿{book.price}</span>
         </p>
       </div>
-    ),
-  );
+    ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
       <div className="container__div text-[var(--color-text)]">
         <div className="grid grid-cols-1 gap-4 min-[1024px]:grid-cols-2 md:gap-10 md:p-10 md:px-20">
           {/* Product image */}
-          <div className="grid grid-cols-1">
+          <div className="w-[60%] place-self-center">
             <img
               src={product.img || "https://placehold.co/200x250"}
               alt="book-cover"
-              className="max-w-[100%] place-self-center object-cover shadow-lg"
+              className="max-w-[100%] place-self-center shadow-lg"
             />
           </div>
-
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
             <p className="text-2xl font-bold md:text-3xl">{product.title}</p>
@@ -150,14 +172,21 @@ export default function AddToCart() {
 
             <button
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
-              onClick={handleAddToCart}
+              onClick={() => {
+                handleAddToCart();
+                handleReload();
+                toast("Added to cart!");
+              }}
             >
               Add to Cart
             </button>
           </div>
-
+        </div>
+      </div>
+      <div className="flex flex-col justify-center">
+        <div className="container__div space-y-10 text-[var(--color-text)] min-[1024px]:px-[72px]">
           {/* Product description */}
-          <div className="space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
+          <div className="mt-[16px] rounded-[10px] bg-[var(--color-box)] px-[24px] py-[32px] text-[var(--cls-white)] md:mb-[50px]">
             <h3 className="text-xl font-bold">Description</h3>
             <p className="mb-5">{product.description}</p>
             <h4 className="mb-4 text-lg font-bold">Genre</h4>
@@ -173,14 +202,17 @@ export default function AddToCart() {
           </div>
         </div>
       </div>
-
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)]">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
           <p className="p-2 text-2xl">฿{totalPrice}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:bg-[#2e648ecc]"
-            onClick={handleAddToCart}
+            onClick={() => {
+              handleAddToCart();
+              handleReload();
+              toast("Added to cart!");
+            }}
           >
             Add to Cart
           </button>
