@@ -7,31 +7,31 @@ export default function Footer() {
     <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
       <div className="container__div px-[16px]">
         <div className="flex-wrp flex flex-col justify-center space-y-[16px] py-[16px] min-[1024px]:flex-row min-[1024px]:gap-5 md:pb-10">
-          <Link href="/about">
+          <Link to="/about">
             <h3>About Us</h3>
           </Link>
 
-          <Link href="#faq">
+          <Link to="#faq">
             <h3>FAQ</h3>
           </Link>
 
-          <Link href="#help">
+          <Link to="#help">
             <h3>Help</h3>
           </Link>
 
-          <Link href="#privacy">
+          <Link to="#privacy">
             <h3>Privacy Notice</h3>
           </Link>
 
-          <Link href="#cookies">
+          <Link to="#cookies">
             <h3>Cookies Notice</h3>
           </Link>
 
-          <Link href="#terms">
+          <Link to="#terms">
             <h3>Terms & Conditions</h3>
           </Link>
 
-          <Link href="#enquiry">
+          <Link to="#enquiry">
             <h3>Enquiry</h3>
           </Link>
         </div>
