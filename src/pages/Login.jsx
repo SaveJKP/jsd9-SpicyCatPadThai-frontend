@@ -25,9 +25,9 @@ export default function Login() {
               <a href="">Forget Your password?</a>
               <div className="flex flex-col justify-center items-center gap-4 w-[50%]">
                 <Separator />
-                <Button className="w-full bg-buttonBrown font-semibold hover:cursor-pointer rounded-2xl">Login</Button>
+                <Button className="w-full bg-buttonBrown px-4 py-2 font-semibold hover:cursor-pointer rounded-2xl">Login</Button>
                 <p>or</p>
-                <Button className="w-full bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl">New Account</Button>
+                <Button className="w-full bg-buttonBlue px-4 py-2 font-semibold hover:cursor-pointer rounded-2xl">New Account</Button>
               </div>
             </form>
           </section>
