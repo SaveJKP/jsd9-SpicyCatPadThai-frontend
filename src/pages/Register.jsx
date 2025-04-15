@@ -5,18 +5,15 @@ export default function Register() {
      <main >
         <div className="bg-greenBackground w-full h-fit">
           <div className="container__div">
-            <section className="flex flex-col md:flex-row justify-start items-center w-full min-h-screen gap-4 py-[15%]">
-              {/* Logo section */}
-              <section className="flex flex-col justify-center items-center gap-4 w-full md:w-1/2 text-text">
+            <section className="flex flex-col md:flex-row justify-start items-center w-full min-h-screen gap-4 py-[15%] md:py-[5%]">
+              <section className="flex flex-col justify-center items-center gap-4 w-full text-text">
                 <img src="/src/assets/logo_katsubook.png" alt="Katsu Bookstore"
-                className="w-[50%] flex md:hidden"/>
-              </section>
-
-              {/* Register Form */}
-              <section className="flex flex-col justify-center items-center gap-4 w-full md:w-1/2 text-text">
+                className="w-[50%] md:w-[27%] lg:w-[25%] flex"/>
                 <h1 className="font-bold">Register</h1>
-                <form action="" className="flex flex-col justify-center items-center gap-4 w-[95%]">
-                  {/* text */}
+
+                {/* Register Form */}
+                <form action="" method="POST" className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]">
+
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="first_name" className="w-1/3">First Name:</label>
                     <input type="text" id="first_name" placeholder="First Name" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required/>
@@ -78,7 +75,7 @@ export default function Register() {
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="country" className="w-1/3">Country :</label>
-                    <input type="text" id="country" placeholder="country" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required/>
+                    <input type="text" id="country" placeholder="Country" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required/>
                   </div>
 
                   <Button className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl">Create Account</Button>
