@@ -47,7 +47,7 @@ export default function UserProfile() {
                 <p className="mt-2"><span className="font-bold">Email:</span> </p> {user.email}
                 <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city}, {user.country}
                 <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phone_number}
-                <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday}
+                {/* <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday} */}
               </div>
 
               <Link to = "/add-to-cart">

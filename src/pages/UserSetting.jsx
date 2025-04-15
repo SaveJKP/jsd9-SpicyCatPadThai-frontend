@@ -61,7 +61,7 @@ export default function UserProfile() {
 
         {/* 3.account and password setting - User Profile Setting*/}
 
-        <div className ="mt-4 px-16 md:w-1/2 md:px-8 lg:px-16">
+        <div className ="mt-4 px-16 font-noto md:w-1/2 md:px-8 lg:px-16">
           <Tabs defaultValue="account" className="">
             <TabsList className="grid w-full grid-cols-2  bg-(--color-box) mb-1">
               <TabsTrigger value="account" className ="text-(--color-text)">Account</TabsTrigger>
@@ -70,7 +70,7 @@ export default function UserProfile() {
             <TabsContent  value="account" >
               <Card>
                 <CardHeader>
-                  <CardTitle>Account</CardTitle>
+                  <CardTitle className ="font-bold">Account</CardTitle>
                   <CardDescription>
                     Make changes to your account here. Click save when you're done.
                   </CardDescription>
