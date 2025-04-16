@@ -6,6 +6,12 @@ export const allProducts = [
     description:
       "โคนันและผองเพื่อนต้องเผชิญกับคดีฆาตกรรมสุดซับซ้อนบนรถไฟชินคันเซ็น",
     picture: "",
+    author: "Gosho Aoyama",
+    price: 150,
+    categories: [
+      { category_id: 101, category_name: "สืบสวน" },
+      { category_id: 104, category_name: "ตลก" },
+    ],
   },
   {
     product_id: 1002,
@@ -14,6 +20,12 @@ export const allProducts = [
     description:
       "กลุ่มของโคนันเข้าไปพัวพันกับคดีฆาตกรรมในคฤหาสน์เก่าแก่ที่มีตำนานน่าสะพรึงกลัว",
     picture: "",
+    author: "Gosho Aoyama",
+    price: 165,
+    categories: [
+      { category_id: 101, category_name: "สืบสวน" },
+      { category_id: 104, category_name: "ตลก" },
+    ],
   },
   {
     product_id: 1003,
@@ -22,6 +34,12 @@ export const allProducts = [
     description:
       "โคนันต้องตามหาเด็กสาวที่หายตัวไปอย่างลึกลับ โดยมีเงื่อนงำซ่อนอยู่ในความทรงจำ",
     picture: "",
+    author: "Gosho Aoyama",
+    price: 170,
+    categories: [
+      { category_id: 101, category_name: "สืบสวน" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 1004,
@@ -30,6 +48,12 @@ export const allProducts = [
     description:
       "โคนันไขคดีฆาตกรรมที่เกิดขึ้นในห้องปิดตาย ซึ่งดูเหมือนจะเป็นไปไม่ได้",
     picture: "",
+    author: "Gosho Aoyama",
+    price: 180,
+    categories: [
+      { category_id: 101, category_name: "สืบสวน" },
+      { category_id: 104, category_name: "ตลก" },
+    ],
   },
   {
     product_id: 1005,
@@ -38,6 +62,12 @@ export const allProducts = [
     description:
       "โคนันต้องเปิดโปงความจริงเบื้องหลังฆาตกรที่สวมหน้ากากอำพรางตัว",
     picture: "",
+    author: "Gosho Aoyama",
+    price: 190,
+    categories: [
+      { category_id: 101, category_name: "สืบสวน" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 2001,
@@ -46,6 +76,12 @@ export const allProducts = [
     description:
       "ลูฟี่เริ่มต้นการเดินทางเพื่อรวบรวมพรรคพวกและมุ่งหน้าสู่แกรนด์ไลน์",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 120,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 2002,
@@ -54,6 +90,12 @@ export const allProducts = [
     description:
       "กลุ่มหมวกฟางต่อสู้เพื่อปลดปล่อยอาณาจักรอลาบาสตาจากเงื้อมมือของคร็อกโคไดล์",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 200,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 2003,
@@ -61,6 +103,12 @@ export const allProducts = [
     volume: 41,
     description: "กลุ่มหมวกฟางบุกเอนิเอสล็อบบี้เพื่อช่วยเหลือโรบิน",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 220,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 2004,
@@ -69,6 +117,12 @@ export const allProducts = [
     description:
       "สงครามครั้งใหญ่ระหว่างกองทัพเรือและกลุ่มโจรสลัดหนวดขาวเพื่อช่วยเอส",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 250,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 2005,
@@ -77,6 +131,12 @@ export const allProducts = [
     description:
       "กลุ่มหมวกฟางวางแผนโค่นล้มเจ็ดเทพโจรสลัด ดองกี้โฮเต้ โดฟลามิงโก้",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 280,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 2006,
@@ -85,6 +145,12 @@ export const allProducts = [
     description:
       "กลุ่มหมวกฟางบุกโฮลเค้กไอส์แลนด์เพื่อช่วยเหลือซันจิจากการแต่งงานทางการเมือง",
     picture: "",
+    author: "Eiichiro Oda",
+    price: 300,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 3001,
@@ -93,6 +159,12 @@ export const allProducts = [
     description:
       "ทันจิโร่ได้พบกับกิยู โทมิโอกะ นักล่าอสูร และเริ่มต้นการเดินทาง",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 130,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 3002,
@@ -101,6 +173,12 @@ export const allProducts = [
     description:
       "ทันจิโร่และเพื่อนๆ ร่วมมือกับเสาหลักแห่งไฟ เร็นโกคุ เคียวจูโร่ ต่อสู้กับอสูรบนรถไฟ",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 180,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 3003,
@@ -109,6 +187,12 @@ export const allProducts = [
     description:
       "ทันจิโร่และเพื่อนๆ ร่วมมือกับเสาหลักแห่งเสียง อุซุย เท็นเก็น ต่อสู้กับอสูรพี่น้องในย่านเริงรมย์",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 185,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 3004,
@@ -117,6 +201,12 @@ export const allProducts = [
     description:
       "ทันจิโร่เดินทางไปยังหมู่บ้านช่างตีดาบเพื่อซ่อมดาบ และเผชิญหน้ากับอสูรข้างขึ้น",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 200,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 3005,
@@ -125,6 +215,12 @@ export const allProducts = [
     description:
       "ทันจิโร่และเพื่อนๆ เข้ารับการฝึกฝนสุดโหดจากเหล่าเสาหลักเพื่อเตรียมพร้อมสำหรับศึกสุดท้าย",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 210,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 3006,
@@ -133,6 +229,12 @@ export const allProducts = [
     description:
       "การต่อสู้ครั้งสุดท้ายกับคิบุตสึจิ มุซัน เพื่อยุติสงครามระหว่างมนุษย์และอสูร",
     picture: "",
+    author: "Koyoharu Gotouge",
+    price: 230,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 4001,
@@ -141,6 +243,12 @@ export const allProducts = [
     description:
       "สนธยาต้องสร้างครอบครัวภายในหนึ่งสัปดาห์เพื่อแทรกซึมเข้าไปในโรงเรียนอีเดน",
     picture: "",
+    author: "Tatsuya Endo",
+    price: 140,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 4002,
@@ -149,6 +257,12 @@ export const allProducts = [
     description:
       "โลอิดรับเลี้ยงอัญญาและแต่งงานกับยอร์เพื่อสร้างครอบครัวฟอร์เจอร์",
     picture: "",
+    author: "Tatsuya Endo",
+    price: 150,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 4003,
@@ -156,6 +270,12 @@ export const allProducts = [
     volume: 3,
     description: "อัญญาต้องสอบเข้าโรงเรียนอีเดนให้ได้เพื่อภารกิจของสนธยา",
     picture: "",
+    author: "Tatsuya Endo",
+    price: 160,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 4004,
@@ -163,6 +283,12 @@ export const allProducts = [
     volume: 4,
     description: "อัญญาพยายามสร้างเพื่อนใหม่ในโรงเรียนอีเดน",
     picture: "",
+    author: "Tatsuya Endo",
+    price: 170,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 4005,
@@ -171,6 +297,12 @@ export const allProducts = [
     description:
       "ครอบครัวฟอร์เจอร์ต้องร่วมมือกันในภารกิจใหม่ที่เกี่ยวข้องกับเพื่อนของอัญญา",
     picture: "",
+    author: "Tatsuya Endo",
+    price: 180,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 5001,
@@ -178,6 +310,12 @@ export const allProducts = [
     volume: 1,
     description: "การโจมตีของไททันมหึมาและการสูญเสียครั้งใหญ่ของเอเรน",
     picture: "",
+    author: "Hajime Isayama",
+    price: 135,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 5002,
@@ -185,6 +323,12 @@ export const allProducts = [
     volume: 2,
     description: "ไททันบุกเข้ามาในเขตชิกันชินะ ทำให้เอเรนสูญเสียแม่ไป",
     picture: "",
+    author: "Hajime Isayama",
+    price: 145,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 5003,
@@ -192,6 +336,12 @@ export const allProducts = [
     volume: 3,
     description: "เอเรนและเพื่อนๆ เข้าร่วมหน่วยสำรวจเพื่อต่อสู้กับไททัน",
     picture: "",
+    author: "Hajime Isayama",
+    price: 155,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 5004,
@@ -199,6 +349,12 @@ export const allProducts = [
     volume: 4,
     description: "หน่วยสำรวจต่อสู้เพื่อยึดคืนเขตโทรสต์จากการรุกรานของไททัน",
     picture: "",
+    author: "Hajime Isayama",
+    price: 165,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 5005,
@@ -206,6 +362,12 @@ export const allProducts = [
     volume: 5,
     description: "การปรากฏตัวของไททันหญิงและการต่อสู้ที่ดุเดือด",
     picture: "",
+    author: "Hajime Isayama",
+    price: 175,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 5006,
@@ -213,6 +375,12 @@ export const allProducts = [
     volume: 9,
     description: "การเผชิญหน้ากันระหว่างไททันเกราะและไททันวานร",
     picture: "",
+    author: "Hajime Isayama",
+    price: 195,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 6001,
@@ -221,6 +389,12 @@ export const allProducts = [
     description:
       "การพบกันครั้งแรกของมิโดริยะกับออลไมท์และการได้รับพลังวัน ฟอร์ ออล",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 140,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 110, category_name: "พลังพิเศษ" },
+    ],
   },
   {
     product_id: 6002,
@@ -228,6 +402,12 @@ export const allProducts = [
     volume: 2,
     description: "มิโดริยะเข้าร่วมการสอบเข้าโรงเรียน UA เพื่อพิสูจน์ตัวเอง",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 150,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 6003,
@@ -235,6 +415,12 @@ export const allProducts = [
     volume: 3,
     description: "นักเรียนห้อง 1-A เริ่มต้นการฝึกฝนการต่อสู้ด้วยอัตลักษณ์",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 160,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 110, category_name: "พลังพิเศษ" },
+    ],
   },
   {
     product_id: 6004,
@@ -242,6 +428,12 @@ export const allProducts = [
     volume: 4,
     description: "เหล่าวายร้ายบุกโจมตี USJ เพื่อหวังกำจัดออลไมท์",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 170,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 6005,
@@ -249,6 +441,12 @@ export const allProducts = [
     volume: 5,
     description: "นักเรียน UA เข้าร่วมเทศกาลกีฬาเพื่อแสดงความสามารถของตน",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 180,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 6006,
@@ -256,6 +454,12 @@ export const allProducts = [
     volume: 6,
     description: "นักเรียน UA ได้รับโอกาสฝึกงานกับฮีโร่มืออาชีพ",
     picture: "",
+    author: "Kohei Horikoshi",
+    price: 190,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 110, category_name: "พลังพิเศษ" },
+    ],
   },
   {
     product_id: 7001,
@@ -263,6 +467,12 @@ export const allProducts = [
     volume: 1,
     description: "ทาเคมิจิย้อนเวลากลับไป 12 ปีก่อน และได้พบกับฮินาตะในวัยเด็ก",
     picture: "",
+    author: "Ken Wakui",
+    price: 130,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 7002,
@@ -270,6 +480,12 @@ export const allProducts = [
     volume: 2,
     description: "ทาเคมิจิเข้าไปพัวพันกับแก๊งนักเลงโตเกียวมันจิไค (โตมัน)",
     picture: "",
+    author: "Ken Wakui",
+    price: 140,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 7003,
@@ -277,6 +493,12 @@ export const allProducts = [
     volume: 3,
     description: "ทาเคมิจิพยายามหยุดยั้งการต่อสู้ระหว่างโตมันและแก๊ง Moebius",
     picture: "",
+    author: "Ken Wakui",
+    price: 150,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 7004,
@@ -284,6 +506,12 @@ export const allProducts = [
     volume: 4,
     description: "ทาเคมิจิต้องเข้าไปแทรกซึมในแก๊ง Valhalla เพื่อช่วยบาจิ",
     picture: "",
+    author: "Ken Wakui",
+    price: 160,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 7005,
@@ -291,6 +519,12 @@ export const allProducts = [
     volume: 7,
     description: "ทาเคมิจิต่อสู้กับแก๊ง Black Dragon เพื่อเปลี่ยนแปลงอนาคต",
     picture: "",
+    author: "Ken Wakui",
+    price: 180,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 8001,
@@ -298,6 +532,12 @@ export const allProducts = [
     volume: 1,
     description: "ยูจิกลืนกินนิ้วของสุคุนะและกลายเป็นภาชนะ",
     picture: "",
+    author: "Gege Akutami",
+    price: 150,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 111, category_name: "ไสยศาสตร์" },
+    ],
   },
   {
     product_id: 8002,
@@ -306,6 +546,12 @@ export const allProducts = [
     description:
       "ยูจิเข้าเรียนที่โรงเรียนไสยเวทและได้พบกับโกโจ ซาโตรุและเพื่อนๆ",
     picture: "",
+    author: "Gege Akutami",
+    price: 160,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 8003,
@@ -313,6 +559,12 @@ export const allProducts = [
     volume: 3,
     description: "นักเรียนจากโรงเรียนไสยเวทโตเกียวและเกียวโตเข้าร่วมการแข่งขัน",
     picture: "",
+    author: "Gege Akutami",
+    price: 170,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 111, category_name: "ไสยศาสตร์" },
+    ],
   },
   {
     product_id: 8004,
@@ -320,6 +572,12 @@ export const allProducts = [
     volume: 8,
     description: "การต่อสู้ครั้งใหญ่ในชิบูย่าระหว่างนักไสยเวทและวิญญาณคำสาป",
     picture: "",
+    author: "Gege Akutami",
+    price: 220,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 8005,
@@ -328,6 +586,12 @@ export const allProducts = [
     description:
       'ยูจิและเพื่อนๆ เข้าร่วมการต่อสู้เพื่อความอยู่รอดใน "การล่าสังหาร"',
     picture: "",
+    author: "Gege Akutami",
+    price: 280,
+    categories: [
+      { category_id: 103, category_name: "แอ็คชั่น" },
+      { category_id: 107, category_name: "แฟนตาซี" },
+    ],
   },
   {
     product_id: 9001,
@@ -335,13 +599,25 @@ export const allProducts = [
     volume: 1,
     description: "มิคามิตื่นขึ้นมาในร่างสไลม์ในโลกที่ไม่คุ้นเคย",
     picture: "",
+    author: "Fuse",
+    price: 160,
+    categories: [
+      { category_id: 107, category_name: "แฟนตาซี" },
+      { category_id: 102, category_name: "ผจญภัย" },
+    ],
   },
   {
     product_id: 9002,
     name: "พบพานกับเวลดอร่า",
     volume: 7,
-    description: "สไลม์ได้พบกับมังกรพายุ เวลดอร่า ที่ถูกผนึกไว้",
+    description: "สไลม์ได้พบกับมังกรพายุ เลดอร่า ที่ถูกผนึกไว้",
     picture: "",
+    author: "Fuse",
+    price: 210,
+    categories: [
+      { category_id: 107, category_name: "แฟนตาซี" },
+      { category_id: 102, category_name: "ผจญภัย" },
+    ],
   },
   {
     product_id: 9003,
@@ -349,6 +625,12 @@ export const allProducts = [
     volume: 2,
     description: "สไลม์เริ่มต้นสร้างหมู่บ้านของตนเองและรวบรวมมอนสเตอร์ต่างๆ",
     picture: "",
+    author: "Fuse",
+    price: 170,
+    categories: [
+      { category_id: 107, category_name: "แฟนตาซี" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 9004,
@@ -356,6 +638,12 @@ export const allProducts = [
     volume: 3,
     description: "หมู่บ้านของสไลม์ต้องเผชิญหน้ากับการโจมตีของฝูงโอเกอร์",
     picture: "",
+    author: "Fuse",
+    price: 180,
+    categories: [
+      { category_id: 107, category_name: "แฟนตาซี" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 9005,
@@ -363,6 +651,12 @@ export const allProducts = [
     volume: 6,
     description: "สไลม์วิวัฒนาการเป็นจอมมาร",
     picture: "",
+    author: "Fuse",
+    price: 200,
+    categories: [
+      { category_id: 107, category_name: "แฟนตาซี" },
+      { category_id: 110, category_name: "พลังพิเศษ" },
+    ],
   },
   {
     product_id: 10001,
@@ -370,6 +664,12 @@ export const allProducts = [
     volume: 1,
     description: "เซ็นคูตื่นขึ้นมาในโลกที่มนุษย์กลายเป็นหิน",
     picture: "",
+    author: "Riichiro Inagaki",
+    price: 155,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 108, category_name: "วิทยาศาสตร์" },
+    ],
   },
   {
     product_id: 10002,
@@ -377,6 +677,12 @@ export const allProducts = [
     volume: 4,
     description: "เซ็นคูเริ่มต้นการฟื้นฟูอารยธรรมด้วยวิทยาศาสตร์",
     picture: "",
+    author: "Riichiro Inagaki",
+    price: 185,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 108, category_name: "วิทยาศาสตร์" },
+    ],
   },
   {
     product_id: 10003,
@@ -384,6 +690,12 @@ export const allProducts = [
     volume: 2,
     description: "เซ็นคูรวบรวมผู้คนและสร้างอาณาจักรวิทยาศาสตร์",
     picture: "",
+    author: "Riichiro Inagaki",
+    price: 165,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 108, category_name: "วิทยาศาสตร์" },
+    ],
   },
   {
     product_id: 10004,
@@ -392,6 +704,12 @@ export const allProducts = [
     description:
       "เซ็นคูต้องเผชิญหน้ากับสึกาสะ ผู้ต้องการสร้างโลกที่แข็งแกร่งด้วยกำลัง",
     picture: "",
+    author: "Riichiro Inagaki",
+    price: 195,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 10005,
@@ -399,6 +717,12 @@ export const allProducts = [
     volume: 10,
     description: "อาณาจักรวิทยาศาสตร์ออกเดินทางสู่โลกใหม่",
     picture: "",
+    author: "Riichiro Inagaki",
+    price: 235,
+    categories: [
+      { category_id: 102, category_name: "ผจญภัย" },
+      { category_id: 108, category_name: "วิทยาศาสตร์" },
+    ],
   },
   {
     product_id: 11001,
@@ -406,6 +730,12 @@ export const allProducts = [
     volume: 1,
     description: "โคดากะและโยโซระเริ่มต้นก่อตั้งชมรมเพื่อนบ้าน",
     picture: "",
+    author: "Itachi",
+    price: 145,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 11002,
@@ -413,6 +743,12 @@ export const allProducts = [
     volume: 2,
     description: "สมาชิกใหม่ๆ เริ่มเข้าร่วมชมรมและทำกิจกรรมต่างๆ",
     picture: "",
+    author: "Itachi",
+    price: 155,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 11003,
@@ -420,6 +756,12 @@ export const allProducts = [
     volume: 3,
     description: "ชมรมเพื่อนบ้านเดินทางไปเข้าค่ายฤดูร้อน",
     picture: "",
+    author: "Itachi",
+    price: 165,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 11004,
@@ -427,6 +769,12 @@ export const allProducts = [
     volume: 4,
     description: "ชมรมเพื่อนบ้านวางแผนจัดกิจกรรมในเทศกาลโรงเรียน",
     picture: "",
+    author: "Itachi",
+    price: 175,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 11005,
@@ -434,6 +782,12 @@ export const allProducts = [
     volume: 5,
     description: "ความสัมพันธ์ระหว่างสมาชิกในชมรมเริ่มซับซ้อนขึ้น",
     picture: "",
+    author: "Itachi",
+    price: 185,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 12001,
@@ -441,6 +795,12 @@ export const allProducts = [
     volume: 1,
     description: "มาชิโระและทาคากิตัดสินใจเป็นนักเขียนการ์ตูน",
     picture: "",
+    author: "Tsugumi Ohba",
+    price: 150,
+    categories: [
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+      { category_id: 112, category_name: "สร้างสรรค์" },
+    ],
   },
   {
     product_id: 12002,
@@ -448,6 +808,12 @@ export const allProducts = [
     volume: 5,
     description: "ทั้งสองเริ่มต้นสร้างมังงะเรื่องแรกเพื่อส่งเข้าประกวด",
     picture: "",
+    author: "Tsugumi Ohba",
+    price: 190,
+    categories: [
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+      { category_id: 112, category_name: "สร้างสรรค์" },
+    ],
   },
   {
     product_id: 12003,
@@ -455,6 +821,12 @@ export const allProducts = [
     volume: 2,
     description: "มาชิโระและทาคากิต้องแข่งขันกับนักเขียนคนอื่นๆ ใน Shonen Jump",
     picture: "",
+    author: "Tsugumi Ohba",
+    price: 160,
+    categories: [
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 12004,
@@ -462,6 +834,12 @@ export const allProducts = [
     volume: 3,
     description: "มังงะของทั้งสองได้รับการตีพิมพ์ใน Shonen Jump",
     picture: "",
+    author: "Tsugumi Ohba",
+    price: 170,
+    categories: [
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+      { category_id: 112, category_name: "สร้างสรรค์" },
+    ],
   },
   {
     product_id: 12005,
@@ -469,6 +847,12 @@ export const allProducts = [
     volume: 4,
     description: "ความฝันที่จะสร้างอนิเมะจากมังงะของพวกเขาเริ่มเป็นจริง",
     picture: "",
+    author: "Tsugumi Ohba",
+    price: 180,
+    categories: [
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 13001,
@@ -476,6 +860,12 @@ export const allProducts = [
     volume: 1,
     description: "คางุยะและชิโรกาเนะเริ่มต้นสงครามความรัก",
     picture: "",
+    author: "Aka Akasaka",
+    price: 145,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 105, category_name: "โรแมนติก" },
+    ],
   },
   {
     product_id: 13002,
@@ -483,6 +873,12 @@ export const allProducts = [
     volume: 5,
     description: "ทั้งสองใช้กลยุทธ์ต่างๆ เพื่อให้อีกฝ่ายสารภาพรัก",
     picture: "",
+    author: "Aka Akasaka",
+    price: 185,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 105, category_name: "โรแมนติก" },
+    ],
   },
   {
     product_id: 13003,
@@ -490,6 +886,12 @@ export const allProducts = [
     volume: 2,
     description: "สมาชิกสภานักเรียนคนอื่นๆ เข้ามามีส่วนร่วมในสงครามความรัก",
     picture: "",
+    author: "Aka Akasaka",
+    price: 155,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 13004,
@@ -497,6 +899,12 @@ export const allProducts = [
     volume: 3,
     description: "เทศกาลวัฒนธรรมเป็นอีกหนึ่งเวทีสำหรับสงครามความรัก",
     picture: "",
+    author: "Aka Akasaka",
+    price: 165,
+    categories: [
+      { category_id: 104, category_name: "ตลก" },
+      { category_id: 105, category_name: "โรแมนติก" },
+    ],
   },
   {
     product_id: 13005,
@@ -504,6 +912,12 @@ export const allProducts = [
     volume: 4,
     description: "ความสัมพันธ์ของคางุยะและชิโรกาเนะเริ่มมีการเปลี่ยนแปลง",
     picture: "",
+    author: "Aka Akasaka",
+    price: 175,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 14001,
@@ -511,6 +925,12 @@ export const allProducts = [
     volume: 1,
     description: "โฮริและมิยามูระได้พบกันนอกโรงเรียนและรู้ความลับของกันและกัน",
     picture: "",
+    author: "Hero",
+    price: 140,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 14002,
@@ -518,6 +938,12 @@ export const allProducts = [
     volume: 5,
     description: "ทั้งสองเริ่มสนิทสนมกันมากขึ้น",
     picture: "",
+    author: "Hero",
+    price: 180,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 14003,
@@ -525,6 +951,12 @@ export const allProducts = [
     volume: 2,
     description: "เพื่อนๆ ของทั้งสองเข้ามามีบทบาทในความสัมพันธ์ของพวกเขา",
     picture: "",
+    author: "Hero",
+    price: 150,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 14004,
@@ -532,6 +964,12 @@ export const allProducts = [
     volume: 3,
     description: "โฮริและมิยามูระเริ่มสนิทสนมกันมากขึ้น",
     picture: "",
+    author: "Hero",
+    price: 160,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 14005,
@@ -539,6 +977,12 @@ export const allProducts = [
     volume: 4,
     description: "ความสัมพันธ์ของโฮริและมิยามูระพัฒนาไปอีกขั้น",
     picture: "",
+    author: "Hero",
+    price: 170,
+    categories: [
+      { category_id: 105, category_name: "โรแมนติก" },
+      { category_id: 114, category_name: "ชีวิตประจำวัน" },
+    ],
   },
   {
     product_id: 15001,
@@ -546,6 +990,12 @@ export const allProducts = [
     volume: 1,
     description: "โซมะต้องเผชิญหน้ากับการท้าทายทำอาหารครั้งแรกในโรงเรียนโทสึกิ",
     picture: "",
+    author: "Yuto Tsukuda",
+    price: 135,
+    categories: [
+      { category_id: 113, category_name: "ทำอาหาร" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 15002,
@@ -553,6 +1003,12 @@ export const allProducts = [
     volume: 5,
     description: "โซมะเข้าร่วมการแข่งขันรอบคัดเลือกเพื่อเข้าสู่รอบต่อไป",
     picture: "",
+    author: "Yuto Tsukuda",
+    price: 175,
+    categories: [
+      { category_id: 113, category_name: "ทำอาหาร" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
   {
     product_id: 15003,
@@ -560,6 +1016,12 @@ export const allProducts = [
     volume: 2,
     description: "โซมะและเพื่อนๆ ฝึกฝนและพัฒนาทักษะการทำอาหารของตนเอง",
     picture: "",
+    author: "Yuto Tsukuda",
+    price: 145,
+    categories: [
+      { category_id: 113, category_name: "ทำอาหาร" },
+      { category_id: 109, category_name: "ชีวิตในโรงเรียน" },
+    ],
   },
   {
     product_id: 15004,
@@ -567,6 +1029,12 @@ export const allProducts = [
     volume: 3,
     description: "โซมะต้องประลองฝีมือกับสมาชิกของสิบหัวกะทิ",
     picture: "",
+    author: "Yuto Tsukuda",
+    price: 155,
+    categories: [
+      { category_id: 113, category_name: "ทำอาหาร" },
+      { category_id: 106, category_name: "ดราม่า" },
+    ],
   },
   {
     product_id: 15005,
@@ -574,5 +1042,11 @@ export const allProducts = [
     volume: 4,
     description: "โซมะและเพื่อนๆ ต่อสู้เพื่ออนาคตของพวกเขาในโรงเรียนโทสึกิ",
     picture: "",
+    author: "Yuto Tsukuda",
+    price: 165,
+    categories: [
+      { category_id: 113, category_name: "ทำอาหาร" },
+      { category_id: 103, category_name: "แอ็คชั่น" },
+    ],
   },
 ];

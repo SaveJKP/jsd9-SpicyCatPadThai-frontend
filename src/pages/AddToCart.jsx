@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 export default function AddToCart() {
   const [product, setProduct] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [quantity, setQuantity] = useState(1);
   let [cart, setCart] = useState([]);
 
@@ -17,6 +18,7 @@ export default function AddToCart() {
   // Fetch product by ID from mock data
   useEffect(() => {
     setProduct(data);
+    setCategories(data.categories);
     const storedCart = localStorage.getItem("cart");
     const parsedCart = storedCart ? JSON.parse(storedCart) : [];
     setCart(parsedCart);
@@ -63,16 +65,14 @@ export default function AddToCart() {
   //   return <div className="p-10 text-xl text-red-500">Product not found</div>;
   // }
 
-  // const genreTags = Array.isArray(product.category)
-  //   ? product.category.map((category, index) => (
-  //       <span
-  //         key={`${category}-${index}`}
-  //         className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-  //       >
-  //         {category}
-  //       </span>
-  //     ))
-  //   : [];
+  const genreTags = categories.map((category, index) => (
+    <span
+      key={`${category}-${index}`}
+      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+    >
+      {category.category_name}
+    </span>
+  ));
 
   // const handleReload = () => {
   //   setTimeout(() => {
@@ -134,7 +134,7 @@ export default function AddToCart() {
           </div>
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
-            <p className="text-2xl font-bold md:text-3xl">{product.title}</p>
+            <p className="text-2xl font-bold md:text-3xl">{product.name}</p>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
 
@@ -185,7 +185,7 @@ export default function AddToCart() {
             <h3 className="text-xl font-bold">Description</h3>
             <p className="mb-5">{product.description}</p>
             <h4 className="mb-4 text-lg font-bold">Genre</h4>
-            <div className="flex flex-row flex-wrap gap-2">genreTags</div>
+            <div className="flex flex-row flex-wrap gap-2">{genreTags}</div>
           </div>
 
           {/* Similar books */}
