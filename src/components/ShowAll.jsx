@@ -7,9 +7,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { books } from "../data/products";
 import { BookCard } from "./BookCard";
 import { useState } from "react";
+import { bannersWithCategories } from "../data/ShowAll";
 
 export default function ShowAll() {
   {
@@ -17,7 +17,7 @@ export default function ShowAll() {
   }
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(books.length / itemsPerPage);
+  const totalPages = Math.ceil(bannersWithCategories.length / itemsPerPage);
   const [open, setOpen] = useState(false);
 
   {
@@ -25,7 +25,7 @@ export default function ShowAll() {
   }
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentBooks = books.slice(startIndex, endIndex);
+  const currentBanners = bannersWithCategories.slice(startIndex, endIndex);
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -44,12 +44,13 @@ export default function ShowAll() {
   return (
     <div>
       <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
-        {currentBooks.map((book) => (
+        {currentBanners.map((banner) => (
           <BookCard
-            key={book.id}
-            title={book.title}
-            banner={book.banner}
-            author={book.author}
+            key={banner.banner_id}
+            id={banner.banner_id}
+            title={banner.name}
+            banner={banner.picture}
+            author={banner.author_name}
           />
         ))}
       </section>

@@ -2,128 +2,123 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { products } from "../data/products";
+import { allProducts } from "../data/AddToCart";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function AddToCart() {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
   let [cart, setCart] = useState([]);
 
+  const { id } = useParams();
+  const data = allProducts.find((p) => p.product_id === parseInt(id));
+
   // Fetch product by ID from mock data
   useEffect(() => {
-    const fetchMockProduct = () => {
-      const data = products.find((p) => p.id === id);
-      setProduct(data);
-    };
-    fetchMockProduct();
-  }, [id]);
-
-  // Load cart from localStorage when the app initializes
-  useEffect(() => {
+    setProduct(data);
     const storedCart = localStorage.getItem("cart");
     const parsedCart = storedCart ? JSON.parse(storedCart) : [];
     setCart(parsedCart);
   }, []);
 
-  const totalPrice = product ? product.price * quantity : 0;
+  // // Load cart from localStorage when the app initializes
+  // const totalPrice = product ? product.price * quantity : 0;
 
-  const handleAdd = () => setQuantity((x) => x + 1);
-  const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
+  // const handleAdd = () => setQuantity((x) => x + 1);
+  // const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
 
-  const handleAddToCart = () => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+  // const handleAddToCart = () => {
+  //   setCart((prevCart) => {
+  //     const existingItem = prevCart.find((item) => item.id === product.id);
 
-      if (existingItem) {
-        cart = prevCart.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity: item.quantity + quantity,
-                total: item.total + totalPrice,
-              }
-            : item,
-        );
-      } else {
-        cart = [
-          ...prevCart,
-          {
-            ...product,
-            quantity,
-            total: totalPrice,
-          },
-        ];
-      }
-      // Save to localStorage BEFORE updating state
-      localStorage.setItem("cart", JSON.stringify(cart));
-      setCart(cart); // Now update the state
-      setQuantity(1);
-    });
-  };
+  //     if (existingItem) {
+  //       cart = prevCart.map((item) =>
+  //         item.id === product.id
+  //           ? {
+  //               ...item,
+  //               quantity: item.quantity + quantity,
+  //               total: item.total + totalPrice,
+  //             }
+  //           : item,
+  //       );
+  //     } else {
+  //       cart = [
+  //         ...prevCart,
+  //         {
+  //           ...product,
+  //           quantity,
+  //           total: totalPrice,
+  //         },
+  //       ];
+  //     }
+  //     // Save the updated cart to localStorage
+  //     localStorage.setItem("cart", JSON.stringify(cart));
+  //     setCart(cart); // Now update the state
+  //     setQuantity(1);
+  //   });
+  // };
 
-  if (!product) {
-    return <div className="p-10 text-xl text-red-500">Product not found</div>;
-  }
+  // if (!product) {
+  //   return <div className="p-10 text-xl text-red-500">Product not found</div>;
+  // }
 
-  const genreTags = Array.isArray(product.category)
-    ? product.category.map((category, index) => (
-        <span
-          key={`${category}-${index}`}
-          className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-        >
-          {category}
-        </span>
-      ))
-    : [];
+  // const genreTags = Array.isArray(product.category)
+  //   ? product.category.map((category, index) => (
+  //       <span
+  //         key={`${category}-${index}`}
+  //         className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+  //       >
+  //         {category}
+  //       </span>
+  //     ))
+  //   : [];
 
-  const handleReload = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-  };
+  // const handleReload = () => {
+  //   setTimeout(() => {
+  //     window.location.reload();
+  //   }, 2000);
+  // };
 
-  const excludeId = id;
+  // const excludeId = id;
 
-  const getRandomBooks = (products, category) => {
-    // Filter products by checking if the category exists in the product's category array
-    const filteredBooks = products.filter(
-      (product) =>
-        Array.isArray(product.category) && product.category.includes(category),
-    );
+  // const getRandomBooks = (books, category) => {
+  //   // Filter products by checking if the category exists in the product's category array
+  //   const filteredBooks = books.filter(
+  //     (product) =>
+  //       Array.isArray(product.category) && product.category.includes(category),
+  //   );
 
-    // Shuffle and pick random ones
-    return filteredBooks
-      .sort(() => Math.random())
-      .filter((item) => item.id !== excludeId);
-  };
+  //   // Shuffle and pick random ones
+  //   return filteredBooks
+  //     .sort(() => Math.random())
+  //     .filter((item) => item.id !== excludeId);
+  // };
 
-  const similarBooks = product.category
-    .flatMap((category) => getRandomBooks(products, category))
-    .slice(0, 4) // Limit total results to four
-    .map((book, index) => (
-      <div key={index} className="flex flex-col items-center">
-        <Link to={`/add-to-cart/${book.id}`}>
-          <img
-            src={book.img}
-            alt={book.title}
-            className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
-            onClick={() => {
-              if (quantity > 1) {
-                handleReload(); // Call handleReload if quantity > 1
-              }
-            }}
-          />
-        </Link>
-        <p className="flex flex-col justify-center md:text-center">
-          <span>{book.title}</span>
-          <span>{book.author}</span>
-          <span>฿{book.price}</span>
-        </p>
-      </div>
-    ));
+  // const similarBooks = product.category
+  //   .flatMap((category) => getRandomBooks(allProducts, category))
+  //   .slice(0, 4) // Limit total results to four
+  //   .map((book, index) => (
+  //     <div key={index} className="flex flex-col items-center">
+  //       <Link to={`/add-to-cart/${book.id}`}>
+  //         <img
+  //           src={book.img}
+  //           alt={book.title}
+  //           className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+  //           onClick={() => {
+  //             if (quantity > 1) {
+  //               handleReload(); // Call handleReload if quantity > 1
+  //             }
+  //           }}
+  //         />
+  //       </Link>
+  //       <p className="flex flex-col justify-center md:text-center">
+  //         <span>{book.title}</span>
+  //         <span>{book.author}</span>
+  //         <span>฿{book.price}</span>
+  //       </p>
+  //     </div>
+  //   ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -132,7 +127,7 @@ export default function AddToCart() {
           {/* Product image */}
           <div className="w-[60%] place-self-center">
             <img
-              src={product.img || "https://placehold.co/200x250"}
+              src={product.picture || "https://placehold.co/200x250"}
               alt="book-cover"
               className="max-w-[100%] place-self-center shadow-lg"
             />
@@ -152,7 +147,7 @@ export default function AddToCart() {
                 width="25px"
                 fill="#e3e3e3"
                 className="bg-[#939393]"
-                onClick={handleRemove}
+                // onClick={handleRemove}
               >
                 <path d="M200-440v-80h560v80H200Z" />
               </svg>
@@ -164,7 +159,7 @@ export default function AddToCart() {
                 width="25px"
                 fill="#e3e3e3"
                 className="bg-[#939393]"
-                onClick={handleAdd}
+                // onClick={handleAdd}
               >
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
               </svg>
@@ -190,14 +185,14 @@ export default function AddToCart() {
             <h3 className="text-xl font-bold">Description</h3>
             <p className="mb-5">{product.description}</p>
             <h4 className="mb-4 text-lg font-bold">Genre</h4>
-            <div className="flex flex-row flex-wrap gap-2">{genreTags}</div>
+            <div className="flex flex-row flex-wrap gap-2">genreTags</div>
           </div>
 
           {/* Similar books */}
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {similarBooks}
+              similarbooks
             </div>
           </div>
         </div>
@@ -205,7 +200,7 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)]">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿{totalPrice}</p>
+          <p className="p-2 text-2xl">฿totalPrice</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:bg-[#2e648ecc]"
             onClick={() => {
