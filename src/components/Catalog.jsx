@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import { GetData } from "../utils/API";
 import { useNavigate } from "react-router-dom";
 import { bannersWithProducts } from "./../data/Catalog";
+import { createPortal } from "react-dom";
 
 export default function Catalog({ id, onClose }) {
   const [name, setName] = useState("");

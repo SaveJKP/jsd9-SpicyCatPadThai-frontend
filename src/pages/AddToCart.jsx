@@ -25,45 +25,45 @@ export default function AddToCart() {
   }, []);
 
   // // Load cart from localStorage when the app initializes
-  // const totalPrice = product ? product.price * quantity : 0;
+  const totalPrice = product ? product.price * quantity : 0;
 
-  // const handleAdd = () => setQuantity((x) => x + 1);
-  // const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
+  const handleAdd = () => setQuantity((x) => x + 1);
+  const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
 
-  // const handleAddToCart = () => {
-  //   setCart((prevCart) => {
-  //     const existingItem = prevCart.find((item) => item.id === product.id);
+  const handleAddToCart = () => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === product.id);
 
-  //     if (existingItem) {
-  //       cart = prevCart.map((item) =>
-  //         item.id === product.id
-  //           ? {
-  //               ...item,
-  //               quantity: item.quantity + quantity,
-  //               total: item.total + totalPrice,
-  //             }
-  //           : item,
-  //       );
-  //     } else {
-  //       cart = [
-  //         ...prevCart,
-  //         {
-  //           ...product,
-  //           quantity,
-  //           total: totalPrice,
-  //         },
-  //       ];
-  //     }
-  //     // Save the updated cart to localStorage
-  //     localStorage.setItem("cart", JSON.stringify(cart));
-  //     setCart(cart); // Now update the state
-  //     setQuantity(1);
-  //   });
-  // };
+      if (existingItem) {
+        cart = prevCart.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + quantity,
+                total: item.total + totalPrice,
+              }
+            : item,
+        );
+      } else {
+        cart = [
+          ...prevCart,
+          {
+            ...product,
+            quantity,
+            total: totalPrice,
+          },
+        ];
+      }
+      // Save the updated cart to localStorage
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setCart(cart); // Now update the state
+      setQuantity(1);
+    });
+  };
 
-  // if (!product) {
-  //   return <div className="p-10 text-xl text-red-500">Product not found</div>;
-  // }
+  if (!product) {
+    return <div className="p-10 text-xl text-red-500">Product not found</div>;
+  }
 
   const genreTags = categories.map((category, index) => (
     <span
@@ -74,51 +74,51 @@ export default function AddToCart() {
     </span>
   ));
 
-  // const handleReload = () => {
-  //   setTimeout(() => {
-  //     window.location.reload();
-  //   }, 2000);
-  // };
+  const handleReload = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
 
-  // const excludeId = id;
+  const excludeId = id;
 
-  // const getRandomBooks = (books, category) => {
-  //   // Filter products by checking if the category exists in the product's category array
-  //   const filteredBooks = books.filter(
-  //     (product) =>
-  //       Array.isArray(product.category) && product.category.includes(category),
-  //   );
+  const getRandomBooks = (books, category) => {
+    // Filter products by checking if the category exists in the product's category array
+    const filteredBooks = books.filter(
+      (product) =>
+        Array.isArray(product.category) && product.category.includes(category),
+    );
 
-  //   // Shuffle and pick random ones
-  //   return filteredBooks
-  //     .sort(() => Math.random())
-  //     .filter((item) => item.id !== excludeId);
-  // };
+    // Shuffle and pick random ones
+    return filteredBooks
+      .sort(() => Math.random())
+      .filter((item) => item.id !== excludeId);
+  };
 
-  // const similarBooks = product.category
-  //   .flatMap((category) => getRandomBooks(allProducts, category))
-  //   .slice(0, 4) // Limit total results to four
-  //   .map((book, index) => (
-  //     <div key={index} className="flex flex-col items-center">
-  //       <Link to={`/add-to-cart/${book.id}`}>
-  //         <img
-  //           src={book.img}
-  //           alt={book.title}
-  //           className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
-  //           onClick={() => {
-  //             if (quantity > 1) {
-  //               handleReload(); // Call handleReload if quantity > 1
-  //             }
-  //           }}
-  //         />
-  //       </Link>
-  //       <p className="flex flex-col justify-center md:text-center">
-  //         <span>{book.title}</span>
-  //         <span>{book.author}</span>
-  //         <span>฿{book.price}</span>
-  //       </p>
-  //     </div>
-  //   ));
+  /* const similarBooks = product.category
+    .flatMap((category) => getRandomBooks(allProducts, category))
+    .slice(0, 4) // Limit total results to four
+    .map((book, index) => (
+      <div key={index} className="flex flex-col items-center">
+        <Link to={`/add-to-cart/${book.id}`}>
+          <img
+            src={book.img}
+            alt={book.title}
+            className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+            onClick={() => {
+              if (quantity > 1) {
+                handleReload(); // Call handleReload if quantity > 1
+              }
+            }}
+          />
+        </Link>
+        <p className="flex flex-col justify-center md:text-center">
+          <span>{book.title}</span>
+          <span>{book.author}</span>
+          <span>฿{book.price}</span>
+        </p>
+      </div>
+    )); */
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -146,8 +146,8 @@ export default function AddToCart() {
                 viewBox="0 -960 960 960"
                 width="25px"
                 fill="#e3e3e3"
-                className="bg-[#939393]"
-                // onClick={handleRemove}
+                className="bg-[#939393] hover:cursor-pointer"
+                onClick={handleRemove}
               >
                 <path d="M200-440v-80h560v80H200Z" />
               </svg>
@@ -158,8 +158,8 @@ export default function AddToCart() {
                 viewBox="0 -960 960 960"
                 width="25px"
                 fill="#e3e3e3"
-                className="bg-[#939393]"
-                // onClick={handleAdd}
+                className="bg-[#939393] hover:cursor-pointer"
+                onClick={handleAdd}
               >
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
               </svg>
