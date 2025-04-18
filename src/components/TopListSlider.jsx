@@ -23,7 +23,7 @@ export function TopListCard({title, banner, author}) {
         </CarouselItem>
     );
 }
-export default function TopListSlider({name}) {
+export default function TopListSlider() {
   const relevantBooks = books;
 
   return  (
