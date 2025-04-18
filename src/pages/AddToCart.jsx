@@ -57,9 +57,9 @@ export default function AddToCart() {
           },
         ];
       }
-      // Save to localStorage BEFORE updating state
+
       localStorage.setItem("cart", JSON.stringify(cart));
-      setCart(cart); // Now update the state
+      setCart(cart);
       setQuantity(1);
     });
   };
@@ -88,13 +88,11 @@ export default function AddToCart() {
   const excludeId = id;
 
   const getRandomBooks = (products, category) => {
-    // Filter products by checking if the category exists in the product's category array
     const filteredBooks = products.filter(
       (product) =>
         Array.isArray(product.category) && product.category.includes(category),
     );
 
-    // Shuffle and pick random ones
     return filteredBooks
       .sort(() => Math.random())
       .filter((item) => item.id !== excludeId);
@@ -102,9 +100,12 @@ export default function AddToCart() {
 
   const similarBooks = product.category
     .flatMap((category) => getRandomBooks(products, category))
-    .slice(0, 4) // Limit total results to four
+    .slice(0, 4)
     .map((book, index) => (
-      <div key={index} className="flex flex-col items-center">
+      <div
+        key={index}
+        className="flex w-[100%] flex-col items-center text-center"
+      >
         <Link to={`/add-to-cart/${book.id}`}>
           <img
             src={book.img}
@@ -112,7 +113,7 @@ export default function AddToCart() {
             className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
             onClick={() => {
               if (quantity > 1) {
-                handleReload(); // Call handleReload if quantity > 1
+                handleReload();
               }
             }}
           />
@@ -175,7 +176,7 @@ export default function AddToCart() {
               onClick={() => {
                 handleAddToCart();
                 handleReload();
-                toast("Added to cart!");
+                toast("Added to Cart!");
               }}
             >
               Add to Cart
