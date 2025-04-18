@@ -1,6 +1,7 @@
 import BannerSlider from "../components/BannerSlider"
 import CardSlider from "../components/CardSlider"
 import ShowAll from "../components/ShowAll"
+import TopList from "../components/TopList"
 
 export default function Home() {
 
@@ -21,7 +22,7 @@ export default function Home() {
 
         <div className="bg-banner">
           <div className="container__div">
-              <BannerSlider/>
+              <TopList/>
           </div>
         </div>
 
