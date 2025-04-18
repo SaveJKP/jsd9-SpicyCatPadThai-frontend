@@ -62,7 +62,6 @@ export default function ShowAll() {
                 </PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationEllipsis className="text-text text-xl"/>
               </PaginationItem>
               <PaginationItem>
                 {/* Next Page */}
