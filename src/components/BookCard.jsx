@@ -18,8 +18,8 @@ export function BookCard({ id,title, banner, author }) {
   return (
     <>
       <div>
-        <Card onClick={handleOpenModal} className="bg-box border-banner flex h-80 w-50 flex-col items-center justify-center md:h-auto md:w-90">
-          <img src={ banner || "https://placehold.co/200x250"} alt="" className="w-[100%] rounded-4xl p-4" />
+        <Card onClick={handleOpenModal} className="bg-box border-banner flex h-80 w-40 flex-col items-center justify-center md:h-auto md:w-90">
+          <img src={ banner || "https://placehold.co/200x250"} alt="" className="w-[100%] rounded-4xl p-4 -mb-6" />
           <CardContent>
             <CardTitle className="text-text text-lg font-bold">
               {title}

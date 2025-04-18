@@ -28,7 +28,7 @@ export default function Catalog({ id, onClose }) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-box justufy-center mt-16 flex w-[40%] min-w-[355px] flex-col items-center gap-[24px] rounded-lg p-6 shadow-lg"
+            className="bg-box justify-center mt-16 flex w-[40%] min-w-[355px] flex-col items-center gap-[24px] rounded-lg p-6 shadow-lg"
           >
             <h1>{name}</h1>
             <img
