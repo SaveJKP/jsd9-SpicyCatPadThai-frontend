@@ -18,7 +18,7 @@ export default function UserProfile() {
       </section>
           
       <div className="container__div py-0 md:flex ">
-        {/* 2. User display + logout - User Profile */}
+        {/* 2. User display + settings button - User Profile */}
         <div className="flex flex-col text-center items-center md:w-1/2">
           <img
             src="/src/assets/logo_cat.jpg"
@@ -30,17 +30,10 @@ export default function UserProfile() {
             <button className="m-4 text-sm underline cursor-pointer">Change Password and Profile Details</button>
           </Link>
     
-          <Link to = "/login">
-            <BrownButton
-              className=""
-              text="Log out"
-              onclick=""
-            />
-          </Link>
         </div>
 
         {/* 3.User Info - User Profile */}
-        <div className ="px-16 mt-4 md:w-1/2 md:px-8 lg:px-16">
+        <div className ="px-16 mt-4 md:w-1/2 md:px-8 lg:px-16 ">
             <div className="bg-(--color-box) px-6 rounded-lg md:px-6 py-4">
               <div className=" profile-detail-text flex flex-col justify-center">
                 <p className="mt-2"><span className="font-bold">Name:</span> <br></br> {user.first_name} {user.last_name}</p>
@@ -52,22 +45,32 @@ export default function UserProfile() {
 
               <Link to = "/purchase">
                 <GreenButton
-                className="w-full mb-2 mt-4"
+                className=" mb-2 mt-4"
                 text="Your Cart →"
                 onclick=""
                 />
               </Link>
 
 
-              <GreenButton
+              {/* <GreenButton
                 className="w-full mb-2"
                 text="Your Orders →"
                 onclick=""
-              />
+              /> */}
 
-
-
+              
           </div>
+          {/* 4.log out button - User Profile */}
+          <div className ="flex flex-col items-center">
+            <Link to = "/login">
+              <BrownButton
+                className="mt-8 md:hidden "
+                text="Log out"
+                onclick=""
+              />
+            </Link>
+          </div>
+          
         </div>
         
       </div>

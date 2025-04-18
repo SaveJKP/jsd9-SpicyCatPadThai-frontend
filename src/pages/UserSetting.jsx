@@ -50,13 +50,6 @@ export default function UserProfile() {
             <button className="m-4 text-sm underline cursor-pointer">Back to Profile</button>
           </Link>
     
-          <Link to = "/login">
-            <BrownButton
-              className=""
-              text="Log out"
-              onclick=""
-            />
-          </Link>
         </div>
 
         {/* 3.account and password setting - User Profile Setting*/}
@@ -95,7 +88,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer">Save changes</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save changes</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
@@ -118,7 +111,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer">Save password</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save password</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
