@@ -1,49 +1,56 @@
 import { Link } from "react-router-dom";
+import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
+import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
 
 export default function Footer() {
   return (
-    <div className="bg-gray-500">
-      <div className="container__div">
-      <div className="footer flex flex-col gap-5 md:pb-10 lg:flex-row">
-        <div className="md:w-[60%]">
-          <img
-            src="/assets/logo_katsubook_onlytext.png"
-            alt="logo_bookstore"
-            className="max-w-50 max-sm:hidden"
-          />
-          <p className="py-[16px] max-md:hidden">&copy; 2025 Katsu Book</p>
-        </div>
-        <div className="flex flex-col gap-1 md:w-[60%]">
-          <h3>Customer Service</h3>
-          <Link>Help Center</Link>
-          <Link>How to Buy</Link>
-          <Link>Payment Methods</Link>
-          <Link>Shipping & Delivery</Link>
-          <Link>Return & Refund</Link>
-        </div>
-        <div className="md:w-[60%]">
-          <Link href="/about.html">
+    <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
+      <div className="container__div px-[16px]">
+        <div className="flex-wrp flex flex-col justify-center space-y-[16px] py-[16px] min-[1024px]:flex-row min-[1024px]:gap-5 md:pb-10">
+          <Link to="/about">
             <h3>About Us</h3>
           </Link>
-          <p className="w-[90%]">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil
-            velit blanditiis rem, id officiis ipsam sed error nesciunt labore
-            quia!
-          </p>
-        </div>
-        <div className="md:w-[60%]">
-          <Link href="/about.html">
-            <h3>Contact Us</h3>
+
+          <Link to="#faq">
+            <h3>FAQ</h3>
           </Link>
-          <p className="w-[90%]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-            quaerat?
-          </p>
+
+          <Link to="#help">
+            <h3>Help</h3>
+          </Link>
+
+          <Link to="#privacy">
+            <h3>Privacy Notice</h3>
+          </Link>
+
+          <Link to="#cookies">
+            <h3>Cookies Notice</h3>
+          </Link>
+
+          <Link to="#terms">
+            <h3>Terms & Conditions</h3>
+          </Link>
+
+          <Link to="#enquiry">
+            <h3>Enquiry</h3>
+          </Link>
         </div>
-        <p className="py-[16px] md:hidden">&copy; 2025 Katsu Book</p>
-      </div>
+        <div className="mt-[16px] flex flex-row items-center min-[1024px]:justify-self-center">
+          <img
+            src={logo_katsubook_notext}
+            alt="logo_bookstore"
+            className="h-[30px] max-sm:hidden"
+          />
+          <img
+            src={logo_katsubook_text}
+            alt="logo_bookstore"
+            className="h-[30px] max-sm:hidden"
+          />
+        </div>
+        <p className="py-[10px] min-[1024px]:justify-self-center">
+          &copy; 2025 KatsuBook. All Rights Reserved
+        </p>
       </div>
     </div>
-    
   );
 }
