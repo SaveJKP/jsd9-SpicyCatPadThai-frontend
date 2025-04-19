@@ -44,10 +44,11 @@ export default function UserProfile() {
             alt="profile"
             className ="w-32 h-32 rounded-full my-4"
           />
-          <p className ="">User ID: {userId}</p>
+          <p className ="mt-2 text-2xl font-bold">{user.first_name} {user.last_name}</p>
+          <p className ="text-sm mt-4">User ID: {userId}</p>
   
           <Link to ={`/user/${userId}`}>
-            <button className="m-4 text-sm underline cursor-pointer">Back to Profile</button>
+            <button className="m-4 text-sm underline cursor-pointer hover:scale-105">Back to Profile</button>
           </Link>
     
         </div>
@@ -57,15 +58,15 @@ export default function UserProfile() {
         <div className ="mt-4 px-16 font-noto md:w-1/2 md:px-8 lg:px-16">
           <Tabs defaultValue="account" className="">
             <TabsList className="grid w-full grid-cols-2  bg-(--color-box) mb-1">
-              <TabsTrigger value="account" className ="text-(--color-text)">Account</TabsTrigger>
+              <TabsTrigger value="account" className ="text-(--color-text)">Profile</TabsTrigger>
               <TabsTrigger value="password" className ="text-(--color-text)">Password</TabsTrigger>
             </TabsList>
             <TabsContent  value="account" >
               <Card>
                 <CardHeader>
-                  <CardTitle className ="font-bold">Account</CardTitle>
+                  <CardTitle className ="font-bold">Profile</CardTitle>
                   <CardDescription>
-                    Make changes to your account here. Click save when you're done.
+                    Make changes to your profile here. Click save when you're done.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
@@ -88,7 +89,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save changes</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save Changes</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
@@ -111,7 +112,7 @@ export default function UserProfile() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save password</Button>
+                  <Button className ="bg-(--color-greenBackground) hover:bg-[#060f0b] cursor-pointer font-bold">Save Password</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
