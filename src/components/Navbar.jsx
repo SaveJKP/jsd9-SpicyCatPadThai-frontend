@@ -37,7 +37,7 @@ const Layout = () => {
   const handleReload = () => {
     setTimeout(() => {
       window.location.reload();
-    }, 1000); // Reload after 3 seconds
+    }, 1000);
   };
   return (
     <>
@@ -125,9 +125,9 @@ const Layout = () => {
                   </div>
                   <Link
                     to="/order"
-                    className="my-2 w-[8rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-[10rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
                   >
-                    My Order
+                    My Orders
                   </Link>
                   <Link
                     onClick={handleLogout}
