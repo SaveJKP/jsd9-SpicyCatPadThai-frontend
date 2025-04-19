@@ -9,19 +9,19 @@ import { toast } from "sonner";
 export default function AddToCart() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [category, setCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   let [cart, setCart] = useState([]);
 
   // Fetch product by ID from mock data
   useEffect(() => {
-    const fetchMockProduct = () => {
-      const data = products.find((p) => p.id === id);
-      setProduct(data);
-    };
-    fetchMockProduct();
+    const getProduct = products.find((p) => p.product_id === parseInt(id));
+    if (getProduct) {
+      setProduct(getProduct);
+      setCategory(getProduct.categories);
+    }
   }, [id]);
 
-  // Load cart from localStorage when the app initializes
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = storedCart ? JSON.parse(storedCart) : [];
@@ -35,11 +35,13 @@ export default function AddToCart() {
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      const existingItem = prevCart.find(
+        (item) => item.product_id === product.product_id,
+      );
 
       if (existingItem) {
         cart = prevCart.map((item) =>
-          item.id === product.id
+          item.product_id === product.product_id
             ? {
                 ...item,
                 quantity: item.quantity + quantity,
@@ -65,50 +67,58 @@ export default function AddToCart() {
   };
 
   if (!product) {
-    return <div className="p-10 text-xl text-red-500">Product not found</div>;
+    return (
+      <div className="flex h-full flex-col items-center space-y-10 bg-[var(--color-greenBackground)] py-15 text-2xl md:w-[100%]">
+        <p className="p-4 text-center text-white">Product not found.</p>
+        <Link
+          to="/"
+          className="rounded-2xl bg-[var(--color-buttonBrown)] px-[58px] py-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e]"
+        >
+          Continue Shopping
+        </Link>
+      </div>
+    );
   }
 
-  const genreTags = Array.isArray(product.category)
-    ? product.category.map((category, index) => (
-        <span
-          key={`${category}-${index}`}
-          className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-        >
-          {category}
-        </span>
-      ))
-    : [];
+  const genreTags = category.map((category, index) => (
+    <span
+      key={`${category}-${index}`}
+      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+    >
+      {category.category_name}
+    </span>
+  ));
 
   const handleReload = () => {
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
   };
 
-  const excludeId = id;
-
-  const getRandomBooks = (products, category) => {
-    const filteredBooks = products.filter(
-      (product) =>
-        Array.isArray(product.category) && product.category.includes(category),
+  // Get random books from the same category
+  const getRandomBooks = (products, categoryName, excludeId) => {
+    const filteredBooks = products.filter((product) =>
+      product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
     return filteredBooks
-      .sort(() => Math.random())
-      .filter((item) => item.id !== excludeId);
+      .filter((item) => item.product_id !== excludeId)
+      .sort(() => Math.random() - 0.5);
   };
 
-  const similarBooks = product.category
-    .flatMap((category) => getRandomBooks(products, category))
+  const similarBooks = category
+    ?.flatMap((cat) =>
+      getRandomBooks(products, cat.category_name, product.product_id),
+    )
     .slice(0, 4)
     .map((book, index) => (
       <div
-        key={index}
+        key={book.product_id || index}
         className="flex w-[100%] flex-col items-center text-center"
       >
-        <Link to={`/add-to-cart/${book.id}`}>
+        <Link to={`/add-to-cart/${book.product_id}`}>
           <img
-            src={book.img}
+            src={book.img || "https://placehold.co/200x250"}
             alt={book.title}
             className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
             onClick={() => {
@@ -117,12 +127,14 @@ export default function AddToCart() {
               }
             }}
           />
+
+          <p className="flex flex-col justify-center md:text-center">
+            <span>{book.name}</span>
+            <span>Vol. {book.volume}</span>
+            <span>{book.author}</span>
+            <span>฿{book.price}</span>
+          </p>
         </Link>
-        <p className="flex flex-col justify-center md:text-center">
-          <span>{book.title}</span>
-          <span>{book.author}</span>
-          <span>฿{book.price}</span>
-        </p>
       </div>
     ));
 
@@ -133,14 +145,17 @@ export default function AddToCart() {
           {/* Product image */}
           <div className="w-[60%] place-self-center">
             <img
-              src={product.img || "https://placehold.co/200x250"}
+              src={product.picture || "https://placehold.co/200x250"}
               alt="book-cover"
               className="max-w-[100%] place-self-center shadow-lg"
             />
           </div>
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
-            <p className="text-2xl font-bold md:text-3xl">{product.title}</p>
+            <p className="text-2xl font-bold md:text-3xl">{product.name}</p>
+            <p className="text-xl font-bold md:text-2xl">
+              Vol. {product.volume}
+            </p>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
 
@@ -152,7 +167,7 @@ export default function AddToCart() {
                 viewBox="0 -960 960 960"
                 width="25px"
                 fill="#e3e3e3"
-                className="bg-[#939393]"
+                className="bg-[#939393] hover:cursor-pointer"
                 onClick={handleRemove}
               >
                 <path d="M200-440v-80h560v80H200Z" />
@@ -164,7 +179,7 @@ export default function AddToCart() {
                 viewBox="0 -960 960 960"
                 width="25px"
                 fill="#e3e3e3"
-                className="bg-[#939393]"
+                className="bg-[#939393] hover:cursor-pointer"
                 onClick={handleAdd}
               >
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
@@ -172,7 +187,7 @@ export default function AddToCart() {
             </div>
 
             <button
-              className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
+              className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
               onClick={() => {
                 handleAddToCart();
                 handleReload();
@@ -204,11 +219,11 @@ export default function AddToCart() {
         </div>
       </div>
       {/* Sticky AddToCart Bar */}
-      <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)]">
+      <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
           <p className="p-2 text-2xl">฿{totalPrice}</p>
           <button
-            className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:bg-[#2e648ecc]"
+            className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
               handleAddToCart();
               handleReload();
