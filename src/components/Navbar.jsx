@@ -101,7 +101,7 @@ const Layout = () => {
                     </svg>
                   </Link>
                   <div className="flex max-w-[120px] flex-row items-center">
-                    <Link to={"/user/:userId"}>
+                    <Link to={"/user/1"}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="auto"
@@ -114,7 +114,7 @@ const Layout = () => {
                       </svg>
                     </Link>
                     <Link
-                      to="/user/:userId"
+                      to="/user/1"
                       className="my-2 w-[10rem] p-[8px] text-[16px] min-[1024px]:block min-sm:hidden"
                     >
                       Account

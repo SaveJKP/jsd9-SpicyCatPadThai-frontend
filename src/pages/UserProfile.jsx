@@ -50,7 +50,7 @@ export default function UserProfile() {
                 <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday}
               </div>
 
-              <Link to = "/add-to-cart">
+              <Link to = "/purchase">
                 <GreenButton
                 className="w-full mb-2 mt-4"
                 text="Your Cart →"
