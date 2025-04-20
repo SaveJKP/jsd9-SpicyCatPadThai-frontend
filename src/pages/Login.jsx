@@ -1,8 +1,19 @@
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator"
+import { useState } from "react";
 
 export default function Login() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log('Email:', email);
+    console.log('Password:', password);
+  }
+
   return (
   <main >
     <div className="bg-greenBackground w-full h-fit">
@@ -22,11 +33,13 @@ export default function Login() {
             <p className="hidden md:flex lg:hidden">Welcome to bookstore Everything in One place</p>
 
             {/* Sign In Form */}
-            <form action="" className="flex flex-col justify-center items-center gap-4 w-full">
-              <input type="email" placeholder="Email"
-              className="w-[65%] md:w-[35%] lg:w-[50%] bg-white text-banner px-4 py-2 rounded-2xl"/>
-              <input type="password" placeholder="Password"
-              className="w-[65%] md:w-[35%] lg:w-[50%] bg-white text-banner px-4 py-2 rounded-2xl"/>
+            <form action={handleLogin} className="flex flex-col justify-center items-center gap-4 w-full">
+              <input type="email" placeholder="Email" className="w-[65%] md:w-[35%] lg:w-[50%] bg-white text-banner px-4 py-2 rounded-2xl"
+              value={email} onChange={(e) => setEmail(e.target.value)}/>
+
+              <input type="password" placeholder="Password" className="w-[65%] md:w-[35%] lg:w-[50%] bg-white text-banner px-4 py-2 rounded-2xl"
+              value={password} onChange={(e) => setPassword(e.target.value)}/>
+
               <a href="">Forget Your password?</a>
               <div className="flex flex-col justify-center items-center gap-4 w-[65%] md:w-[35%] lg:w-[50%]">
                 <Separator />
