@@ -37,6 +37,7 @@ export default function ShowAll() {
   };
 
   return <div>
+        <h1 className="text-text flex justify-start items-center ml-[5%] pt-[5%]">All Products</h1>
           <section className="flex flex-row flex-wrap justify-center items-center p-8 gap-4">
           {currentBooks.map((book) => (
           <BookCard key={book.id} title={book.title} banner={book.banner} author={book.author} />
