@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button"
 import TopListSlider from "./TopListSlider";
-import React, { useRef } from 'react'
+import React from 'react'
 
   export default function TopList() {
     return <div className="flex justify-center items-center w-full h-fit bg-banner">
