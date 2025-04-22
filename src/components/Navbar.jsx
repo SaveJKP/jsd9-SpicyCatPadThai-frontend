@@ -38,7 +38,7 @@ const Layout = () => {
   };
   return (
     <>
-      <div className="bg-[var(--color-greenBackground)]">
+      <div className="bg-[var(--color-greenBackground)] sticky top-0 z-50">
         <div className="container__div">
           <div className="flex h-[64px] flex-row justify-between px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-0">
             <div className="flex flex-row">
@@ -76,19 +76,18 @@ const Layout = () => {
                   className="max-h-10 place-self-center md:hidden"
                 />
               </Link>
-
-              {/* <div classNameName="flex w-[50%] flex-row items-center justify-center sm:max-md:hidden">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-lightgray hover:border-lightgray mx-4 h-[45px] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
-                />
-              </div> */}
             </div>
 
             <div className="flex flex-row justify-end gap-5">
               {!token ? (
                 <>
+                <div classNameName="flex w-[50%] items-center justify-center sm:max-md:hidden">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="border-lightgray hover:border-lightgray mx-4 my-[5%] h-[65%] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
+                  />
+                </div>
                   {/* search icon */}
                   <Link to={"/search"}>
                     <svg
