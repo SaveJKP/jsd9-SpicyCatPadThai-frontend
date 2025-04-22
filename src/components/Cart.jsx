@@ -9,21 +9,29 @@ export const Cart = () => {
   });
   const [showCheckout, setShowCheckout] = useState(false);
 
-  const updateCartQuantity = (itemId, newQuantity) => {
-    if (newQuantity < 1) {
-      setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
-      return;
+  const removeFromCart = (id) => {
+    const item = cart.find((item) => item.product_id === id);
+    if (
+      window.confirm(
+        `Are you sure you want to remove ${item.name} Vol. ${item.volume}?`,
+      )
+    ) {
+      setCart((prevCart) => prevCart.filter((item) => item.product_id !== id));
     }
-
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
   };
 
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const updateCartQuantity = (id, newQuantity) => {
+    const item = cart.find((item) => item.product_id === id);
+    if (newQuantity < 1) {
+      removeFromCart(id);
+    }
+    if (newQuantity >= 1) {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.product_id === id ? { ...item, quantity: newQuantity } : item,
+        ),
+      );
+    }
   };
 
   const totalPrice = cart.reduce(
@@ -48,6 +56,7 @@ export const Cart = () => {
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
     setShowCheckout(true);
+    // placeholder for posting to the server
   };
 
   if (showCheckout) {
@@ -82,18 +91,23 @@ export const Cart = () => {
         </div>
       ) : (
         <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
+          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[1024px]:hidden md:mb-14">
+            Order Summary
+          </h2>
           {cart.map((item) => (
-            <div key={item.id} className="my-[32px] flex flex-col">
+            <div key={item.product_id} className="my-[32px] flex flex-col">
               <div className="flex flex-row justify-center">
                 <img
-                  src={item.img}
-                  className="max-w-[40%] object-contain object-top px-[8px]"
-                  alt={item.title}
+                  src={item.picture || "https://placehold.co/200x250"}
+                  className="max-h-[250px] max-w-[200px] object-contain object-top px-[8px]"
+                  alt={item.name}
                 />
                 <div className="flex w-[55%] flex-col px-[8px]">
-                  <h3 className="pb-[8px] text-xl font-bold">{item.title}</h3>
-                  <p className="pb-[8px]">{item.price.toFixed(2)}</p>
-                  <p>฿{(item.price * item.quantity).toFixed(2)}</p>
+                  <h3 className="pb-[8px] text-xl font-bold">{item.name}</h3>
+                  <p className="pb-[8px]">Vol. {item.volume}</p>
+                  <p className="pb-[8px]">{item.author}</p>
+                  <p className="pb-[8px]">฿{item.price.toFixed(2)} </p>
+
                   <div className="grid grid-cols-2 place-content-between py-4">
                     <div className="flex flex-row items-center gap-2">
                       <svg
@@ -104,7 +118,10 @@ export const Cart = () => {
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
                         onClick={() => {
-                          updateCartQuantity(item.id, item.quantity - 1);
+                          updateCartQuantity(
+                            item.product_id,
+                            item.quantity - 1,
+                          );
                           handleReload();
                         }}
                       >
@@ -121,7 +138,10 @@ export const Cart = () => {
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
                         onClick={() => {
-                          updateCartQuantity(item.id, item.quantity + 1);
+                          updateCartQuantity(
+                            item.product_id,
+                            item.quantity + 1,
+                          );
                           handleReload();
                         }}
                       >
@@ -137,7 +157,7 @@ export const Cart = () => {
                         fill="#1e1e1e"
                         className="cursor-pointer"
                         onClick={() => {
-                          removeFromCart(item.id);
+                          removeFromCart(item.product_id);
                           handleReload();
                         }}
                       >
@@ -153,7 +173,7 @@ export const Cart = () => {
       )}
 
       {Array.isArray(cart) && cart.length > 0 && (
-        <div className="bg-[#F5F5F5] pb-3 max-sm:rounded-b-2xl md:h-[45%] md:w-[45%] md:rounded-2xl md:py-[50px]">
+        <div className="bg-[#ffff] pb-3 max-sm:rounded-b-2xl md:h-[45%] md:w-[45%] md:rounded-2xl md:py-[50px]">
           <div className="mx-8 text-xl leading-10 max-sm:mx-4">
             <h2 className="text-4xl font-bold sm:max-md:hidden md:mb-14">
               Order Summary
