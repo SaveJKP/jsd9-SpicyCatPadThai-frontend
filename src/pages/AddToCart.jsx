@@ -215,6 +215,7 @@ export default function AddToCart() {
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
               {similarBooks}
+              {similarBooks}
             </div>
           </div>
         </div>
