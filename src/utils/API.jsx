@@ -1,5 +1,4 @@
 import axios from "axios";
-import Swal from "sweetalert2";
 
 export async function GetData(url) {
   try {

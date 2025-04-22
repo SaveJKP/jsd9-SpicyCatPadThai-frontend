@@ -9,7 +9,7 @@ import AddToCart from "./pages/AddToCart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
-
+import UserSetting from "./pages/UserSetting";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +18,15 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "user/:userId", element: <UserProfile /> },
+      { path: "user/:userId/settings", element: <UserSetting /> },
       { path: "about", element: <About /> },
       { path: "purchase", element: <Purchase /> },
-      { path: "add-to-cart", element: <AddToCart /> },
+
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
+      { path: "add-to-cart/:id", element: <AddToCart /> },
     ],
   },
 ]);

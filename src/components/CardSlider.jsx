@@ -4,11 +4,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { books } from "../data/products";
-import { CarouselCard } from "./CarouselCard";
+import { BookCard } from "./BookCard";
+import { bannersWithCategories } from "../data/ShowAll";
 
 export default function CardSlider({name}) {
-  const relevantBooks = books;
+  const relevantBooks = bannersWithCategories;
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">
@@ -21,13 +21,14 @@ export default function CardSlider({name}) {
             className="w-full"
         >
             <CarouselContent className="ml-6 gap-4">
-                {relevantBooks.map((book) => (
-                    <CarouselCard
-                        key={book.id}
-                        title={book.title}
-                        banner={book.banner}
-                        author={book.author}
-                    />
+                {relevantBooks.map((banner) => (
+                   <BookCard
+                   key={banner.banner_id}
+                   id={banner.banner_id}
+                   title={banner.name}
+                   banner={banner.picture}
+                   author={banner.author_name}
+                 />
                 ))}
             </CarouselContent>
             {/* <CarouselPrevious className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2" />

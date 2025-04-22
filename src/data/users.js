@@ -1,0 +1,55 @@
+const users = [
+    {
+        "user_id": 1,
+        "first_name": "Alice",
+        "last_name": "Smith",
+        "email": "alice.smith@example.com",
+        "password": "hashed_password_1",
+        "address": "123 Main St, Apt 4B",
+        "gender": "Female",
+        "birthday": "1995-06-15",
+        "phone_number": 1234567890,
+        "city_id": 1,
+        "city": "New York",
+        "country": "USA",
+        "registration_date": "2025-04-09",
+        "user_level": "User",
+        "user_status": "Active"
+    },
+    {
+        "user_id": 2,
+        "first_name": "Bob",
+        "last_name": "Johnson",
+        "email": "bob.johnson@example.com",
+        "password": "hashed_password_2",
+        "address": "456 Elm St",
+        "gender": "Male",
+        "birthday": "1988-11-23",
+        "phone_number": 2345678901,
+        "city_id": 2,
+        "city": "Los Angeles",
+        "country": "USA",
+        "registration_date": "2025-04-09",
+        "user_level": "Admin",
+        "user_status": "Active"
+      },
+      {
+        "user_id": 3,
+        "first_name": "Yuki",
+        "last_name": "Tanaka",
+        "email": "yuki.tanaka@example.jp",
+        "password": "hashed_password_3",
+        "address": "789 Sakura Lane",
+        "gender": "Female",
+        "birthday": "2000-02-10",
+        "phone_number": 3456789012,
+        "city_id": 3,
+        "city": "Tokyo",
+        "country": "Japan",
+        "registration_date": "2025-04-09",
+        "user_level": "User",
+        "user_status": "Inactive"
+      },
+  ];
+  
+  export default users;
