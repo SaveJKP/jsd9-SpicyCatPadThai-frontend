@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { allProducts } from "../data/AddToCart";
+import { products } from "../data/products.js";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -12,9 +12,6 @@ export default function AddToCart() {
   const [category, setCategory] = useState([]);
   const [quantity, setQuantity] = useState(1);
   let [cart, setCart] = useState([]);
-
-  const { id } = useParams();
-  const data = allProducts.find((p) => p.product_id === parseInt(id));
 
   // Fetch product by ID from mock data
   useEffect(() => {
@@ -140,7 +137,7 @@ export default function AddToCart() {
           </p>
         </Link>
       </div>
-    )); */
+    ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -217,7 +214,7 @@ export default function AddToCart() {
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              similarbooks
+              {similarBooks}
             </div>
           </div>
         </div>
