@@ -38,7 +38,7 @@ const Layout = () => {
   };
   return (
     <>
-      <div className="bg-[var(--color-greenBackground)]">
+      <div className="bg-[var(--color-greenBackground)] sticky top-0 z-50">
         <div className="container__div">
           <div className="flex h-[64px] flex-row justify-between px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-0">
             <div class="flex flex-row">
