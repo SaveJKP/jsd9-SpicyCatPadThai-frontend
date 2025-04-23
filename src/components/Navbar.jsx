@@ -79,27 +79,31 @@ const Layout = () => {
             </div>
 
             <div className="flex flex-row justify-end gap-5">
-              {!token ? (
+              {token ? (
                 <>
-                  <div className="flex w-[50%] items-center justify-center sm:max-md:hidden">
+                  <div className="flex w-[50%] items-center sm:max-md:hidden">
                     <input
                       type="text"
                       placeholder="Search"
-                      className="border-lightgray hover:border-lightgray mx-4 my-[5%] h-[65%] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
+                      dir="ltr"
+                      className="hover:border-lightgray bg-text my-[5%] h-[65%] w-full rounded-s-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[1024px]:hidden"
                     />
+                    {/* search icon */}
+                    <Link to={"/search"}>
+                      <div dir="rtl" className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="bg-text relative flex flex-col rounded-s-lg p-1 sm:max-[1024px]:hidden"
+                          viewBox="0 -960 960 960"
+                          width="36px"
+                          fill="#d9d9d9"
+                        >
+                          <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                        </svg>
+                      </div>
+                    </Link>
                   </div>
-                  {/* search icon */}
-                  <Link to={"/search"}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="flex h-[100%] flex-col sm:max-[1024px]:hidden"
-                      viewBox="0 -960 960 960"
-                      width="40px"
-                      fill="#e3e3e3"
-                    >
-                      <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
-                    </svg>
-                  </Link>
+
                   <div className="flex max-w-[120px] flex-row items-center">
                     <Link to={"/user/1"}>
                       <svg
@@ -134,6 +138,28 @@ const Layout = () => {
                 </>
               ) : (
                 <>
+                  <div className="flex w-[50%] items-center sm:max-md:hidden">
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      dir="ltr"
+                      className="hover:border-lightgray bg-text my-[5%] h-[65%] w-full rounded-s-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[1024px]:hidden"
+                    />
+                    {/* search icon */}
+                    <Link to={"/search"}>
+                      <div dir="rtl" className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="bg-text relative flex flex-col rounded-s-lg p-1 sm:max-[1024px]:hidden"
+                          viewBox="0 -960 960 960"
+                          width="36px"
+                          fill="#d9d9d9"
+                        >
+                          <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                        </svg>
+                      </div>
+                    </Link>
+                  </div>
                   <Link
                     to="/login"
                     className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
@@ -142,7 +168,7 @@ const Layout = () => {
                   </Link>
                   <Link
                     to="/register"
-                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBlue)] p-[8px] text-center text-[16px] hover:bg-[#416683] min-[1024px]:block min-sm:hidden"
                   >
                     Register
                   </Link>
