@@ -6,33 +6,33 @@ export default function Footer() {
   return (
     <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
       <div className="container__div px-[16px]">
-        <div className="flex-wrp flex flex-col justify-center space-y-[16px] py-[16px] min-[1024px]:flex-row min-[1024px]:gap-5 md:pb-10">
+        <div className="flex-wrp flex flex-col justify-center py-[32px] text-lg min-[1024px]:flex-row min-[1024px]:gap-5 sm:max-md:space-y-[16px]">
           <Link to="/about">
-            <h3>About Us</h3>
+            <p>About Us</p>
           </Link>
 
           <Link to="#faq">
-            <h3>FAQ</h3>
+            <p>FAQ</p>
           </Link>
 
           <Link to="#help">
-            <h3>Help</h3>
+            <p>Help</p>
           </Link>
 
           <Link to="#privacy">
-            <h3>Privacy Notice</h3>
+            <p>Privacy Notice</p>
           </Link>
 
           <Link to="#cookies">
-            <h3>Cookies Notice</h3>
+            <p>Cookies Notice</p>
           </Link>
 
           <Link to="#terms">
-            <h3>Terms & Conditions</h3>
+            <p>Terms & Conditions</p>
           </Link>
 
           <Link to="#enquiry">
-            <h3>Enquiry</h3>
+            <p>Enquiry</p>
           </Link>
         </div>
         <div className="mt-[16px] flex flex-row items-center min-[1024px]:justify-self-center">

@@ -28,7 +28,7 @@ export default function AddToCart() {
     setCart(parsedCart);
   }, []);
 
-  // // Load cart from localStorage when the app initializes
+  // Load cart from localStorage when the app initializes
   const totalPrice = product ? product.price * quantity : 0;
 
   const handleAdd = () => setQuantity((x) => x + 1);
@@ -115,13 +115,16 @@ export default function AddToCart() {
     .map((book, index) => (
       <div
         key={book.product_id || index}
-        className="flex w-[100%] flex-col items-center text-center"
+        className="flex flex-col text-center min-[1024px]:w-[50%]"
       >
         <Link to={`/add-to-cart/${book.product_id}`}>
           <img
-            src={book.img || "https://placehold.co/200x250"}
+            src={
+              book.img ||
+              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+            }
             alt={book.title}
-            className="mb-2.5 shadow-xl md:max-w-[50%] md:place-self-center"
+            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
             onClick={() => {
               if (quantity > 1) {
                 handleReload();
@@ -129,8 +132,8 @@ export default function AddToCart() {
             }}
           />
 
-          <p className="flex flex-col justify-center md:text-center">
-            <span>{book.name}</span>
+          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+            <span className="text-clip">{book.name}</span>
             <span>Vol. {book.volume}</span>
             <span>{book.author}</span>
             <span>฿{book.price}</span>
@@ -146,9 +149,12 @@ export default function AddToCart() {
           {/* Product image */}
           <div className="w-[60%] place-self-center">
             <img
-              src={product.picture || "https://placehold.co/200x250"}
+              src={
+                product.picture ||
+                "https://www.geeksandgamers.com/wp-content/uploads/hm_bbpui/282793/yko8lqxg8dvq18y6w7jkxg3746zhr7hi.jpg"
+              }
               alt="book-cover"
-              className="max-w-[100%] place-self-center shadow-lg"
+              className="w-[350px] place-self-center object-cover shadow-lg"
             />
           </div>
           {/* Product info */}
@@ -215,7 +221,6 @@ export default function AddToCart() {
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
               {similarBooks}
-              {similarBooks}
             </div>
           </div>
         </div>
@@ -223,7 +228,7 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿totalPrice</p>
+          <p className="p-2 text-2xl">฿{totalPrice.toFixed(2)}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
