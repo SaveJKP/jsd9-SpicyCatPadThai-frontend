@@ -17,33 +17,31 @@ export default function Hamburger() {
 
   const handleSearch = () => {
     navigate("/search");
-  }
-
+  };
 
   return (
     <>
       {!token ? (
-        <div className="relative text-sm text-[var(--color-text)] min-[1024px]:hidden">
+        <div className="relative z-10 text-sm text-[var(--color-text)] min-[1024px]:hidden">
           <div className="bg-[var(--color-greenBackground)] pt-[5%] pb-[5%] leading-4 no-underline">
-             {/*  <input type="text"
-              className="flex justify-self-center items-center w-[75%] text-banner bg-text rounded-2xl px-4 py-2 md:hidden" placeholder="Search" /> */}
-
-              {/* search icon */}
-              {/* <Link to={"/search"}> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mb-[16px] justify-self-center min-[1024px]:hidden"
-                  viewBox="0 -960 960 960"
-                  width="40px"
-                  fill="#e3e3e3"
-                  onClick={() => {
-                    handleClick(),
-                    handleSearch()
-                  }}
-                >
-                  <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
-                </svg>
-              {/* </Link> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mb-[16px] justify-self-center min-[1024px]:hidden"
+              viewBox="0 -960 960 960"
+              width="40px"
+              fill="#e3e3e3"
+              onClick={() => {
+                handleClick(), handleSearch();
+              }}
+            >
+              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+            </svg>
+            <Link
+              to={"/order"}
+              className="mx-15 mb-6 block items-center rounded-xl p-3 text-center hover:bg-[#dcd7c97c]"
+            >
+              My Orders
+            </Link>
             <Link
               to={"/logout"}
               className="mx-15 mb-6 block items-center rounded-xl bg-[var(--color-buttonBrown)] p-3 text-center hover:bg-[#dcd7c97c]"
@@ -54,19 +52,17 @@ export default function Hamburger() {
         </div>
       ) : (
         <div className="relative overflow-hidden text-sm">
-          <div className="bg-[var(--color-background)] pt-10 pb-30 leading-4 no-underline">
+          <div className="bg-[var(--color-greenBackground)] pt-[5%] pb-[5%] leading-4 text-[var(--color-text)] no-underline">
             {/* search icon */}
             <Link to={"/search"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="mb-[16px] justify-self-center min-[1024px]:hidden"
-                height="auto"
                 viewBox="0 -960 960 960"
                 width="40px"
                 fill="#e3e3e3"
                 onClick={() => {
-                  handleClick(),
-                  handleSearch()
+                  handleClick(), handleSearch();
                 }}
               >
                 <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
@@ -74,13 +70,15 @@ export default function Hamburger() {
             </Link>
             <Link
               to={"/login"}
-              className="mx-15 mb-6 block items-center rounded-xl bg-[var(--color-buttonBrown)] p-3 text-center hover:bg-[#dcd7c97c] md:hidden"
+              className="mx-15 mb-6 block items-center rounded-xl bg-[var(--color-buttonBrown)] p-3 text-center hover:bg-[#bc7142cb] min-[1024px]:hidden"
+              onClick={handleClick}
             >
               Log in
             </Link>
             <Link
               to={"/register"}
-              className="mx-15 mb-6 block rounded-xl bg-[var(--color-buttonBlue)] p-3 text-center hover:bg-[#2c393095] md:hidden"
+              className="mx-15 mb-6 block rounded-xl bg-[var(--color-buttonBlue)] p-3 text-center hover:bg-[#416683] min-[1024px]:hidden"
+              onClick={handleClick}
             >
               Register
             </Link>
