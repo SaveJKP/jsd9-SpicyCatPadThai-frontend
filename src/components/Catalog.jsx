@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 // import { GetData } from "../utils/API";
 import { useNavigate } from "react-router-dom";
 import { bannersWithProducts } from "./../data/Catalog";
-import { createPortal } from "react-dom";
 
 export default function Catalog({ id, onClose }) {
   const [name, setName] = useState("");
@@ -59,6 +58,7 @@ export default function Catalog({ id, onClose }) {
                     className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     {"Volume " + product.volume} - {product.name}
+                    {/* Split character ... */}
                   </option>
                 ))}
               </select>

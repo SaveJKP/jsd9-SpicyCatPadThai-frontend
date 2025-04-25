@@ -20,25 +20,22 @@ export default function Register() {
   const [country, setCountry] = useState('');
 
   const PostData = async () => {
+    const payload = {
+        name,
+        lastName,
+        email,
+        password,
+        dateOfBirth,
+        address,
+        city,
+        country,
+        phoneNumber
+    }
     try {
-      const response = await axios.post(" ", {
-        name: name,
-        lastName: lastName,
-        dateOfBirth: dateOfBirth,
-        gender: gender,
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-        address: address,
-        phoneNumber: phoneNumber,
-        city: city,
-        country: country
-      }
-    );
-    console.log(response.data);
-    setData([...data, response.data])
-  }
-    catch (err) {
+      await axios.post('http://localhost:3000/api/auth/register', payload)
+
+      console.log(payload);
+    } catch (err) {
       console.log(err);
     }
   };
@@ -54,7 +51,7 @@ export default function Register() {
                 <h1 className="font-bold">Register</h1>
 
                 {/* Register Form */}
-                <form action="" method="POST" className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]">
+                <form className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]">
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="first_name" className="w-1/3">First Name:</label>
@@ -74,7 +71,7 @@ export default function Register() {
                     value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full px-12">
+                  {/* <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="gender" className="w-1/3">Gender:</label>
                     <ul className="flex flex-row gap-4 w-2/3">
                             <li className="flex flex-row text-center gap-2">
@@ -88,7 +85,7 @@ export default function Register() {
                                 <p>F</p>
                             </li>
                         </ul>
-                  </div>
+                  </div> */}
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="email" className="w-1/3">Email:</label>
@@ -102,11 +99,11 @@ export default function Register() {
                     value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full px-12">
+                  {/* <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="confirm_password" className="w-1/3">Confirm Password:</label>
-                    <input type="password" id="password" placeholder="Confirm Password" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                  </div>
+                  </div> */}
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="address" className="w-1/3">Address:</label>
@@ -132,11 +129,9 @@ export default function Register() {
                     value={country} onChange={(e) => setCountry(e.target.value)}/>
                   </div>
 
-                  <Button className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl" onClick={
-                    password === confirmPassword ? PostData : console.log("error")
-                  }>
+                  <button className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl" onClick={PostData}>
                     Create Account
-                  </Button>
+                  </button>
 
                 </form>
               </section>
