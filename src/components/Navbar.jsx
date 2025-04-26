@@ -79,7 +79,7 @@ const Layout = () => {
             </div>
 
             <div className="flex flex-row justify-end gap-5">
-              {!token ? (
+              {token ? (
                 <>
                   <div className="flex w-[50%] items-center sm:max-md:hidden">
                     <input

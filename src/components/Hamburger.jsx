@@ -21,7 +21,7 @@ export default function Hamburger() {
 
   return (
     <>
-      {!token ? (
+      {token ? (
         <div className="relative z-10 text-sm text-[var(--color-text)] min-[1024px]:hidden">
           <div className="bg-[var(--color-greenBackground)] pt-[5%] pb-[5%] leading-4 no-underline">
             <svg
