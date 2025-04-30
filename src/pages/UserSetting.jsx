@@ -45,7 +45,7 @@ export default function UserProfile() {
             className ="w-32 h-32 rounded-full my-4"
           />
           <p className ="mt-2 text-2xl font-bold">{user.first_name} {user.last_name}</p>
-          <p className ="text-sm mt-4">User ID: {userId}</p>
+          <p className ="hidden text-sm mt-4">User ID: {userId}</p>
   
           <Link to ={`/user/${userId}`}>
             <button className="m-4 text-sm underline cursor-pointer hover:scale-105">Back to Profile</button>
