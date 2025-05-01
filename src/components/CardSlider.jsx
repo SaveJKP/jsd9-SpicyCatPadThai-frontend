@@ -10,6 +10,21 @@ import { bannersWithCategories } from "../data/ShowAll";
 export default function CardSlider({name}) {
   const relevantBooks = bannersWithCategories;
 
+  const [banner, setBanner] = useState([])
+
+  useEffect(() => {
+    const getItemsCardSlider = async() => {
+      try {
+        const response = await axios.get(' ')
+        setBanner(response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    };
+
+    getItemsCardSlider();
+}, []);
+
   return  (
     <div className="w-full px-4 md:px-8 py-8">
         <h1 className="text-text text-2xl mb-4 font-semibold px-2">{name}</h1>
