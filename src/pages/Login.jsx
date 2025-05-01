@@ -4,14 +4,19 @@ import { Separator } from "@/components/ui/separator"
 import { useState } from "react";
 
 export default function Login() {
+  const [user, setUser] = useState([]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const response = await axios.post(/* http://localhost:3000/mongo/auth/login */)
+      setUser(...user, response.user);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
