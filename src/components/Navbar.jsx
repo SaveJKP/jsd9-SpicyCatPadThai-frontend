@@ -5,7 +5,7 @@ import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
 import Hamburger from "./Hamburger";
 
-const Layout = () => {
+const Navbar = () => {
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
@@ -215,4 +215,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default Navbar;
