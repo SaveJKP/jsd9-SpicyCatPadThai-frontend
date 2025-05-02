@@ -10,8 +10,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
 import UserSetting from "./pages/UserSetting";
+<<<<<<< HEAD
 // import Orders from "./pages/Orders";
 // import OrderDetails from "./pages/OrderDetails";
+=======
+import Orders from "./pages/Orders";
+import OrderDetails from "./pages/OrderDetails";
+>>>>>>> order
 
 const router = createBrowserRouter([
   {
@@ -23,8 +28,14 @@ const router = createBrowserRouter([
       { path: "user/:userId/settings", element: <UserSetting /> },
       { path: "about", element: <About /> },
       { path: "purchase", element: <Purchase /> },
+<<<<<<< HEAD
       // { path: "orders/:id", element: <Orders /> },
       // { path: "orders/:id/:orderId", element: <OrderDetails /> },
+=======
+      { path: "purchase", element: <Purchase /> },
+      { path: "orders/:id", element: <Orders /> },
+      { path: "orders/:id/:orderId", element: <OrderDetails /> },
+>>>>>>> order
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
