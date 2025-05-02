@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
 import UserSetting from "./pages/UserSetting";
+// import Orders from "./pages/Orders";
+// import OrderDetails from "./pages/OrderDetails";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,8 @@ const router = createBrowserRouter([
       { path: "user/:userId/settings", element: <UserSetting /> },
       { path: "about", element: <About /> },
       { path: "purchase", element: <Purchase /> },
-
+      // { path: "orders/:id", element: <Orders /> },
+      // { path: "orders/:id/:orderId", element: <OrderDetails /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },

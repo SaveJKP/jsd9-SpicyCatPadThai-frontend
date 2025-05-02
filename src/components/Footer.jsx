@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
       <div className="container__div px-[16px]">
-        <div className="flex-wrp flex flex-col justify-center py-[32px] text-lg min-[1024px]:flex-row min-[1024px]:gap-5 sm:max-md:space-y-[16px]">
+        <div className="flex flex-col flex-wrap justify-center py-[32px] text-lg min-[1024px]:flex-row min-[1024px]:gap-5 sm:max-md:space-y-[16px]">
           <Link to="/about">
             <p>About Us</p>
           </Link>
