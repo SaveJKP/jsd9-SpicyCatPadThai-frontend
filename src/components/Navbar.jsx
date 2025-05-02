@@ -1,18 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ordersData } from "../data/Orders.js";
+// import { ordersData } from "../data/Orders.js";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
-import { useParams } from "react-router-dom";
 import Hamburger from "./Hamburger";
 
-<<<<<<< Updated upstream
-const Navbar = () => {
-=======
-const Layout = () => {
-  const { id } = useParams();
->>>>>>> Stashed changes
+export const Navbar = () => {
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState(null);
@@ -45,10 +39,10 @@ const Layout = () => {
     }, 1000);
   };
 
-  useEffect(() => {
-    const userOrders = ordersData.filter((o) => o.user_id === id);
-    setOrders(userOrders);
-  }, [id]);
+  // useEffect(() => {
+  //   const userOrders = ordersData.filter((o) => o.user_id === id);
+  //   setOrders(userOrders);
+  // }, [id]);
 
   return (
     <>
@@ -230,5 +224,3 @@ const Layout = () => {
     </>
   );
 };
-
-export default Navbar;

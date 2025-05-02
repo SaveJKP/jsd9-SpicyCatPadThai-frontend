@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollToTop } from "./components/ScrollToTop";
