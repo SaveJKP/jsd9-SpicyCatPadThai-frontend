@@ -1,4 +1,4 @@
-import ShowAll from "../components/ShowAll";
+import ShowSearch from "../components/ShowSearch";
 
 export default function Search() {
   return (
@@ -10,7 +10,7 @@ export default function Search() {
             className="bg-text flex w-[75%] items-center justify-self-center rounded-2xl px-4 py-2 min-[1024px]:hidden"
             placeholder="Search"
           />
-          <ShowAll />
+          <ShowSearch />
         </main>
       </div>
     </div>
