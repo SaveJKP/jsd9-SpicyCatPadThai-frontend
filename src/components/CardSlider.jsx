@@ -6,6 +6,8 @@ import {
 } from "@/components/ui/carousel"
 import { BookCard } from "./BookCard";
 import { bannersWithCategories } from "../data/ShowAll";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function CardSlider({name}) {
   const relevantBooks = bannersWithCategories;

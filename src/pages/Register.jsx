@@ -130,7 +130,7 @@ export default function Register() {
                     value={country} onChange={(e) => setCountry(e.target.value)}/>
                   </div>
 
-                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl" onClick={PostData}>
+                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2" onClick={PostData}>
                     Create Account
                   </button>
 

@@ -12,7 +12,10 @@ export default function Login() {
   const handleLogin = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(/* http://localhost:3000/mongo/auth/login */)
+      const response = await axios.post('http://localhost:5173/auth/login', {
+        email,
+        password
+      })
       setUser(...user, response.user);
     } catch (err) {
       console.error(err);

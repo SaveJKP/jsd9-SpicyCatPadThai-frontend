@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/pagination";
 import { BookCard } from "./BookCard";
 import { useState } from "react";
+import { useEffect } from "react";
 import { bannersWithCategories } from "../data/ShowAll";
 import axios from "axios";
 
