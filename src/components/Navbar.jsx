@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ordersData } from "../data/Orders.js";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
+import { useParams } from "react-router-dom";
 import Hamburger from "./Hamburger";
 
+<<<<<<< Updated upstream
 const Navbar = () => {
+=======
+const Layout = () => {
+  const { id } = useParams();
+>>>>>>> Stashed changes
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState(null);
   const navigate = useNavigate();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
@@ -36,6 +44,12 @@ const Navbar = () => {
       window.location.reload();
     }, 1000);
   };
+
+  useEffect(() => {
+    const userOrders = ordersData.filter((o) => o.user_id === id);
+    setOrders(userOrders);
+  }, [id]);
+
   return (
     <>
       <div className="sticky top-0 z-50 bg-[var(--color-greenBackground)]">
@@ -79,7 +93,7 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-row justify-end gap-5">
-              {token ? (
+              {!token ? (
                 <>
                   <div className="flex w-[50%] items-center sm:max-md:hidden">
                     <input
@@ -123,12 +137,13 @@ const Navbar = () => {
                       Account
                     </Link>
                   </div>
-                  <Link
-                    to="/order"
-                    className="my-2 w-[10rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
+                  <p
+                    // onClick={() => navigate(`/orders/${orders.user_id}`)}
+                    onClick={() => navigate(`/orders/user123`)}
+                    className="my-2 p-[8px] text-center text-[16px] hover:cursor-pointer min-[1024px]:block min-sm:hidden"
                   >
-                    My Orders
-                  </Link>
+                    Orders
+                  </p>
                   <Link
                     onClick={handleLogout}
                     className="my-2 block w-[30%] justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
@@ -201,10 +216,11 @@ const Navbar = () => {
                     fill="auto"
                   />
                 </svg>
-
-                <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
-                  {totalQuantity}
-                </span>
+                {totalQuantity > 0 ? (
+                  <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
+                    {totalQuantity}
+                  </span>
+                ) : null}
               </Link>
             </div>
           </div>
