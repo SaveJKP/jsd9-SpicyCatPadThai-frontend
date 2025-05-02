@@ -19,7 +19,7 @@ export default function Register() {
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
 
-  const PostData = async () => {
+  const PostData = async (e) => {
     const payload = {
         name,
         lastName,
@@ -32,9 +32,10 @@ export default function Register() {
         phoneNumber
     }
     try {
-      await axios.post('http://localhost:3000/api/auth/register', payload)
+      const response = await axios.post('http://localhost:3000/api/auth/register', payload)
 
       console.log(payload);
+      setData(...data, response.data);
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +52,7 @@ export default function Register() {
                 <h1 className="font-bold">Register</h1>
 
                 {/* Register Form */}
-                <form className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]">
+                <form className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]" onSubmit={PostData}>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="first_name" className="w-1/3">First Name:</label>
@@ -129,7 +130,7 @@ export default function Register() {
                     value={country} onChange={(e) => setCountry(e.target.value)}/>
                   </div>
 
-                  <button className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl" onClick={PostData}>
+                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2" onClick={PostData}>
                     Create Account
                   </button>
 
