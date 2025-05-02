@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ordersData } from "../data/Orders.js";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
@@ -11,7 +10,12 @@ export default function Orders() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userOrders = ordersData.filter((o) => o.user_id === id);
+    const userOrders = ordersData
+      .filter((o) => o.user_id === id)
+      .sort(
+        (prev, latest) =>
+          new Date(latest.created_at) - new Date(prev.created_at),
+      );
     setOrders(userOrders);
   }, [id]);
 
@@ -24,13 +28,11 @@ export default function Orders() {
       <div className="flex w-[80%] justify-self-center">
         <div className="w-full flex-col">
           {orders.map((order) => {
-            const total = order.items.reduce(
-              (orderSum, item) => orderSum + item.price * item.quantity,
-              0,
-            );
-
             return (
-              <div key={order.order_id} className="mb-6 flex flex-col gap-1">
+              <div
+                key={order.order_id}
+                className="flex flex-col border border-[var(--color-radio)] p-5"
+              >
                 <p className="flex justify-between font-semibold">
                   Order No: {order.order_id}
                   <span
@@ -51,7 +53,7 @@ export default function Orders() {
                     day: "numeric",
                   })}
                 </p>
-                <p>Total: ฿{total.toFixed(2)}</p>
+                <p>Total: ฿{order.total_price.toFixed(2)}</p>
 
                 {order.items.map((item) => (
                   <div

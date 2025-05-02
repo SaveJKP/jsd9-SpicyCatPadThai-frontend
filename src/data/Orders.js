@@ -69,6 +69,15 @@ export const ordersData = [
         quantity: 1,
         price: 10.0,
       },
+      {
+        product_id: "manga022",
+        title: "Jujutsu Kaisen ",
+        name: "การประลองกับสิบหัวกะทิ",
+        vol_no: "100",
+        author: "Miyazaki Hayao",
+        quantity: 3,
+        price: 11.25,
+      },
     ],
   },
   {
