@@ -61,7 +61,7 @@ export const Cart = () => {
 
   if (showCheckout) {
     return (
-      <div className="flex flex-col items-center space-y-10 md:w-[100%]">
+      <div className="flex flex-col items-center space-y-10 py-[200px] md:w-[100%]">
         <p className="pt-10 text-center text-2xl text-white">
           Thank you for shopping with us! Your order has been processed.
         </p>
@@ -79,7 +79,7 @@ export const Cart = () => {
   return (
     <>
       {Array.isArray(cart) && cart.length === 0 ? (
-        <div className="flex flex-col items-center space-y-10 text-2xl md:w-[100%]">
+        <div className="flex flex-col items-center space-y-10 py-[200px] text-2xl md:w-[100%]">
           <p className="p-4 text-center text-white">Your cart is empty.</p>
           <Link
             to="/"
@@ -98,8 +98,11 @@ export const Cart = () => {
             <div key={item.product_id} className="my-[32px] flex flex-col">
               <div className="flex flex-row justify-center">
                 <img
-                  src={item.picture || "https://placehold.co/200x250"}
-                  className="max-h-[250px] max-w-[200px] object-contain object-top px-[8px]"
+                  src={
+                    item.picture ||
+                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+                  }
+                  className="max-h-[200px] max-w-[200px] object-contain object-top px-[8px]"
                   alt={item.name}
                 />
                 <div className="flex w-[55%] flex-col px-[8px]">

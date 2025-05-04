@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { ordersData } from "../data/Orders.js";
 import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
 import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
 import Hamburger from "./Hamburger";
 
-const Layout = () => {
+export const Navbar = () => {
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState(null);
   const navigate = useNavigate();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const toggleHamburger = () => {
@@ -36,9 +38,15 @@ const Layout = () => {
       window.location.reload();
     }, 1000);
   };
+
+  // useEffect(() => {
+  //   const userOrders = ordersData.filter((o) => o.user_id === id);
+  //   setOrders(userOrders);
+  // }, [id]);
+
   return (
     <>
-      <div className="bg-[var(--color-greenBackground)]">
+      <div className="sticky top-0 z-50 bg-[var(--color-greenBackground)]">
         <div className="container__div">
           <div className="flex h-[64px] flex-row justify-between px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-0">
             <div className="flex flex-row">
@@ -76,31 +84,34 @@ const Layout = () => {
                   className="max-h-10 place-self-center md:hidden"
                 />
               </Link>
-
-              {/* <div classNameName="flex w-[50%] flex-row items-center justify-center sm:max-md:hidden">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-lightgray hover:border-lightgray mx-4 h-[45px] w-full rounded-[12px] border bg-[var(--color-radio)] p-[12px] text-[var(--color-banner)] shadow-[0px_0px_20px_-18px] transition-all duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] outline-none hover:border-[2px] hover:shadow-[0px_0px_20px_-17px] focus:border-[2px] focus:border-gray-500 sm:max-md:hidden"
-                />
-              </div> */}
             </div>
 
             <div className="flex flex-row justify-end gap-5">
               {!token ? (
                 <>
-                  {/* search icon */}
-                  <Link to={"/search"}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="flex h-[100%] flex-col sm:max-[1024px]:hidden"
-                      viewBox="0 -960 960 960"
-                      width="40px"
-                      fill="#e3e3e3"
-                    >
-                      <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
-                    </svg>
-                  </Link>
+                  <div className="flex w-[50%] items-center sm:max-md:hidden">
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      dir="ltr"
+                      className="hover:border-lightgray bg-text my-[5%] h-[65%] w-full rounded-s-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[1024px]:hidden"
+                    />
+                    {/* search icon */}
+                    <Link to={"/search"}>
+                      <div dir="rtl" className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="bg-text relative flex flex-col rounded-s-lg p-1 sm:max-[1024px]:hidden"
+                          viewBox="0 -960 960 960"
+                          width="36px"
+                          fill="#d9d9d9"
+                        >
+                          <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                        </svg>
+                      </div>
+                    </Link>
+                  </div>
+
                   <div className="flex max-w-[120px] flex-row items-center">
                     <Link to={"/user/1"}>
                       <svg
@@ -120,12 +131,13 @@ const Layout = () => {
                       Account
                     </Link>
                   </div>
-                  <Link
-                    to="/order"
-                    className="my-2 w-[10rem] p-[8px] text-center text-[16px] min-[1024px]:block min-sm:hidden"
+                  <p
+                    // onClick={() => navigate(`/orders/${orders.user_id}`)}
+                    onClick={() => navigate(`/orders/user123`)}
+                    className="my-2 p-[8px] text-center text-[16px] hover:cursor-pointer min-[1024px]:block min-sm:hidden"
                   >
-                    My Orders
-                  </Link>
+                    Orders
+                  </p>
                   <Link
                     onClick={handleLogout}
                     className="my-2 block w-[30%] justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
@@ -135,6 +147,28 @@ const Layout = () => {
                 </>
               ) : (
                 <>
+                  <div className="flex w-[50%] items-center sm:max-md:hidden">
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      dir="ltr"
+                      className="hover:border-lightgray bg-text my-[5%] h-[65%] w-full rounded-s-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[1024px]:hidden"
+                    />
+                    {/* search icon */}
+                    <Link to={"/search"}>
+                      <div dir="rtl" className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="bg-text relative flex flex-col rounded-s-lg p-1 sm:max-[1024px]:hidden"
+                          viewBox="0 -960 960 960"
+                          width="36px"
+                          fill="#d9d9d9"
+                        >
+                          <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                        </svg>
+                      </div>
+                    </Link>
+                  </div>
                   <Link
                     to="/login"
                     className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
@@ -143,7 +177,7 @@ const Layout = () => {
                   </Link>
                   <Link
                     to="/register"
-                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
+                    className="my-2 w-30 justify-self-center rounded-xl bg-[var(--color-buttonBlue)] p-[8px] text-center text-[16px] hover:bg-[#416683] min-[1024px]:block min-sm:hidden"
                   >
                     Register
                   </Link>
@@ -176,10 +210,11 @@ const Layout = () => {
                     fill="auto"
                   />
                 </svg>
-
-                <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
-                  {totalQuantity}
-                </span>
+                {totalQuantity > 0 ? (
+                  <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
+                    {totalQuantity}
+                  </span>
+                ) : null}
               </Link>
             </div>
           </div>
@@ -189,5 +224,3 @@ const Layout = () => {
     </>
   );
 };
-
-export default Layout;

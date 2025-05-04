@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import Catalog from "./Catalog";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 export function BookCard({ id,title, banner, author }) {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,10 @@ export function BookCard({ id,title, banner, author }) {
           </CardContent>
         </Card>
       </div>
-      {open && <Catalog id={id} onClose={() => setOpen(false)}/>}
+      {open && createPortal(
+        <Catalog id={id} onClose={() => setOpen(false)} />,
+        document.getElementById('modal-root')
+      )}
     </>
   );
 }

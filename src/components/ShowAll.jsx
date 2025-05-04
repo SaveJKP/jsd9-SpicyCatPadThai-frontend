@@ -9,7 +9,9 @@ import {
 } from "@/components/ui/pagination";
 import { BookCard } from "./BookCard";
 import { useState } from "react";
+import { useEffect } from "react";
 import { bannersWithCategories } from "../data/ShowAll";
+import axios from "axios";
 
 export default function ShowAll() {
   {
@@ -40,6 +42,24 @@ export default function ShowAll() {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  {
+    /* Get Items Banner */
+  }
+  const [banners, setBanners] = useState([])
+
+  useEffect(() => {
+    const getItemsShowAll = async() => {
+      try {
+        const response = await axios.get(' ')
+        setBanners(response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    };
+
+    getItemsShowAll();
+}, []);
 
   return (
     <div>
@@ -72,7 +92,7 @@ export default function ShowAll() {
               </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationEllipsis className="text-text text-xl" />
+              {/* <PaginationEllipsis className="text-text text-xl" /> */}
             </PaginationItem>
             <PaginationItem>
               {/* Next Page */}
