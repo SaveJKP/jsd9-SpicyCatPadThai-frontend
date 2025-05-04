@@ -55,8 +55,8 @@ export default function UserProfile() {
           lastName: res.data.lastName,
           email: res.data.email,
           address: res.data.address,
-          city: res.data.city,
-          country: res.data.country,
+          city: res.data.city_id.name,
+          country: res.data.city_id.country_id.name,
           phoneNumber: res.data.phoneNumber,
         });
       } catch (error) {

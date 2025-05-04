@@ -71,7 +71,7 @@ export default function UserProfile() {
               <div className=" profile-detail-text flex flex-col justify-center">
                 <p className="mt-2"><span className="font-bold">Name:</span> <br></br> {user.name} {user.lastName}</p>
                 <p className="mt-2"><span className="font-bold">Email:</span> </p> {user.email}
-                <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city}, {user.country}
+                <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city_id.name}, {user.city_id.country_id.name}
                 <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phoneNumber}
                 {/* <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday} */}
               </div>
