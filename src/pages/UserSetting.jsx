@@ -34,7 +34,7 @@ export default function UserProfile() {
     lastName: "",
     email: "",
     address: "",
-    city: "",
+    cityName: "",
     country: "",
     phoneNumber: "",
     currentPassword: "",
@@ -55,7 +55,7 @@ export default function UserProfile() {
           lastName: res.data.lastName,
           email: res.data.email,
           address: res.data.address,
-          city: res.data.city_id.name,
+          cityName: res.data.city_id.name,
           country: res.data.city_id.country_id.name,
           phoneNumber: res.data.phoneNumber,
         });
@@ -82,6 +82,7 @@ export default function UserProfile() {
 
     try {
       const res = await axios.patch(
+        // Send the updatedUser state directly, as it contains the correct fields including cityName
         `http://localhost:3000/api/auth/user/${userId}`,
         updatedUser,
         {
@@ -225,8 +226,8 @@ export default function UserProfile() {
                         <Label htmlFor="city">City</Label>
                         <Input
                           id="city"
-                          name="city"
-                          value={updatedUser.city}
+                          name="cityName"
+                          value={updatedUser.cityName}
                           onChange={handleChange}
                         />
                       </div>
