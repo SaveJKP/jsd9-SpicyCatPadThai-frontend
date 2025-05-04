@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/tabs"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Dropdown from '../components/Dropdown';
 
 export default function UserProfile() {
   const { userId } = useParams();
@@ -223,21 +223,21 @@ export default function UserProfile() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label htmlFor="city">City</Label>
-                        <Input
-                          id="city"
-                          name="cityName"
-                          value={updatedUser.cityName}
-                          onChange={handleChange}
-                        />
+                      <Dropdown
+                        apiUrl="http://localhost:3000/api/auth/city"
+                        value={updatedUser.cityName}
+                        onChange={(value) => handleChange({ target: { name: 'cityName', value } })}
+                        label="City"
+                        name="cityName"
+                      />
                       </div>
                       <div className="space-y-1">
-                        <Label htmlFor="country">Country</Label>
-                        <Input
-                          id="country"
-                          name="country"
+                        <Dropdown
+                          apiUrl="http://localhost:3000/api/auth/country"
                           value={updatedUser.country}
-                          onChange={handleChange}
+                          onChange={(value) => handleChange({ target: { name: 'country', value } })}
+                          label="Country"
+                          name="country"
                         />
                       </div>
                       <div className="space-y-1">
