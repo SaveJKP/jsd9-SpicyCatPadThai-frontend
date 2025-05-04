@@ -9,7 +9,7 @@ import {
     CardDescription,
     CardTitle,
 } from "@/components/ui/card"
-import { books } from "../data/products";
+import { products } from "../data/products.js";
 
 export function TopListCard({title, banner, author}) {
     return (
@@ -23,8 +23,8 @@ export function TopListCard({title, banner, author}) {
         </CarouselItem>
     );
 }
-export default function TopListSlider({name}) {
-  const relevantBooks = books;
+export default function TopListSlider() {
+  const relevantBooks = products;
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">
@@ -36,12 +36,12 @@ export default function TopListSlider({name}) {
             className="w-full"
         >
             <CarouselContent className="ml-6 gap-2">
-                {relevantBooks.map((book) => (
+                {relevantBooks.map((product) => (
                     <TopListCard
-                        key={book.id}
-                        title={book.title}
-                        banner={book.banner}
-                        author={book.author}
+                        key={product.id}
+                        title={product.title}
+                        banner={product.banner}
+                        author={product.author}
                     />
                 ))}
             </CarouselContent>

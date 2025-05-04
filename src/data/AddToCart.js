@@ -1,4 +1,4 @@
-export const allProducts = [
+export const products = [
   {
     product_id: 1001,
     name: "คดีฆาตกรรมบนรถไฟหัวกระสุน",

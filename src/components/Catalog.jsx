@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { bannersWithProducts } from "./../data/Catalog";
 
+
 export default function Catalog({ id, onClose }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +24,7 @@ export default function Catalog({ id, onClose }) {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-10 flex w-[100%] items-start justify-center backdrop-blur-sm"
+          className="fixed inset-0 z-10 flex w-[100%] pt-[10%] items-start justify-center backdrop-blur-sm"
           onClick={onClose}
         >
           <div
@@ -58,6 +59,7 @@ export default function Catalog({ id, onClose }) {
                     className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     {"Volume " + product.volume} - {product.name}
+                    {/* Split character ... */}
                   </option>
                 ))}
               </select>

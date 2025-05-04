@@ -2,6 +2,7 @@ import BannerSlider from "../components/BannerSlider"
 import CardSlider from "../components/CardSlider"
 import ShowAll from "../components/ShowAll"
 import TopList from "../components/TopList"
+import { useState } from "react";
 
 export default function Home() {
 

@@ -6,9 +6,26 @@ import {
 } from "@/components/ui/carousel"
 import { BookCard } from "./BookCard";
 import { bannersWithCategories } from "../data/ShowAll";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function CardSlider({name}) {
   const relevantBooks = bannersWithCategories;
+
+  const [banner, setBanner] = useState([])
+
+  useEffect(() => {
+    const getItemsCardSlider = async() => {
+      try {
+        const response = await axios.get(' ')
+        setBanner(response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    };
+
+    getItemsCardSlider();
+}, []);
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">
@@ -31,7 +48,7 @@ export default function CardSlider({name}) {
                  />
                 ))}
             </CarouselContent>
-            {/* <CarouselPrevious className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2" />
+          {/*   <CarouselPrevious className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2" />
             <CarouselNext className="absolute right-[-10px] md:right-[-20px] top-1/2 -translate-y-1/2" /> */}
         </Carousel>
     </div>
