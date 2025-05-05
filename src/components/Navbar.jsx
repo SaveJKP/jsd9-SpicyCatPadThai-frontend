@@ -188,7 +188,7 @@ export const Navbar = () => {
               <Link
                 className="flex items-center"
                 to={"/purchase"}
-                // onClick={handleReload}
+                onClick={handleReload}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
