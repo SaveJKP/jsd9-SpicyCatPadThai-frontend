@@ -26,7 +26,7 @@ export default function Login() {
   <main >
     <div className="bg-greenBackground w-full h-fit">
       <div className="container__div">
-        <section className="flex flex-col lg:flex-row justify-center items-center w-full min-h-screen gap-4">
+        <section className="flex flex-col lg:flex-row justify-center items-center w-full h-full gap-4">
 
           {/* Icon Section */}
           <section className="flex flex-col justify-center items-center gap-4 w-full lg:w-1/2 text-text">

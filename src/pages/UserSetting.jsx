@@ -30,7 +30,7 @@ export default function UserProfile() {
 
 
   return (
-    <div className ="h-full bg-(--color-greenBackground) text-(--color-text) pb-8 md:px-12 lg:px-72 " >
+    <div className ="h-full bg-(--color-greenBackground) text-(--color-text) pb-6 md:px-12 lg:px-72 " >
       {/* 1. Heading - User Profile Setting */}
       <section className ="py-8 px-16 ">
         <h1 className="font-bold text-center">Settings</h1>

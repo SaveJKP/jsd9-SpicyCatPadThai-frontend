@@ -17,7 +17,7 @@ export default function ShowAll() {
   {
     /* set page */
   }
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(bannersWithCategories.length / itemsPerPage);
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ export default function ShowAll() {
 }, []);
 
   return (
-    <div>
+    <div  className="container__div">
       <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
         {currentBanners.map((banner) => (
           <BookCard

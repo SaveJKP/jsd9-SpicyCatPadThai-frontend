@@ -45,7 +45,7 @@ export default function Register() {
      <main >
         <div className="bg-greenBackground w-full h-fit">
           <div className="container__div">
-            <section className="flex flex-col md:flex-row justify-start items-center w-full min-h-screen gap-4 py-[15%] md:py-[5%]">
+            <section className="flex flex-col md:flex-row justify-start items-center w-full h-full gap-4 py-[15%] md:py-[5%]">
               <section className="flex flex-col justify-center items-center gap-4 w-full text-text">
                 <img src="/src/assets/logo_katsubook.png" alt="Katsu Bookstore"
                 className="w-[50%] md:w-[27%] lg:w-[25%] flex"/>

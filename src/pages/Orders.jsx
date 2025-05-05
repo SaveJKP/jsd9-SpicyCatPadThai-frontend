@@ -23,7 +23,7 @@ export default function Orders() {
     return <p className="p-4">No orders found for this user.</p>;
 
   return (
-    <div className="container__div bg-[var(--color-text)] max-sm:rounded-t-2xl md:rounded-2xl">
+    <div className="container__div bg-[var(--color-text)] max-sm:rounded-t-2xl md:rounded-2xl pb-2">
       <h2 className="py-[16px] pl-[16px] text-2xl font-bold">Your Orders</h2>
       <div className="flex w-[80%] justify-self-center">
         <div className="w-full flex-col">
