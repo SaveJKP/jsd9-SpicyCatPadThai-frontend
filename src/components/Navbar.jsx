@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
   };
   useEffect(() => {
     // Fetch cart from localStorage when the component mounts
@@ -139,6 +139,7 @@ export const Navbar = () => {
                     Orders
                   </p>
                   <Link
+                    to="/login"
                     onClick={handleLogout}
                     className="my-2 block w-[30%] justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
                   >
@@ -187,7 +188,7 @@ export const Navbar = () => {
               <Link
                 className="flex items-center"
                 to={"/purchase"}
-                onClick={handleReload}
+                // onClick={handleReload}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
