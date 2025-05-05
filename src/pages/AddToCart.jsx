@@ -127,7 +127,7 @@ export default function AddToCart() {
             className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
             onClick={() => {
               if (quantity > 1) {
-                handleReload();
+                // handleReload();
               }
             }}
           />
@@ -197,7 +197,7 @@ export default function AddToCart() {
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
               onClick={() => {
                 handleAddToCart();
-                handleReload();
+                // handleReload();
                 toast("Added to Cart!");
               }}
             >
@@ -233,7 +233,7 @@ export default function AddToCart() {
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
               handleAddToCart();
-              handleReload();
+              // handleReload();
               toast("Added to cart!");
             }}
           >
