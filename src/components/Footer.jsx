@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
-import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
+import logo_katsubook_notext from "/logo_katsubook_onlylogo.png";
+import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 
 export default function Footer() {
   return (

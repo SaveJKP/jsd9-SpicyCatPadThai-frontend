@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import React, { useRef } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
 
+
   export default function BannerSlider() {
     const plugin = React.useRef(
         Autoplay({ delay: 6000, stopOnInteraction: true })
@@ -19,19 +20,19 @@ import Autoplay from 'embla-carousel-autoplay'
         {
             id:1,
             title:"Bangkok Legacy",
-            banner:"/src/assets/bangkoklegacy_banner.jpg",
+            banner: "/bangkoklegacy_banner.jpg",
             description: "In the heart of Bangkok, Thanawat is pulled into the deadly world of the Thai mafia to protect his family. As danger closes in, he must navigate betrayal, loyalty, and the blurred line between right and wrong."
         },
         {
             id:2,
             title:"Food Striker",
-            banner:"/src/assets/foodstriker_banner.jpg",
+            banner:"/foodstriker_banner.jpg",
             description: "In the high-stakes world of competitive cooking, young Shota sets out to become the world’s greatest chef. Armed with his spoon and big dreams, he faces quirky rivals, learns life lessons, and discovers the true magic of food and friendship."
         },
         {
             id:3,
             title:"Junior Software Developer 9",
-            banner:"/src/assets/jsd_banner.jpg",
+            banner:"/jsd_banner.jpg",
             description: "Generation Thailand JSD9 follows a group of diverse Thais as they take on a tough coding bootcamp. Amid struggles with imposter syndrome and industry pressure, they build lasting friendships and discover their true potential."
         }
 

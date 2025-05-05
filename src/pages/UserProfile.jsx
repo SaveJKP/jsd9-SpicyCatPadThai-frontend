@@ -21,7 +21,7 @@ export default function UserProfile() {
         {/* 2. User display + logout - User Profile */}
         <div className="flex flex-col text-center items-center md:w-1/2">
           <img
-            src="/src/assets/logo_cat.jpg"
+            src="/logo_cat.jpg"
             alt="profile"
             className ="w-32 h-32 rounded-full my-4"
           />

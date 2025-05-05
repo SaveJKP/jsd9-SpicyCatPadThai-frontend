@@ -26,13 +26,13 @@ export default function Login() {
   <main >
     <div className="bg-greenBackground w-full h-fit">
       <div className="container__div">
-        <section className="flex flex-col lg:flex-row justify-center items-center w-full h-full gap-4">
+        <section className="flex flex-col mt-[10%] mb-[5%] justify-center lg:flex-row items-center w-full h-full gap-4">
 
           {/* Icon Section */}
           <section className="flex flex-col justify-center items-center gap-4 w-full lg:w-1/2 text-text">
-            <img src="/src/assets/logo_katsubook.png" alt="Katsu Bookstore"
+            <img src="/logo_katsubook.png" alt="Katsu Bookstore"
             className="w-[50%] hidden lg:flex"/>
-            <img src="/src/assets/logo_katsubook_no-text.png" alt="Katsu Bookstore"
+            <img src="/logo_katsubook_no-text.png" alt="Katsu Bookstore"
             className="w-[35%] md:w-[15%] flex lg:hidden"/>
             <p className="hidden lg:flex w-fit">Welcome to bookstore Everything in One place</p>
           </section>
