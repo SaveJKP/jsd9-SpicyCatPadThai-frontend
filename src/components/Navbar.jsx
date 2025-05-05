@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { ordersData } from "../data/Orders.js";
-import logo_katsubook_notext from "../assets/logo_katsubook_onlylogo.png";
-import logo_katsubook_text from "../assets/logo_katsubook_onlytext.png";
+import logo_katsubook_notext from "/logo_katsubook_onlylogo.png";
+import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 import Hamburger from "./Hamburger";
 
 export const Navbar = () => {
@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    /* navigate("/login"); */
   };
   useEffect(() => {
     // Fetch cart from localStorage when the component mounts
@@ -139,6 +139,7 @@ export const Navbar = () => {
                     Orders
                   </p>
                   <Link
+                    to={"/login"}
                     onClick={handleLogout}
                     className="my-2 block w-[30%] justify-self-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb] min-[1024px]:block min-sm:hidden"
                   >

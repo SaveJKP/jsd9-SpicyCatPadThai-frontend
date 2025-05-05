@@ -7,7 +7,7 @@ import React from 'react'
 
             <section className="flex flex-row px-2 py-6 justify-center md:justify-between items-center w-[100%]">
                 <div className="hidden md:flex justify-center items-center w-1/2">
-                    <img src="/src/assets/logo_katsubook_no-text.png" alt=""
+                    <img src="/logo_katsubook_no-text.png" alt=""
                     className="w-[50%]"/>
                 </div>
                 <div className="flex flex-col w-[75%] md:w-1/2 justify-center md:mr-12">
