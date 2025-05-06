@@ -11,10 +11,10 @@ import {
   } from "@/components/ui/card"
 
 
-export function CarouselCard({title, banner, author}) {
+/* export function CarouselCard({title, banner, author}) {
     return (
         <div>
-            <CarouselItem className="basis-2/3 md:basis-3/7 lg:basis-2/7 ">
+            <CarouselItem>
                 <Card className="w-50 flex flex-col justify-center items-center p-4 gap-2 bg-box rounded-2xl border-banner">
                     <img src={banner} alt={title || "Book cover"}
                     className="object-cover rounded-2xl"/>
@@ -25,3 +25,4 @@ export function CarouselCard({title, banner, author}) {
         </div>
     );
 }
+ */
