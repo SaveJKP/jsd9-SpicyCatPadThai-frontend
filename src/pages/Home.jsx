@@ -16,8 +16,8 @@ export default function Home() {
 
         <div className="bg-greenBackground">
           <div className="container__div">
-              <CardSlider name="New Release"/>
-              <CardSlider name="Best Seller"/>
+              <CardSlider name="🥇 Trending Manga"/>
+              <CardSlider name="🆕 New Releases"/>
           </div>
         </div>
 
@@ -29,8 +29,8 @@ export default function Home() {
 
         <div className="bg-greenBackground">
           <div className="container__div">
+            <ShowAll/>
           </div>
-          <ShowAll/>
         </div>
     </main>
   )

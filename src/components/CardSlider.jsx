@@ -29,7 +29,7 @@ export default function CardSlider({name}) {
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">
-        <h1 className="text-text text-2xl mb-4 font-semibold px-2">{name}</h1>
+        <h1 className="text-text text-3xl md:text-4xl mb-4 font-semibold px-2">{name}</h1>
         <Carousel
             opts={{
                 align: "start",

@@ -63,17 +63,20 @@ export default function ShowAll() {
 
   return (
     <div  className="container__div">
-      <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
-        {currentBanners.map((banner) => (
-          <BookCard
-            key={banner.banner_id}
-            id={banner.banner_id}
-            title={banner.name}
-            banner={banner.picture}
-            author={banner.author_name}
-          />
-        ))}
-      </section>
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="px-[12%] text-white text-3xl md:text-4xl mt-12 font-semibold">📚 All Series</h2>
+        <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
+          {currentBanners.map((banner) => (
+            <BookCard
+              key={banner.banner_id}
+              id={banner.banner_id}
+              title={banner.name}
+              banner={banner.picture}
+              author={banner.author_name}
+            />
+          ))}
+        </section>
+      </div>
 
       {totalPages > 1 && (
         <Pagination className="p-8">
