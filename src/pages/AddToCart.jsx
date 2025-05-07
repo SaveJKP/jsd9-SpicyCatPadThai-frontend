@@ -1,17 +1,27 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products.js";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useCart } from "../context/CartContext.jsx";
 
 export default function AddToCart() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
   const [category, setCategory] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  let [cart, setCart] = useState([]);
+  const { setCart } = useCart();
+  const {
+    handleAdd,
+    handleRemove,
+    quantity,
+    product,
+    totalPrice,
+    setProduct,
+    setQuantity,
+  } = useCart();
+
+  const handleSetQuantity = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
 
   // Fetch product by ID from mock data
   useEffect(() => {
@@ -22,26 +32,16 @@ export default function AddToCart() {
     }
   }, [id]);
 
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
-    setCart(parsedCart);
-  }, []);
-
-  // Load cart from localStorage when the app initializes
-  const totalPrice = product ? product.price * quantity : 0;
-
-  const handleAdd = () => setQuantity((x) => x + 1);
-  const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
-
   const handleAddToCart = () => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
         (item) => item.product_id === product.product_id,
       );
 
+      let updatedCart;
+
       if (existingItem) {
-        cart = prevCart.map((item) =>
+        updatedCart = prevCart.map((item) =>
           item.product_id === product.product_id
             ? {
                 ...item,
@@ -51,19 +51,17 @@ export default function AddToCart() {
             : item,
         );
       } else {
-        cart = [
+        updatedCart = [
           ...prevCart,
           {
             ...product,
             quantity,
-            total: totalPrice,
+            total: quantity * product.price,
           },
         ];
       }
 
-      localStorage.setItem("cart", JSON.stringify(cart));
-      setCart(cart);
-      setQuantity(1);
+      return updatedCart;
     });
   };
 
@@ -89,12 +87,6 @@ export default function AddToCart() {
       {category.category_name}
     </span>
   ));
-
-  const handleReload = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  };
 
   // Get random books from the same category
   const getRandomBooks = (products, categoryName, excludeId) => {
@@ -127,7 +119,7 @@ export default function AddToCart() {
             className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
             onClick={() => {
               if (quantity > 1) {
-                handleReload();
+                handleSetQuantity(1);
               }
             }}
           />
@@ -197,7 +189,7 @@ export default function AddToCart() {
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
               onClick={() => {
                 handleAddToCart();
-                handleReload();
+                handleSetQuantity(1);
                 toast("Added to Cart!");
               }}
             >
@@ -228,12 +220,12 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿{totalPrice.toFixed(2)}</p>
+          <p className="p-2 text-2xl">฿{quantity * product.price}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
               handleAddToCart();
-              handleReload();
+              handleSetQuantity(1);
               toast("Added to cart!");
             }}
           >
