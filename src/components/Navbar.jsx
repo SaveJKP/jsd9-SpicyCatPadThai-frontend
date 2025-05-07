@@ -103,10 +103,10 @@ export const Navbar = () => {
                   >
                     Register
                   </Link>
+                  <LoginPopover />
                 </>
               )}
 
-              <LoginPopover />
               <Link className="flex items-center" to={"/purchase"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
