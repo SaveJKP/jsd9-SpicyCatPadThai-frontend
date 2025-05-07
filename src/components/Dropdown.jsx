@@ -9,7 +9,7 @@ import {   Select,
 
 const Dropdown = ({ apiUrl, value, onChange, label, name }) => {
     const [options, setOptions] = useState([]);
-  
+
     useEffect(() => {
       const fetchOptions = async () => {
         try {
@@ -23,10 +23,10 @@ const Dropdown = ({ apiUrl, value, onChange, label, name }) => {
           console.error('Error fetching options:', error);
         }
       };
-  
+
       fetchOptions();
     }, [apiUrl]);
-  
+
     return (
       <div className="space-y-1">
         <label htmlFor={name} className="text-sm font-semibold">
@@ -41,7 +41,7 @@ const Dropdown = ({ apiUrl, value, onChange, label, name }) => {
               <SelectItem disabled>No options available</SelectItem>
             ) : (
               options.map((option) => (
-                <SelectItem key={option.id} value={option.name}>
+                <SelectItem key={option._id} value={option.name}>
                   {option.name}
                 </SelectItem>
               ))
@@ -51,5 +51,5 @@ const Dropdown = ({ apiUrl, value, onChange, label, name }) => {
       </div>
     );
   };
-  
+
   export default Dropdown;

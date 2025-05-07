@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from "axios";
+import Dropdown from "../components/Dropdown";
 
 export default function Register() {
 
-  //set input state
   const [data, setData] = useState([]);
 
   const [name, setName] = useState('');
@@ -16,7 +16,7 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [city, setCity] = useState('');
+  const [cityName, setcityName] = useState('');
   const [country, setCountry] = useState('');
 
   const PostData = async (e) => {
@@ -27,12 +27,22 @@ export default function Register() {
         password,
         dateOfBirth,
         address,
-        city,
+        cityName,
         country,
         phoneNumber
     }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', payload)
+      const response = await axios.post('http://localhost:3000/api/auth/register', payload, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
 
       console.log(payload);
       setData(...data, response.data);
@@ -100,15 +110,15 @@ export default function Register() {
                     value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </div>
 
-                  {/* <div className="flex flex-row justify-between items-center w-full px-12">
+                  <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="confirm_password" className="w-1/3">Confirm Password:</label>
                     <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                  </div> */}
+                  </div>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
                     <label htmlFor="address" className="w-1/3">Address:</label>
-                    <input type="text" id="address" placeholder="Address" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
+                    <textarea type="text" id="address" placeholder="Address" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={address} onChange={(e) => setAddress(e.target.value)}/>
                   </div>
 
@@ -118,19 +128,33 @@ export default function Register() {
                     value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="city" className="w-1/3">City :</label>
-                    <input type="text" id="city" placeholder="City" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
-                    value={city} onChange={(e) => setCity(e.target.value)}/>
+                  <div className="flex flex-col md:flex-row w-full">
+                    <div className="flex-1/2 mr-12 ml-12 md:mr-4">
+                        <Dropdown
+                          apiUrl="http://localhost:3000/api/auth/country"
+                          value={country}
+                          onChange={(value) => setCountry(value)}
+                          label="Country"
+                          name="country"
+                          placeholderText="Select Country"
+                          required
+                        />
+                    </div>
+                    <div className="flex-1/2 ml-12 mr-12 md:ml-4">
+                      <Dropdown
+                        apiUrl="http://localhost:3000/api/auth/city"
+                        value={cityName}
+                        onChange={(value) => setcityName(value)}
+                        label="City"
+                        name="cityName"
+                        placeholderText="Select City"
+                        required
+                      />
+                    </div>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="country" className="w-1/3">Country :</label>
-                    <input type="text" id="country" placeholder="Country" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
-                    value={country} onChange={(e) => setCountry(e.target.value)}/>
-                  </div>
 
-                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2" onClick={PostData}>
+                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2">
                     Create Account
                   </button>
 

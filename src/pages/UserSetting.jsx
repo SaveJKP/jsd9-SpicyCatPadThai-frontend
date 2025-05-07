@@ -159,17 +159,17 @@ export default function UserProfile() {
           />
           <p className ="mt-2 text-2xl font-bold">{user.name} {user.lastName}</p>
           <p className ="hidden text-sm mt-4">User ID: {userId}</p>
-  
+
           <Link to ={`/user/${userId}`}>
             <button className="m-4 text-sm underline cursor-pointer hover:scale-105">Back to Profile</button>
           </Link>
-    
+
         </div>
 
         {/* 3.account and password setting - User Profile Setting*/}
-        
+
         <div className ="mt-4 px-16 font-noto md:w-1/2 md:px-8 lg:px-16">
-          
+
             <Tabs defaultValue="account" className="">
               <TabsList className="grid w-full grid-cols-2  bg-(--color-box) mb-1">
                 <TabsTrigger value="account" className ="text-(--color-text)">Profile</TabsTrigger>
@@ -229,6 +229,7 @@ export default function UserProfile() {
                         onChange={(value) => handleChange({ target: { name: 'cityName', value } })}
                         label="City"
                         name="cityName"
+                        placeholderText="Select City"
                       />
                       </div>
                       <div className="space-y-1">
@@ -238,6 +239,7 @@ export default function UserProfile() {
                           onChange={(value) => handleChange({ target: { name: 'country', value } })}
                           label="Country"
                           name="country"
+                          placeholderText="Select Country"
                         />
                       </div>
                       <div className="space-y-1">
@@ -262,7 +264,7 @@ export default function UserProfile() {
                   </Card>
                 </form>
               </TabsContent>
-              
+
               {/* 3.2.password setting */}
               <TabsContent value="password">
                 <form onSubmit={handlePasswordChange}>
@@ -281,7 +283,7 @@ export default function UserProfile() {
                           type="password"
                           name="currentPassword"
                           value={updatedUser.currentPassword}
-                          onChange={handleChange} 
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="space-y-1">
@@ -291,7 +293,7 @@ export default function UserProfile() {
                           type="password"
                           name="newPassword"
                           value={updatedUser.newPassword}
-                          onChange={handleChange} 
+                          onChange={handleChange}
                         />
                       </div>
                     </CardContent>
