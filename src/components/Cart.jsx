@@ -63,7 +63,7 @@ export const Cart = () => {
   if (showCheckout) {
     return (
       <div className="flex flex-col items-center space-y-10 py-[100px] md:w-[100%]">
-        <p className="text-center text-xl text-white">
+        <p className="text-center text-xl leading-12 text-white">
           Thank you for shopping with us! <br />
           Your order has been processed.
         </p>
