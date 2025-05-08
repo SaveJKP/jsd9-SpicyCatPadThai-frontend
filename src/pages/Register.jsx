@@ -18,7 +18,7 @@ export default function Register() {
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [cityName, setcityName] = useState('');
-  const [country, setCountry] = useState('');
+  const [countryId, setCountryId] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,8 +30,8 @@ export default function Register() {
         password,
         dateOfBirth,
         address,
-        cityName,
-        country,
+        city_id: cityName,
+        country_id: countryId,
         phoneNumber
     }
 
@@ -57,8 +57,8 @@ export default function Register() {
     }
   };
 
-  const cityApiUrl = country
-  ? `http://localhost:3000/api/auth/country/${country}/cities`
+  const cityApiUrl = countryId
+  ? `http://localhost:3000/api/auth/country/${countryId}/cities`
   : null;
 
   return (
@@ -142,8 +142,8 @@ export default function Register() {
                     <div className="flex-1/2 mr-12 ml-12 md:mr-4">
                         <Dropdown
                           apiUrl="http://localhost:3000/api/auth/country"
-                          value={country}
-                          onChange={(value) => setCountry(value)}
+                          value={countryId}
+                          onChange={(countryId) => setCountryId(countryId)}
                           label="Country"
                           name="country"
                           placeholderText="Select Country"
