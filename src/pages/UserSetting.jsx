@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/tabs"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Dropdown from '../components/Dropdown';
+import Dropdown from '../components/Dropdown'
 
 export default function UserProfile() {
   const { userId } = useParams();
@@ -31,7 +31,6 @@ export default function UserProfile() {
   const [user, setUser] = useState(null); // Store user data
   const [updatedUser, setUpdatedUser] = useState({
     name: "",
-    lastName: "",
     email: "",
     address: "",
     cityId: "",
@@ -79,7 +78,7 @@ export default function UserProfile() {
   };
 
   //0.3 Handle form submission (send updated data to backend)
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true); // Disable the button while submitting
@@ -90,7 +89,7 @@ export default function UserProfile() {
       email: updatedUser.email,
       address: updatedUser.address,
       phoneNumber: updatedUser.phoneNumber,
-      city_id: updatedUser.cityId, 
+      city_id: updatedUser.cityId,
     };
 
     try {

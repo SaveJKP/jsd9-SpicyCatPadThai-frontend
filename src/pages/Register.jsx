@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from "axios";
 import Dropdown from "../components/Dropdown";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
 
@@ -18,6 +19,8 @@ export default function Register() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [cityName, setcityName] = useState('');
   const [country, setCountry] = useState('');
+
+  const navigate = useNavigate();
 
   const PostData = async (e) => {
     const payload = {
@@ -46,10 +49,17 @@ export default function Register() {
 
       console.log(payload);
       setData(...data, response.data);
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000)
     } catch (err) {
       console.log(err);
     }
   };
+
+  const cityApiUrl = country
+  ? `http://localhost:3000/api/auth/country/${country}/cities`
+  : null;
 
   return (
      <main >
@@ -142,7 +152,7 @@ export default function Register() {
                     </div>
                     <div className="flex-1/2 ml-12 mr-12 md:ml-4">
                       <Dropdown
-                        apiUrl="http://localhost:3000/api/auth/city"
+                        apiUrl={cityApiUrl}
                         value={cityName}
                         onChange={(value) => setcityName(value)}
                         label="City"
@@ -152,7 +162,6 @@ export default function Register() {
                       />
                     </div>
                   </div>
-
 
                   <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2">
                     Create Account
