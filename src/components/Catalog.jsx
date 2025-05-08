@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 // import { GetData } from "../utils/API";
 import { useNavigate } from "react-router-dom";
-import { bannersWithProducts } from "./../data/Catalog";
 import axios from "axios";
 
 export default function Catalog({ id, onClose }) {
@@ -10,18 +9,17 @@ export default function Catalog({ id, onClose }) {
   const [products, setProducts] = useState([]);
   const [picture, setPicture] = useState("");
 
-  const banner = bannersWithProducts.find((banner) => banner.banner_id === id);
   const navigate = useNavigate();
 
   const fetchTitleById = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/titles/6814725661fa18a1c47ce5a9`,
+        `http://localhost:3000/api/titles/${id}`,
       );
       console.log(res.data);
       setName(res.data.title_name);
       setDescription(res.data.title_description);
-      setPicture(banner.title_picture);
+      setPicture(res.data.title_picture);
     } catch (err) {
       console.error(err);
     }
@@ -29,9 +27,9 @@ export default function Catalog({ id, onClose }) {
   const fetchProductsById = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/productss/6814725661fa18a1c47ce5a9",
+        `http://localhost:3000/productss/${id}`,
       );
-      setProducts(res.data.product); // แปลง values เป็น array
+      setProducts(res.data.product);
     } catch (err) {
       console.error(err);
     }

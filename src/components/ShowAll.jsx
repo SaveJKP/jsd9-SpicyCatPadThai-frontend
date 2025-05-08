@@ -10,24 +10,37 @@ import {
 import { BookCard } from "./BookCard";
 import { useState } from "react";
 import { useEffect } from "react";
-import { bannersWithCategories } from "../data/ShowAll";
 import axios from "axios";
 
 export default function ShowAll() {
+  const [banners, setBanners] = useState([]);
   {
     /* set page */
   }
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(bannersWithCategories.length / itemsPerPage);
-  const [open, setOpen] = useState(false);
+  const totalPages = Math.ceil(banners.length / itemsPerPage);
 
+  useEffect(() => {
+    const getItemsShowAll = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/titles/get-all",
+        );
+        setBanners(response.data.title);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getItemsShowAll();
+  }, []);
   {
     /* set index items to show book */
   }
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentBanners = bannersWithCategories.slice(startIndex, endIndex);
+  const currentBanners = banners.slice(startIndex, endIndex);
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -46,31 +59,17 @@ export default function ShowAll() {
   {
     /* Get Items Banner */
   }
-  const [banners, setBanners] = useState([])
-
-  useEffect(() => {
-    const getItemsShowAll = async() => {
-      try {
-        const response = await axios.get(' ')
-        setBanners(response.data)
-      } catch (err) {
-        console.log(err)
-      }
-    };
-
-    getItemsShowAll();
-}, []);
 
   return (
     <div>
       <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
         {currentBanners.map((banner) => (
           <BookCard
-            key={banner.banner_id}
-            id={banner.banner_id}
-            title={banner.name}
-            banner={banner.picture}
-            author={banner.author_name}
+            key={banner._id}
+            id={banner._id}
+            title={banner.title_name}
+            banner={banner.title_picture}
+            author={banner.author_id?.author_name}
           />
         ))}
       </section>
