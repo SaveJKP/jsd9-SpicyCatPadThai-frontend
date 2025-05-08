@@ -34,8 +34,8 @@ export default function UserProfile() {
     lastName: "",
     email: "",
     address: "",
-    cityName: "",
-    country: "",
+    cityId: "",
+    countryId: "",
     phoneNumber: "",
     currentPassword: "",
     newPassword: "",
@@ -55,8 +55,8 @@ export default function UserProfile() {
           lastName: res.data.lastName,
           email: res.data.email,
           address: res.data.address,
-          cityName: res.data.city_id.name,
-          country: res.data.city_id.country_id.name,
+          cityId: res.data.city_id?._id,
+          countryId: res.data.city_id?.country_id?._id,
           phoneNumber: res.data.phoneNumber,
         });
       } catch (error) {
@@ -69,6 +69,10 @@ export default function UserProfile() {
     fetchUserData();
   }, [userId]);
 
+  const cityApiUrl = updatedUser.countryId
+  ? `http://localhost:3000/api/auth/country/${updatedUser.countryId}/cities`
+  : null;
+
   //0.2Handle change
   const handleChange = (e) => {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
@@ -80,11 +84,19 @@ export default function UserProfile() {
     e.preventDefault();
     setIsSubmitting(true); // Disable the button while submitting
 
+    const payload = {
+      name: updatedUser.name,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      address: updatedUser.address,
+      phoneNumber: updatedUser.phoneNumber,
+      city_id: updatedUser.cityId, 
+    };
+
     try {
       const res = await axios.patch(
-        // Send the updatedUser state directly, as it contains the correct fields including cityName
         `http://localhost:3000/api/auth/user/${userId}`,
-        updatedUser,
+        payload, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -101,6 +113,7 @@ export default function UserProfile() {
     }
   };
 
+ 
   //0.4handle password change
   const navigate = useNavigate();
   const handlePasswordChange = async (e) => {
@@ -224,22 +237,29 @@ export default function UserProfile() {
                       </div>
                       <div className="space-y-1">
                       <Dropdown
-                        apiUrl="http://localhost:3000/api/auth/city"
-                        value={updatedUser.cityName}
-                        onChange={(value) => handleChange({ target: { name: 'cityName', value } })}
-                        label="City"
-                        name="cityName"
-                        placeholderText="Select City"
+                        apiUrl="http://localhost:3000/api/auth/country"
+                        value={updatedUser.countryId}
+                        onChange={(selectedCountryId) => {
+                          setUpdatedUser(prev => ({
+                            ...prev,
+                            countryId: selectedCountryId,
+                            cityId: "", 
+                          }));
+                        }}
+                        label="Country"
+                        name="countryId"
                       />
                       </div>
                       <div className="space-y-1">
                         <Dropdown
-                          apiUrl="http://localhost:3000/api/auth/country"
-                          value={updatedUser.country}
-                          onChange={(value) => handleChange({ target: { name: 'country', value } })}
-                          label="Country"
-                          name="country"
-                          placeholderText="Select Country"
+                          apiUrl={cityApiUrl}
+                          value={updatedUser.cityId}
+                          onChange={(selectedCityId) => {
+                            setUpdatedUser(prev => ({ ...prev, cityId: selectedCityId }));
+                          }}
+                          label="City"
+                          name="cityId"
+                          disabled={!updatedUser.countryId} // Disable if no country selected
                         />
                       </div>
                       <div className="space-y-1">

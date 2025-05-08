@@ -7,41 +7,52 @@ import {   Select,
     SelectValue, } from "@/components/ui/select";
 
 
-const Dropdown = ({ apiUrl, value, onChange, label, name }) => {
+const Dropdown = ({ apiUrl, value, onChange, label, name, disabled }) => {
     const [options, setOptions] = useState([]);
-
+    const [isLoadingOptions, setIsLoadingOptions] = useState(false);
+  
     useEffect(() => {
       const fetchOptions = async () => {
+        if (!apiUrl) {
+          setOptions([]);
+          setIsLoadingOptions(false);
+          return;
+        }
+        setIsLoadingOptions(true);
         try {
           const response = await axios.get(apiUrl, {
             headers: {
               'Content-Type': 'application/json',
             },
           });
-          setOptions(response.data); // Assuming the API returns an array of objects { id, name }
+          setOptions(response.data);
         } catch (error) {
-          console.error('Error fetching options:', error);
+          console.error(`Error fetching ${label} options:`, error);
+          setOptions([]);
+        } finally {
+          setIsLoadingOptions(false);
         }
       };
 
       fetchOptions();
-    }, [apiUrl]);
-
+    }, [apiUrl, label]);
+  
     return (
       <div className="space-y-1">
         <label htmlFor={name} className="text-sm font-semibold">
           {label}
         </label>
-        <Select value={value} onValueChange={onChange}>
+        <Select value={value} onValueChange={onChange} disabled={disabled || isLoadingOptions}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder={`Select ${label}`} />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {options.length === 0 ? (
-              <SelectItem disabled>No options available</SelectItem>
-            ) : (
+            {isLoadingOptions ? 
+            (
+              <SelectItem disabled>Loading options...</SelectItem>
+            ) :  (
               options.map((option) => (
-                <SelectItem key={option._id} value={option.name}>
+                <SelectItem key={option._id} value={option._id}>
                   {option.name}
                 </SelectItem>
               ))
