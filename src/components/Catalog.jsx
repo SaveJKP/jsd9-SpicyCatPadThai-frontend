@@ -43,7 +43,7 @@ export default function Catalog({ id, onClose }) {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-10 flex w-[100%] items-start justify-center pt-[10%] backdrop-blur-sm " // Dark background
+          className="fixed inset-0 z-10 pt-24 flex w-[100%] items-start justify-center backdrop-blur-sm"
           onClick={onClose}
         >
           <div

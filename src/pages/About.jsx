@@ -3,7 +3,7 @@ import BrownButton from "../components/BrownButton";
 
 export default function About() {
   return (
-    <div className ="min-h-screen  bg-(--color-greenBackground) text-(--color-text) pb-8">
+    <div className ="h-full  bg-(--color-greenBackground) text-(--color-text) pb-8">
       
       {/* 1.Intro Section  - About */}
       <section className ="py-8 px-16 md:px-24 lg:px-88">

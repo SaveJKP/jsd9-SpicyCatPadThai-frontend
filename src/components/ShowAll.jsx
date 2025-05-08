@@ -17,7 +17,7 @@ export default function ShowAll() {
   {
     /* set page */
   }
-  const itemsPerPage = 8;
+  const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(banners.length / itemsPerPage);
 
@@ -61,18 +61,21 @@ export default function ShowAll() {
   }
 
   return (
-    <div>
-      <section className="flex flex-row flex-wrap items-center justify-center gap-4 p-8">
-        {currentBanners.map((banner) => (
-          <BookCard
-            key={banner._id}
-            id={banner._id}
-            title={banner.title_name}
-            banner={banner.title_picture}
-            author={banner.author_id?.author_name}
-          />
-        ))}
-      </section>
+    <div  className="container__div">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="px-[12%] text-white text-3xl md:text-4xl mt-12 font-semibold">📚 All Series</h2>
+        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-8 justify-center items-center self-center">
+          {currentBanners.map((banner) => (
+            <BookCard
+              key={banner._id}
+              id={banner._id}
+              title={banner.title_name}
+              banner={banner.title_picture}
+              author={banner.author_id?.author_name}
+            />
+          ))}
+        </section>
+      </div>
 
       {totalPages > 1 && (
         <Pagination className="p-8">

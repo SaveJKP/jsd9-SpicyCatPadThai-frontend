@@ -9,7 +9,7 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <ScrollToTop />
-      <div className="flex-1">
+      <div className="flex-1 bg-(--color-greenBackground)">
         <Outlet />
         <Toaster />
       </div>

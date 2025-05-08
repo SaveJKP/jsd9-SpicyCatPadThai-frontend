@@ -26,30 +26,30 @@ export default function UserProfile() {
   const { userId } = useParams();
   const user = users.find(u => u.user_id === Number(userId));
 
-  
+
 
 
   return (
-    <div className ="h-full bg-(--color-greenBackground) text-(--color-text) pb-8 md:px-12 lg:px-72 " >
+    <div className ="h-full bg-(--color-greenBackground) text-(--color-text) pb-6 md:px-12 lg:px-72 " >
       {/* 1. Heading - User Profile Setting */}
       <section className ="py-8 px-16 ">
         <h1 className="font-bold text-center">Settings</h1>
       </section>
-          
+
       <div className="container__div py-0 md:flex ">
         {/* 2. User display + logout - User Profile Setting */}
         <div className="flex flex-col text-center items-center md:w-1/2">
           <img
-            src="/src/assets/logo_cat.jpg"
+            src="/logo_cat.jpg"
             alt="profile"
             className ="w-32 h-32 rounded-full my-4"
           />
           <p className ="">User ID: {userId}</p>
-  
+
           <Link to ={`/user/${userId}`}>
             <button className="m-4 text-sm underline cursor-pointer">Back to Profile</button>
           </Link>
-    
+
           <Link to = "/login">
             <BrownButton
               className=""
