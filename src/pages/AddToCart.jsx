@@ -7,8 +7,8 @@ import axios from "axios";
 export default function AddToCart() {
   const { id } = useParams();
   const [category, setCategory] = useState([]);
-  const { setCart } = useCart();
   const {
+    setCart,
     handleAdd,
     handleRemove,
     quantity,
@@ -47,38 +47,29 @@ export default function AddToCart() {
 
   useEffect(() => {
     fetchProductsById();
-    const storedCart = localStorage.getItem("cart");
-    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
-    setCart(parsedCart);
-  }, []);
+  }, []); // Fetch product only once on mount
 
   useEffect(() => {
-    if (product?.title_id) {
+    if (product && product.title_id) {
       fetchCategoryById(product.title_id);
     }
-  }, [product]);
-
-  const totalPrice = product ? product.price * quantity : 0;
-
-  const handleAdd = () => setQuantity((x) => x + 1);
-  const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
+  }, [product]); // Fetch category when product data is available
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      let updatedCart;
       const existingItem = prevCart.find(
-        (item) => item.product_id === product.product_id,
+        (item) => item._id === product._id,
       );
 
       let updatedCart;
 
       if (existingItem) {
         updatedCart = prevCart.map((item) =>
-          item.product_id === product.product_id
+          item._id === product._id
             ? {
                 ...item,
                 quantity: item.quantity + quantity,
-                total: item.total + totalPrice,
+                total:  (totalPrice)*quantity,
               }
             : item,
         );
@@ -128,17 +119,11 @@ export default function AddToCart() {
     }, 1000);
   };
 
-  const getRandomBooks = (
-    products,
-    categoryName,
-    excludeId,
-  ) => {
+  const getRandomBooks = (products, categoryName, excludeId) => {
     if (!products || !categoryName) return [];
 
     const filteredBooks = products.filter((product) =>
-      product.categories?.some(
-        (cat) => cat.category_name === categoryName,
-      ),
+      product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
     return filteredBooks
@@ -282,4 +267,3 @@ export default function AddToCart() {
     </div>
   );
 }
-
