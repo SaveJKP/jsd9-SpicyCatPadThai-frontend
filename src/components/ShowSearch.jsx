@@ -10,6 +10,7 @@ import {
 import { BookCard } from "./BookCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
 export default function ShowSearch() {
@@ -20,21 +21,37 @@ export default function ShowSearch() {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(banners.length / itemsPerPage);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const queryToSearch = (queryParams.get("query") || "").trim();
 
-  useEffect(() => {
-    const getItemsShowAll = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/titles/get-all",
-        );
-        setBanners(response.data.title);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+useEffect(() => {
 
-    getItemsShowAll();
-  }, []);
+  if (!queryToSearch) {
+    console.log("Search query is empty. Not fetching. Clearing banners.");
+    setBanners([]);
+    setCurrentPage(1);
+    return;
+  }
+
+  const fetchSearchResults = async () => {
+    try {
+      console.log(`Fetching search results for query: "${queryToSearch}"`);
+      const response = await axios.get(
+        `http://localhost:3000/api/titles/search?query=${encodeURIComponent(queryToSearch)}`
+      );
+      console.log("API response:", response.data);
+      setBanners(response.data.title || []);
+      setCurrentPage(1);
+    } catch (err) {
+      console.error("Error fetching search results:", err);
+      setBanners([]);
+      setCurrentPage(1);
+    }
+  };
+
+  fetchSearchResults();
+}, [location.search]);
   {
     /* set index items to show book */
   }
@@ -63,7 +80,7 @@ export default function ShowSearch() {
   return (
     <div  className="container__div">
       <div className="flex flex-col items-start justify-start">
-        <h2 className="px-[12%] text-white text-3xl md:text-4xl mt-12 font-semibold">📚 All Series</h2>
+        <h2 className="px-[10%] text-white text-3xl md:text-4xl mt-12 font-semibold">Search Result</h2>
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-8 justify-center items-center self-center">
           {currentBanners.map((banner) => (
             <BookCard
@@ -71,7 +88,7 @@ export default function ShowSearch() {
               id={banner._id}
               title={banner.title_name}
               banner={banner.title_picture}
-              author={banner.author_id?.author_name}
+              author={banner.authorInfo?.author_name}
             />
           ))}
         </section>
