@@ -8,7 +8,6 @@ export default function Catalog({ id, onClose }) {
   const [description, setDescription] = useState("");
   const [products, setProducts] = useState([]);
   const [picture, setPicture] = useState("");
-  const [selectedProductId, setSelectedProductId] = useState(""); // For controlling the select
 
   const navigate = useNavigate();
 
@@ -34,14 +33,15 @@ export default function Catalog({ id, onClose }) {
     if (id) {
       fetchTitleById();
       fetchProductsById();
-      setSelectedProductId(""); // Reset selection when id changes
     }
   }, [id]);
 
   const handleVolumeChange = (event) => {
     const productId = event.target.value;
-    setSelectedProductId(productId);
-    navigate(`/add-to-cart/${productId}`);
+    // Ensure a valid product is selected before navigating
+    if (productId) {
+      navigate(`/add-to-cart/${productId}`);
+    }
   };
   return (
     <>
@@ -66,19 +66,30 @@ export default function Catalog({ id, onClose }) {
               <p className="text-md mb-2">Volume</p>
               <select
                 name="volume"
-                value={selectedProductId}
+                defaultValue="" // Set a default value for the placeholder
                 onChange={handleVolumeChange}
                 className="w-full cursor-pointer overflow-y-auto rounded bg-[#444] text-white"
               >
-                {products.map((product) => (
-                  <option
-                    key={product._id}
-                    value={product._id}
-                    className="cursor-pointer px-4 py-2 text-gray-300 hover:bg-[#555]"
-                  >
-                    {product.name_vol}
-                  </option>
-                ))}
+                <option value="" disabled className="hidden">Select Volume</option>
+                {products.length > 0 && products.map((product) =>
+                  product.quantity > 0 ? (
+                    <option
+                      key={product._id}
+                      value={product._id}
+                      className="cursor-pointer px-4 py-2 text-gray-300 hover:bg-[#555]"
+                    >
+                      {product.name_vol}
+                    </option>
+                  ) : (
+                    <option
+                      key={product._id}
+                      disabled
+                      className="cursor-not-allowed px-4 py-2 text-red-500"
+                    >
+                      {product.name_vol} (Sold Out)
+                    </option>
+                  ),
+                )}
               </select>
             </div>
           </div>
