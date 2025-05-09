@@ -6,14 +6,18 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [ user, setUser ] = useState(null);
+    const [ isUser, setIsUser ] = useState(false); // <-- ADD isUser State
     const [ loading, setLoading ] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async() => {
             try {
-                const response = await axios.get("http://localhost:3000/api/auth/profile");
+                const response = await axios.get("http://localhost:3000/api/auth/profile", {
+                    withCredentials: true
+                });
                 setUser(response.data.user);
+                setIsUser(true); // <-- SET isUser to true
             } catch (err) {
                 console.error("Not authenticated", err);
                 setUser(null);
@@ -44,9 +48,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUser, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, setUser, login, logout, loading, isUser }}>
             {children}
-        </AuthContext.Provider>
+        </AuthContext.Provider> // <-- ADD isUser to provider
     );
 };
 
