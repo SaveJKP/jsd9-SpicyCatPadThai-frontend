@@ -21,14 +21,13 @@ export default function ShowSearch() {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(banners.length / itemsPerPage);
-  const location = useLocation();
+  const location = useLocation(); //get quey from url e.g.,  If the URL is http://localhost:3000/search?query=naruto, then location.search is "?query=naruto
   const queryParams = new URLSearchParams(location.search);
-  const queryToSearch = (queryParams.get("query") || "").trim();
+  const searchText = (queryParams.get("query") || "").trim(); //get the query text e.g, naruto
 
 useEffect(() => {
 
-  if (!queryToSearch) {
-    console.log("Search query is empty. Not fetching. Clearing banners.");
+  if (!searchText) {
     setBanners([]);
     setCurrentPage(1);
     return;
@@ -36,11 +35,9 @@ useEffect(() => {
 
   const fetchSearchResults = async () => {
     try {
-      console.log(`Fetching search results for query: "${queryToSearch}"`);
       const response = await axios.get(
-        `http://localhost:3000/api/titles/search?query=${encodeURIComponent(queryToSearch)}`
+        `http://localhost:3000/api/titles/search?query=${encodeURIComponent(searchText)}`
       );
-      console.log("API response:", response.data);
       setBanners(response.data.title || []);
       setCurrentPage(1);
     } catch (err) {
@@ -80,7 +77,14 @@ useEffect(() => {
   return (
     <div  className="container__div">
       <div className="flex flex-col items-start justify-start">
-        <h2 className="px-[10%] text-white text-3xl md:text-4xl mt-12 font-semibold">Search Result</h2>
+        <h2 className="px-[10%] text-white text-3xl md:text-4xl mt-12 font-semibold">Search Result: {searchText} </h2>
+        
+        {banners.length === 0 && searchText !== "" ? (
+          <div className="flex justify-center items-center w-full h-96">
+            <p className="text-white text-2xl font-medium">Book title not found</p>
+          </div>
+        ) : (
+        
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-8 justify-center items-center self-center">
           {currentBanners.map((banner) => (
             <BookCard
@@ -92,6 +96,7 @@ useEffect(() => {
             />
           ))}
         </section>
+        )}
       </div>
 
       {totalPages > 1 && (
