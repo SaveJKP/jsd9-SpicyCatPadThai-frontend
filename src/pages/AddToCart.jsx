@@ -1,16 +1,26 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useCart } from "../context/CartContext.jsx";
 import axios from "axios";
 
 export default function AddToCart() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
   const [category, setCategory] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [cart, setCart] = useState([]);
+  const { setCart } = useCart();
+  const {
+    handleAdd,
+    handleRemove,
+    quantity,
+    product,
+    totalPrice,
+    setProduct,
+    setQuantity,
+  } = useCart();
+
+  const handleSetQuantity = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
 
   // Fetch product by ID from mock data
   const fetchProductsById = async () => {
@@ -60,7 +70,10 @@ export default function AddToCart() {
         (item) => item.product_id === product.product_id,
       );
 
+      let updatedCart;
+
       if (existingItem) {
+        updatedCart = prevCart.map((item) =>
         updatedCart = prevCart.map((item) =>
           item.product_id === product.product_id
             ? {
@@ -72,11 +85,12 @@ export default function AddToCart() {
         );
       } else {
         updatedCart = [
+        updatedCart = [
           ...prevCart,
           {
             ...product,
             quantity,
-            total: totalPrice,
+            total: quantity * product.price,
           },
         ];
       }
@@ -225,7 +239,7 @@ export default function AddToCart() {
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
               onClick={() => {
                 handleAddToCart();
-                handleReload();
+                handleSetQuantity(1);
                 toast("Added to Cart!");
               }}
             >
@@ -256,12 +270,12 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿{totalPrice.toFixed(2)}</p>
+          <p className="p-2 text-2xl">฿{quantity * product.price}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
               handleAddToCart();
-              handleReload();
+              handleSetQuantity(1);
               toast("Added to cart!");
             }}
           >
