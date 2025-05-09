@@ -7,17 +7,17 @@ import { useNavigate } from "react-router-dom";
 export default function OrderDetails() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState(null);
-  const { id, orderId } = useParams();
+  const { userId, orderId } = useParams();
 
   useEffect(() => {
     const userOrderDetail = ordersData.find(
-      (o) => String(o.user_id) === id && String(o.order_id) === orderId,
+      (o) => String(o.user_id) === userId && String(o.order_id) === orderId,
     );
     setOrders(userOrderDetail);
-  }, [id, orderId]);
+  }, [userId, orderId]);
 
   if (!orders) {
-    return <div>Loading or order not found...</div>;
+    return <div className="p-4 text-white">Loading or order not found...</div>;
   }
   const total = orders.items?.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -101,8 +101,10 @@ export default function OrderDetails() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center py-10">
           <button
-            className="mx-[58px] my-[32px] flex justify-center rounded-2xl bg-[var(--color-buttonBrown)] py-[10px] text-white hover:cursor-pointer"
+            className="my-[32px] flex justify-self-center rounded-[10px] bg-[var(--color-buttonBrown)] px-[66px] py-[10px] text-white hover:cursor-pointer"
             onClick={() => {
               navigate(`/orders/${orders.user_id}`);
             }}

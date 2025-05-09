@@ -5,19 +5,19 @@ import { ordersData } from "../data/Orders.js";
 import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
-  const { id } = useParams();
+  const { userId } = useParams();
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const userOrders = ordersData
-      .filter((o) => o.user_id === id)
+      .filter((o) => o.user_id === userId)
       .sort(
         (prev, latest) =>
           new Date(latest.created_at) - new Date(prev.created_at),
       );
     setOrders(userOrders);
-  }, [id]);
+  }, [userId]);
 
   if (orders.length === 0)
     return <p className="p-4">No orders found for this user.</p>;
