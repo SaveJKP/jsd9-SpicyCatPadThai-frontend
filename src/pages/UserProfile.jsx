@@ -93,7 +93,7 @@ export default function UserProfile() {
                 </GreenButton>
               </Link> */}
 
-              <Link to = "">
+              <Link to = "orders/:id">
                 <GreenButton
                 className="w-full mb-2"
                 text="Your Orders →"
