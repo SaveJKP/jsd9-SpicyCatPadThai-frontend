@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useCart } from "../context/CartContext.jsx";
 import axios from "axios";
 
 export default function AddToCart() {
-  const { id } = useParams();
+  const [products, setProducts] = useState([]); // รายการ product ทั้งหมดของ title นี้
   const [category, setCategory] = useState([]);
+  const [selectedProductVolumeId, setSelectedProductVolumeId] = useState(""); // State สำหรับเก็บ ID volume ที่เลือก
   const {
     setCart,
     handleAdd,
@@ -18,12 +19,14 @@ export default function AddToCart() {
     setQuantity,
   } = useCart();
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const handleSetQuantity = (newQuantity) => {
     setQuantity(newQuantity);
   };
 
-  // Fetch product by ID from mock data
-  const fetchProductsById = async () => {
+  const fetchProductById = async () => {
     try {
       const res = await axios.get(`http://localhost:3000/products/${id}`);
       setProduct(res.data.product);
@@ -45,21 +48,41 @@ export default function AddToCart() {
     }
   };
 
+  const fetchProductsByTitleId = async (titleId) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/productss/${titleId}`);
+      setProducts(res.data.product);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    fetchProductsById();
-  }, []); // Fetch product only once on mount
+    fetchProductById();
+  }, [id]);
 
   useEffect(() => {
     if (product && product.title_id) {
+      fetchProductsByTitleId(product.title_id);
       fetchCategoryById(product.title_id);
     }
-  }, [product]); // Fetch category when product data is available
+  }, [product]);
+
+  const handleVolumeChange = (event) => {
+    const selectedId = event.target.value;
+    setSelectedProductVolumeId(selectedId);
+
+    // Find the selected product volume from the 'products' array
+    const selectedVolume = products.find((p) => p._id === selectedId);
+    if (selectedVolume) {
+      // อัปเดต 'product' state ด้วย volume ที่เลือก
+      setProduct(selectedVolume);
+    }
+  };
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find(
-        (item) => item._id === product._id,
-      );
+      const existingItem = prevCart.find((item) => item._id === product._id);
 
       let updatedCart;
 
@@ -69,9 +92,9 @@ export default function AddToCart() {
             ? {
                 ...item,
                 quantity: item.quantity + quantity,
-                total:  (totalPrice)*quantity,
+                total: (item.price || 0) * (item.quantity + quantity), // ใช้ item.price ที่อาจมาจาก volume ที่เลือก
               }
-            : item,
+            : item
         );
       } else {
         updatedCart = [
@@ -79,13 +102,14 @@ export default function AddToCart() {
           {
             ...product,
             quantity,
-            total: quantity * product.price,
+            total: (product.price || 0) * quantity, // ใช้ product.price ของ volume ที่เลือก
           },
         ];
       }
 
       return updatedCart;
     });
+    toast("Added to Cart!");
   };
 
   if (!product) {
@@ -123,7 +147,7 @@ export default function AddToCart() {
     if (!products || !categoryName) return [];
 
     const filteredBooks = products.filter((product) =>
-      product.categories?.some((cat) => cat.category_name === categoryName),
+      product.categories?.some((cat) => cat.category_name === categoryName)
     );
 
     return filteredBooks
@@ -131,39 +155,41 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  const similarBooks = category?.flatMap((cat) =>
-    getRandomBooks(products, cat.category_id?.category_name, product.product_id),
-  )
-    .slice(0, 4)
-    .map((book, index) => (
-      <div
-        key={book.product_id || index}
-        className="flex flex-col text-center min-[1024px]:w-[50%]"
-      >
-        <Link to={`/add-to-cart/${book.product_id}`}>
-          <img
-            src={
-              book.img ||
-              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-            }
-            alt={book.title}
-            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
-            onClick={() => {
-              if (quantity > 1) {
-                handleReload();
-              }
-            }}
-          />
+  // const similarBooks = category
+  //   ?.map((cat) =>
+  //     getRandomBooks(products, cat.category_id?.category_name, product.product_id),
+  //   )
+  //   .flat()
+  //   .slice(0, 4)
+  //   .map((book, index) => (
+  //     <div
+  //       key={book.product_id || index}
+  //       className="flex flex-col text-center min-[1024px]:w-[50%]"
+  //     >
+  //       <Link to={`/add-to-cart/${book.product_id}`}>
+  //         <img
+  //           src={
+  //             book.img ||
+  //             "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+  //           }
+  //           alt={book.title}
+  //           className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
+  //           onClick={() => {
+  //             if (quantity > 1) {
+  //               handleReload();
+  //             }
+  //           }}
+  //         />
 
-          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-            <span className="text-clip">{book.name}</span>
-            <span>Vol. {book.volume}</span>
-            <span>{book.author}</span>
-            <span>฿{book.price}</span>
-          </p>
-        </Link>
-      </div>
-    ));
+  //         <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+  //           <span className="text-clip">{book.name}</span>
+  //           <span>Vol. {book.volume}</span>
+  //           <span>{book.author}</span>
+  //           <span>฿{book.price}</span>
+  //         </p>
+  //       </Link>
+  //     </div>
+  //   ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -183,9 +209,29 @@ export default function AddToCart() {
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
             <p className="text-2xl font-bold md:text-3xl">{product.name_vol}</p>
-            <p className="text-xl font-bold md:text-2xl">
-              Vol. {product.volume_no}
-            </p>
+            <select
+              name="volume"
+              value={selectedProductVolumeId} // ควบคุมค่าด้วย state
+              onChange={handleVolumeChange}
+              className="w-full cursor-pointer overflow-y-auto rounded bg-white text-black p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="" disabled className="text-gray-500 hidden">
+                Select Volume
+              </option>
+              {products.length > 0 &&
+                products.map((p) => (
+                  <option
+                    key={p._id}
+                    value={p._id}
+                    disabled={p.quantity <= 0}
+                    className={`cursor-pointer px-4 py-2 text-black hover:bg-gray-100 ${
+                      p.quantity <= 0 ? "text-red-500 bg-gray-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {p.name_vol} {p.quantity <= 0 && "(Sold Out)"}
+                  </option>
+                ))}
+            </select>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
 
@@ -218,11 +264,7 @@ export default function AddToCart() {
 
             <button
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
-              onClick={() => {
-                handleAddToCart();
-                handleSetQuantity(1);
-                toast("Added to Cart!");
-              }}
+              onClick={handleAddToCart}
             >
               Add to Cart
             </button>
@@ -243,7 +285,7 @@ export default function AddToCart() {
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {similarBooks}
+              {/* {similarBooks} */}
             </div>
           </div>
         </div>
@@ -251,14 +293,10 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿{quantity * product.price}</p>
+          <p className="p-2 text-2xl">฿{quantity * (product.price || 0)}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
-            onClick={() => {
-              handleAddToCart();
-              handleSetQuantity(1);
-              toast("Added to cart!");
-            }}
+            onClick={handleAddToCart}
           >
             Add to Cart
           </button>

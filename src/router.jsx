@@ -1,4 +1,4 @@
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
 import ErrorHandling from "./pages/ErrorHandling";
@@ -31,16 +31,15 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
+      { path: "user/:userId", element: <UserProfile /> },
+      { path: "user/:userId/settings", element: <UserSetting /> },
+      { path: "purchase", element: <Purchase /> },
+      { path: "orders/:id", element: <Orders /> },
+      { path: "orders/:id/:orderId", element: <OrderDetails /> },
+      { path: "add-to-cart/:id", element: <AddToCart /> },
       {
         element: <ProtectedRoute />,
-        children: [
-          { path: "user/:userId", element: <UserProfile /> },
-          { path: "user/:userId/settings", element: <UserSetting /> },
-          { path: "purchase", element: <Purchase /> },
-          { path: "orders/:id", element: <Orders /> },
-          { path: "orders/:id/:orderId", element: <OrderDetails /> },
-          { path: "add-to-cart/:id", element: <AddToCart /> },
-        ],
+        children: [],
       },
     ],
   },

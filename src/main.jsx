@@ -6,9 +6,11 @@ import { MessageProvider } from "./context/MessageProvider";
 import { CartProvider } from "./context/CartContext";
 import "./index.css";
 createRoot(document.getElementById("root")).render(
- /*  <StrictMode> */
+  /*  <StrictMode> */
+  <CartProvider>
     <MessageProvider>
       <RouterProvider router={router} />
     </MessageProvider>
-/*  </StrictMode> */
+  </CartProvider>,
+  /*  </StrictMode> */
 );

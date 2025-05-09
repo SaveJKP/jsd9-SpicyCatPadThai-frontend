@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function Catalog({ id, onClose }) {
-  // Added 'open' prop
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [products, setProducts] = useState([]);
@@ -21,7 +20,7 @@ export default function Catalog({ id, onClose }) {
       console.error(err);
     }
   };
-  const fetchProductsById = async () => {
+  const fetchProductsByTitleId = async () => {
     try {
       const res = await axios.get(`http://localhost:3000/productss/${id}`);
       setProducts(res.data.product);
@@ -32,7 +31,7 @@ export default function Catalog({ id, onClose }) {
   useEffect(() => {
     if (id) {
       fetchTitleById();
-      fetchProductsById();
+      fetchProductsByTitleId();
     }
   }, [id]);
 

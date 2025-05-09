@@ -10,7 +10,7 @@ import Catalog from "./Catalog";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-export function BookCard({ id,title, banner, author }) {
+export function BookCard({ id,title, picture, author }) {
   const [open, setOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -20,7 +20,7 @@ export function BookCard({ id,title, banner, author }) {
     <>
       <div>
         <Card onClick={handleOpenModal} className="bg-box border-banner flex h-75 w-45 flex-col items-center justify-center hover:cursor-pointer">
-          <img src={ banner || "https://placehold.co/200x250"} alt={title} className="w-full aspect-[3/4] object-cover -mb-8 p-4" />
+          <img src={ picture || "https://placehold.co/200x250"} alt={title} className="w-full aspect-[3/4] object-cover -mb-8 p-4" />
           <CardContent>
             <CardTitle className="text-text text-lg font-bold line-clamp-1">
               {title}
