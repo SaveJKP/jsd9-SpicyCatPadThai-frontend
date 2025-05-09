@@ -16,10 +16,11 @@ export const Navbar = () => {
 
   const [orders, setOrders] = useState(null);
 
-  const [searchText, setSearchText] = useState('');
-
   const { totalQuantity } = useCart();
-
+  
+  const [searchText, setSearchText] = useState('');
+  const navigate = useNavigate();
+  
   const handleReload = () => {
     setTimeout(() => {
       window.location.reload();
