@@ -30,7 +30,19 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
+<<<<<<< Updated upstream
       { path: "add-to-cart/:id", element: <AddToCart /> },
+=======
+      { path: "user/:userId", element: <UserProfile /> },
+      { path: "add-to-cart/:id", element: <AddToCart /> },
+      { path: "purchase", element: <Purchase /> },
+      { path: "orders/:userId/:orderId", element: <OrderDetails /> },
+      { path: "orders/:userId", element: <Orders /> },
+      {
+        element: <ProtectedRoute />,
+        children: [{ path: "user/:userId/settings", element: <UserSetting /> }],
+      },
+>>>>>>> Stashed changes
     ],
   },
 ]);
