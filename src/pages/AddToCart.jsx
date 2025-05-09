@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { products } from "../data/products.js";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useCart } from "../context/CartContext.jsx";
+import axios from "axios";
 
 export default function AddToCart() {
   const { id } = useParams();
@@ -24,13 +23,40 @@ export default function AddToCart() {
   };
 
   // Fetch product by ID from mock data
-  useEffect(() => {
-    const getProduct = products.find((p) => p.product_id === parseInt(id));
-    if (getProduct) {
-      setProduct(getProduct);
-      setCategory(getProduct.categories);
+  const fetchProductsById = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/products/${id}`);
+      setProduct(res.data.product);
+    } catch (err) {
+      console.error("Error fetching product:", err);
+      toast.error("Failed to fetch product details.");
     }
-  }, [id]);
+  };
+
+  const fetchCategoryById = async (titleId) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/api/pdc/${titleId}`);
+      setCategory(res.data.productCategories);
+      console.log("Fetched categories:", res.data.productCategories);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      toast.error("Failed to fetch categories.");
+      setCategory([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductsById();
+    const storedCart = localStorage.getItem("cart");
+    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+    setCart(parsedCart);
+  }, []);
+
+  useEffect(() => {
+    if (product?.title_id) {
+      fetchCategoryById(product.title_id);
+    }
+  }, [product]);
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
@@ -79,17 +105,20 @@ export default function AddToCart() {
     );
   }
 
-  const genreTags = category.map((category, index) => (
-    <span
-      key={`${category}-${index}`}
-      className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
-    >
-      {category.category_name}
-    </span>
-  ));
+  const genreTags = category?.map((categoryItem) => {
+    return (
+      <span
+        key={categoryItem._id}
+        className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
+      >
+        {categoryItem.category_id?.category_name || "N/A"}
+      </span>
+    );
+  });
 
-  // Get random books from the same category
   const getRandomBooks = (products, categoryName, excludeId) => {
+    if (!products || !categoryName) return [];
+
     const filteredBooks = products.filter((product) =>
       product.categories?.some((cat) => cat.category_name === categoryName),
     );
@@ -99,40 +128,39 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  const similarBooks = category
-    ?.flatMap((cat) =>
-      getRandomBooks(products, cat.category_name, product.product_id),
-    )
-    .slice(0, 4)
-    .map((book, index) => (
-      <div
-        key={book.product_id || index}
-        className="flex flex-col text-center min-[1024px]:w-[50%]"
-      >
-        <Link to={`/add-to-cart/${book.product_id}`}>
-          <img
-            src={
-              book.img ||
-              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-            }
-            alt={book.title}
-            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
-            onClick={() => {
-              if (quantity > 1) {
-                handleSetQuantity(1);
-              }
-            }}
-          />
+  // const similarBooks = category?.flatMap((cat) =>
+  //   getRandomBooks(products, cat.category_id?.category_name, product.product_id),
+  // )
+  //   .slice(0, 4)
+  //   .map((book, index) => (
+  //     <div
+  //       key={book.product_id || index}
+  //       className="flex flex-col text-center min-[1024px]:w-[50%]"
+  //     >
+  //       <Link to={`/add-to-cart/${book.product_id}`}>
+  //         <img
+  //           src={
+  //             book.img ||
+  //             "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+  //           }
+  //           alt={book.title}
+  //           className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
+  //           onClick={() => {
+  //             if (quantity > 1) {
+  //               handleReload();
+  //             }
+  //           }}
+  //         />
 
-          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-            <span className="text-clip">{book.name}</span>
-            <span>Vol. {book.volume}</span>
-            <span>{book.author}</span>
-            <span>฿{book.price}</span>
-          </p>
-        </Link>
-      </div>
-    ));
+  //         <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+  //           <span className="text-clip">{book.name}</span>
+  //           <span>Vol. {book.volume}</span>
+  //           <span>{book.author}</span>
+  //           <span>฿{book.price}</span>
+  //         </p>
+  //       </Link>
+  //     </div>
+  //   ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -151,9 +179,9 @@ export default function AddToCart() {
           </div>
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
-            <p className="text-2xl font-bold md:text-3xl">{product.name}</p>
+            <p className="text-2xl font-bold md:text-3xl">{product.name_vol}</p>
             <p className="text-xl font-bold md:text-2xl">
-              Vol. {product.volume}
+              Vol. {product.volume_no}
             </p>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
@@ -212,7 +240,7 @@ export default function AddToCart() {
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {similarBooks}
+              {/* {similarBooks} */}
             </div>
           </div>
         </div>

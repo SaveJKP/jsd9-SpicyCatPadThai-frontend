@@ -5,27 +5,27 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { BookCard } from "./BookCard";
-import { bannersWithCategories } from "../data/ShowAll";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
 export default function CardSlider({name}) {
-  const relevantBooks = bannersWithCategories;
 
-  const [banner, setBanner] = useState([])
+  const [banners, setBanners] = useState([])
 
   useEffect(() => {
     const getItemsCardSlider = async() => {
       try {
-        const response = await axios.get(' ')
-        setBanner(response.data)
+        const response = await axios.get('http://localhost:3000/api/titles/get-all')
+        setBanners(response.data.title || [])
       } catch (err) {
         console.log(err)
+        setBanners([])
       }
     };
 
     getItemsCardSlider();
-}, []);
+  }, []);
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">
@@ -38,13 +38,13 @@ export default function CardSlider({name}) {
             className="w-full"
         >
             <CarouselContent className="ml-6 gap-4">
-                {relevantBooks.map((banner) => (
+                {banners.map((banner) => (
                    <BookCard
-                   key={banner.banner_id}
-                   id={banner.banner_id}
-                   title={banner.name}
-                   banner={banner.picture}
-                   author={banner.author_name}
+                   key={banner._id}
+                   id={banner._id}
+                   title={banner.title_name}
+                   banner={banner.title_picture}
+                   author={banner.author_id?.author_name}
                  />
                 ))}
             </CarouselContent>

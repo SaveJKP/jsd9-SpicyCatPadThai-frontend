@@ -12,35 +12,37 @@ import Search from "./pages/Search";
 import UserSetting from "./pages/UserSetting";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
+import { AuthProvider } from "./context/userContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
+    ),
     children: [
+      // Public routes
       { path: "/", element: <Home /> },
-      { path: "user/:userId", element: <UserProfile /> },
-      { path: "user/:userId/settings", element: <UserSetting /> },
       { path: "about", element: <About /> },
-      { path: "purchase", element: <Purchase /> },
-      { path: "purchase", element: <Purchase /> },
-      { path: "orders/:userId", element: <Orders /> },
-      { path: "orders/:userId/:orderId", element: <OrderDetails /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
       { path: "user/:userId", element: <UserProfile /> },
-      { path: "add-to-cart/:id", element: <AddToCart /> },
-      { path: "purchase", element: <Purchase /> },
-      { path: "orders/:userId/:orderId", element: <OrderDetails /> },
-      { path: "orders/:userId", element: <Orders /> },
       {
         element: <ProtectedRoute />,
-        children: [{ path: "user/:userId/settings", element: <UserSetting /> }],
+        children: [
+          { path: "user/:userId/settings", element: <UserSetting /> },
+          { path: "purchase", element: <Purchase /> },
+          { path: "orders/:id", element: <Orders /> },
+          { path: "orders/:id/:orderId", element: <OrderDetails /> },
+          { path: "add-to-cart/:id", element: <AddToCart /> },
+        ],
       },
     ],
   },
 ]);
-
-export default router; // export router หลังจากประกาศ
+export default router;
