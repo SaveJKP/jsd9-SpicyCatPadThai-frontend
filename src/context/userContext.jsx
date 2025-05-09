@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async() => {
             try {
-                const response = await axios.get("http://localhost:3000/api/auth/login");
+                const response = await axios.get("http://localhost:3000/api/auth/profile");
                 setUser(response.data.user);
             } catch (err) {
                 console.error("Not authenticated", err);
