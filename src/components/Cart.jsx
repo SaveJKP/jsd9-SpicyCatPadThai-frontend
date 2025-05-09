@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/userContext";
 
 export const Cart = () => {
   const { cart, setCart } = useCart();
+  const { user } = useAuth();
 
   const [showCheckout, setShowCheckout] = useState(false);
   useEffect(() => {
@@ -44,39 +46,29 @@ export const Cart = () => {
       );
     }
   };
-  
-  const postOder = async () =>{
-    try {
-     payload = {
-user_id:,
-        total_price:totalPriceFinal,
-        order_status:"pending",
-    
-        tracking_number:"0001",
-     } 
-    } catch (error) {
-      
-    }
-  }
-  const postOrderDetails = async () => {
+
+  const postOder = async () => {
     try {
       const orderItems = cart.map((item) => ({
-        
-        
         product_id: item._id,
         quantity: item.quantity,
-        price: item.price,
+        subtotal_price: item.price * item.quantity,
       }));
-
       const payload = {
+        user_id: user._id,
+        total_price: totalPriceFinal,
         items: orderItems,
       };
-    } catch (error) {}
+      await axios.post("http://localhost:3000/api/create-order", payload);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  
+
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
+    postOder();
     setShowCheckout(true);
 
     // placeholder for posting to the server

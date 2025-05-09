@@ -13,7 +13,7 @@ export const Navbar = () => {
 
   const [orders, setOrders] = useState(null);
 
-  const { totalQuantity } = useCart();
+  // const { totalQuantity } = useCart();
 
   const handleReload = () => {
     setTimeout(() => {
@@ -129,11 +129,11 @@ export const Navbar = () => {
                     fill="auto"
                   />
                 </svg>
-                {totalQuantity > 0 ? (
+                {/* {totalQuantity > 0 ? (
                   <span className="mb-[30px] basis-4 rounded-lg bg-[var(--color-box)] px-1 text-xs">
                     {totalQuantity}
                   </span>
-                ) : null}
+                ) : null} */}
               </Link>
             </div>
           </div>

@@ -131,39 +131,39 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  // const similarBooks = category?.flatMap((cat) =>
-  //   getRandomBooks(products, cat.category_id?.category_name, product.product_id),
-  // )
-  //   .slice(0, 4)
-  //   .map((book, index) => (
-  //     <div
-  //       key={book.product_id || index}
-  //       className="flex flex-col text-center min-[1024px]:w-[50%]"
-  //     >
-  //       <Link to={`/add-to-cart/${book.product_id}`}>
-  //         <img
-  //           src={
-  //             book.img ||
-  //             "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-  //           }
-  //           alt={book.title}
-  //           className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
-  //           onClick={() => {
-  //             if (quantity > 1) {
-  //               handleReload();
-  //             }
-  //           }}
-  //         />
+  const similarBooks = category?.flatMap((cat) =>
+    getRandomBooks(products, cat.category_id?.category_name, product.product_id),
+  )
+    .slice(0, 4)
+    .map((book, index) => (
+      <div
+        key={book.product_id || index}
+        className="flex flex-col text-center min-[1024px]:w-[50%]"
+      >
+        <Link to={`/add-to-cart/${book.product_id}`}>
+          <img
+            src={
+              book.img ||
+              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+            }
+            alt={book.title}
+            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
+            onClick={() => {
+              if (quantity > 1) {
+                handleReload();
+              }
+            }}
+          />
 
-  //         <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-  //           <span className="text-clip">{book.name}</span>
-  //           <span>Vol. {book.volume}</span>
-  //           <span>{book.author}</span>
-  //           <span>฿{book.price}</span>
-  //         </p>
-  //       </Link>
-  //     </div>
-  //   ));
+          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+            <span className="text-clip">{book.name}</span>
+            <span>Vol. {book.volume}</span>
+            <span>{book.author}</span>
+            <span>฿{book.price}</span>
+          </p>
+        </Link>
+      </div>
+    ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -243,7 +243,7 @@ export default function AddToCart() {
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {/* {similarBooks} */}
+              {similarBooks}
             </div>
           </div>
         </div>
