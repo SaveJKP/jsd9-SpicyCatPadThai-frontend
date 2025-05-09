@@ -60,10 +60,11 @@ export default function AddToCart() {
 
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      let updatedCart;
       const existingItem = prevCart.find(
         (item) => item.product_id === product.product_id,
       );
+
+      let updatedCart;
 
       if (existingItem) {
         updatedCart = prevCart.map((item) =>
@@ -86,9 +87,7 @@ export default function AddToCart() {
         ];
       }
 
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      setCart(updatedCart);
-      setQuantity(1);
+      return updatedCart;
     });
   };
 
@@ -117,17 +116,11 @@ export default function AddToCart() {
     );
   });
 
-  const getRandomBooks = (
-    products,
-    categoryName,
-    excludeId,
-  ) => {
+  const getRandomBooks = (products, categoryName, excludeId) => {
     if (!products || !categoryName) return [];
 
     const filteredBooks = products.filter((product) =>
-      product.categories?.some(
-        (cat) => cat.category_name === categoryName,
-      ),
+      product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
     return filteredBooks
@@ -271,4 +264,3 @@ export default function AddToCart() {
     </div>
   );
 }
-
