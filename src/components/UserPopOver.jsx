@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/userContext"
+import { useAuth } from "../context/userContext";
 
 /* const handleLogout = () => {
   localStorage.removeItem("token");
@@ -17,7 +17,7 @@ const togglePopOver = () => {
 };
 
 export function UserPopover() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <Popover>
@@ -37,7 +37,10 @@ export function UserPopover() {
           <Link className="leading-none font-medium hover:text-[var(--color-radio)]">
             Username
           </Link>
-          <Link className="leading-none font-medium hover:text-[var(--color-radio)]">
+          <Link
+            to={`/orders/${user?._id}`}
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
+          >
             Orders
           </Link>
           <Link
