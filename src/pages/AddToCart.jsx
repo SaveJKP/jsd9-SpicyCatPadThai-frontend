@@ -58,11 +58,6 @@ export default function AddToCart() {
     }
   }, [product]);
 
-  const totalPrice = product ? product.price * quantity : 0;
-
-  const handleAdd = () => setQuantity((x) => x + 1);
-  const handleRemove = () => setQuantity((x) => (x > 1 ? x - 1 : 1));
-
   const handleAddToCart = () => {
     setCart((prevCart) => {
       let updatedCart;
@@ -70,10 +65,7 @@ export default function AddToCart() {
         (item) => item.product_id === product.product_id,
       );
 
-      let updatedCart;
-
       if (existingItem) {
-        updatedCart = prevCart.map((item) =>
         updatedCart = prevCart.map((item) =>
           item.product_id === product.product_id
             ? {
@@ -84,7 +76,6 @@ export default function AddToCart() {
             : item,
         );
       } else {
-        updatedCart = [
         updatedCart = [
           ...prevCart,
           {
@@ -125,12 +116,6 @@ export default function AddToCart() {
       </span>
     );
   });
-
-  const handleReload = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  };
 
   const getRandomBooks = (
     products,

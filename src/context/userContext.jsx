@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
             } catch (err) {
                 console.error("Not authenticated", err);
                 setUser(null);
+                setIsUser(false);
             } finally {
                 setLoading(false);
             }
@@ -35,9 +36,13 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            await axios.post("");
+            await axios.post("http://localhost:3000/api/auth/logout",{}, {
+                 withCredentials: true,
+            });
             setUser(null);
+            setIsUser(false);
             navigate("/login")
+
         } catch (err) {
             console.error("Logout Failed:", err)
         }

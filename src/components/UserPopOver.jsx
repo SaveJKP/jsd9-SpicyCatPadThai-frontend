@@ -5,10 +5,11 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/userContext"
 
-const handleLogout = () => {
+/* const handleLogout = () => {
   localStorage.removeItem("token");
-};
+}; */
 
 // const [popOverOpen, setPopOverOpen] = useState(false);
 const togglePopOver = () => {
@@ -16,6 +17,8 @@ const togglePopOver = () => {
 };
 
 export function UserPopover() {
+  const { logout } = useAuth();
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -47,7 +50,7 @@ export function UserPopover() {
           <Link
             to={"/login"}
             onClick={() => {
-              handleLogout();
+              logout();
               togglePopOver();
             }}
             className="my-2 flex justify-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb]"

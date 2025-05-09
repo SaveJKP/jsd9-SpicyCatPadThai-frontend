@@ -31,10 +31,10 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
+      { path: "user/:userId", element: <UserProfile /> },
       {
         element: <ProtectedRoute />,
         children: [
-          { path: "user/:userId", element: <UserProfile /> },
           { path: "user/:userId/settings", element: <UserSetting /> },
           { path: "purchase", element: <Purchase /> },
           { path: "orders/:id", element: <Orders /> },
