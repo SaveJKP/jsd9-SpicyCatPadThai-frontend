@@ -7,8 +7,11 @@ import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 import { UserPopover } from "./UserPopOver";
 import { LoginPopover } from "./LoginPopOver";
 import Hamburger from "./Hamburger";
+import { useAuth } from "../context/userContext";
 
 export const Navbar = () => {
+  const { user } = useAuth();
+
   const token = localStorage.getItem("token");
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState(null);
@@ -120,7 +123,7 @@ export const Navbar = () => {
             </div>
 
             <div className="flex flex-row justify-end gap-5">
-              {token ? (
+              {user ? (
                 <UserPopover />
               ) : (
                 <>
