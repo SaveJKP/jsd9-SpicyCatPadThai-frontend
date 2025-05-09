@@ -12,7 +12,16 @@ import { useAuth } from "../context/userContext";
 export const Navbar = () => {
   const { user } = useAuth();
 
+  const [searchText, setSearchText] = useState('');
+
   const { totalQuantity } = useCart();
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && searchText.trim() !== '') {
+      e.preventDefault()
+      navigate(`/search?query=${encodeURIComponent(searchText.trim())}`);
+    }
+  };
 
   return (
     <>
@@ -65,6 +74,9 @@ export const Navbar = () => {
                 placeholder="Search"
                 className="hover:border-lightgray bg-text relative left-10 my-[5%] h-[65%] w-full rounded-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[815px]:hidden"
                 onClick={() => navigate('/search')}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={handleSearch}
               />
               {/* search icon */}
               <Link to={"/search"}>
@@ -74,6 +86,10 @@ export const Navbar = () => {
                   viewBox="0 -960 960 960"
                   width="32px"
                   fill="#d9d9d9"
+                  onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/search?query=${encodeURIComponent(searchText.trim())}`);
+                }}
                 >
                   <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
                 </svg>
