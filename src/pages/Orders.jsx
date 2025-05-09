@@ -5,26 +5,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Orders() {
-<<<<<<< Updated upstream
-  const { userId } = useParams();
-=======
   const { user } = useAuth();
->>>>>>> Stashed changes
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-<<<<<<< Updated upstream
-    const userOrders = ordersData
-      .filter((o) => o.user_id === userId)
-      .sort(
-        (prev, latest) =>
-          new Date(latest.created_at) - new Date(prev.created_at),
-      );
-    setOrders(userOrders);
-  }, [userId]);
-=======
     if (!user?._id) return null;
     const fetchOrders = async () => {
       try {
@@ -40,7 +26,6 @@ export default function Orders() {
 
     fetchOrders();
   }, [user._id]);
->>>>>>> Stashed changes
 
   if (orders.length === 0)
     return <p className="py-20 text-center text-white">No orders found</p>;

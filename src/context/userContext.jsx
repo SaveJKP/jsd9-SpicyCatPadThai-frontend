@@ -1,25 +1,7 @@
-import React, {createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 export const userContext = createContext();
 
-<<<<<<< Updated upstream
-export const UserProvider = () => {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async() => {
-            try {
-                const response = await axios.get('');
-                setUser(response.data.user);
-            } catch (err) {
-                console.error(err);
-                setUser(null);
-            }
-        }
-        fetchUser();
-    }, []);
-}
-=======
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isUser, setIsUser] = useState(false); // <-- ADD isUser State
@@ -84,4 +66,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
->>>>>>> Stashed changes

@@ -5,14 +5,6 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< Updated upstream
-=======
-import { useAuth } from "../context/userContext";
->>>>>>> Stashed changes
-
-const handleLogout = () => {
-  localStorage.removeItem("token");
-};
 
 // const [popOverOpen, setPopOverOpen] = useState(false);
 const togglePopOver = () => {
@@ -20,11 +12,8 @@ const togglePopOver = () => {
 };
 
 export function UserPopover() {
-<<<<<<< Updated upstream
-=======
   const { user, logout } = useAuth();
 
->>>>>>> Stashed changes
   return (
     <Popover>
       <PopoverTrigger asChild>

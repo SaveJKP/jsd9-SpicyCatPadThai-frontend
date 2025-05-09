@@ -9,20 +9,6 @@ export default function OrderDetails() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [order, setOrder] = useState(null);
   const navigate = useNavigate();
-<<<<<<< Updated upstream
-  const [orders, setOrders] = useState(null);
-  const { userId, orderId } = useParams();
-
-  useEffect(() => {
-    const userOrderDetail = ordersData.find(
-      (o) => String(o.user_id) === userId && String(o.order_id) === orderId,
-    );
-    setOrders(userOrderDetail);
-  }, [userId, orderId]);
-
-  if (!orders) {
-    return <div className="p-4 text-white">Loading or order not found...</div>;
-=======
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -49,7 +35,6 @@ export default function OrderDetails() {
     return (
       <p className="py-20 text-center text-white">No order details found</p>
     );
->>>>>>> Stashed changes
   }
 
   const total = orderDetails.reduce(
