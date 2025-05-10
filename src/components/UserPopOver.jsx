@@ -3,15 +3,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/userContext";
 
-/* const handleLogout = () => {
-  localStorage.removeItem("token");
-}; */
-
-// const [popOverOpen, setPopOverOpen] = useState(false);
 const togglePopOver = () => {
   setPopOverOpen(!popOverOpen);
 };
@@ -33,15 +27,19 @@ export function UserPopover() {
         </svg>
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-[var(--color-greenBackground)]">
-        <div className="flex w-[50%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
-          <Link className="leading-none font-medium hover:text-[var(--color-radio)]">
-            Username
-          </Link>
+        <div className="flex w-[60%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
+          <p className="text-xl leading-none font-bold">Hello! {user?.name}</p>
           <Link
             to={`/orders/${user?._id}`}
             className="leading-none font-medium hover:text-[var(--color-radio)]"
           >
             Orders
+          </Link>
+          <Link
+            to={`/user/${user?._id}`}
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
+          >
+            Profile
           </Link>
           <Link
             to="/about"
@@ -50,8 +48,7 @@ export function UserPopover() {
           >
             About Us
           </Link>
-          <Link
-            to={"/login"}
+          <button
             onClick={() => {
               logout();
               togglePopOver();
@@ -59,7 +56,7 @@ export function UserPopover() {
             className="my-2 flex justify-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb]"
           >
             Log out
-          </Link>
+          </button>
         </div>
       </PopoverContent>
     </Popover>
