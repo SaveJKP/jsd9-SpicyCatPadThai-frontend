@@ -6,7 +6,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [ user, setUser ] = useState(null);
-    console.log(user)
     const [ isUser, setIsUser ] = useState(false); // <-- ADD isUser State
     const [ loading, setLoading ] = useState(true);
     const navigate = useNavigate();
@@ -18,6 +17,7 @@ export const AuthProvider = ({ children }) => {
                     withCredentials: true
                 });
                 setUser(response.data.user);
+                console.log(response.data.user)
                 setIsUser(true); // <-- SET isUser to true
             } catch (err) {
                 console.error("Not authenticated", err);

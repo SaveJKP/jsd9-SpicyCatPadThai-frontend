@@ -41,7 +41,6 @@ export default function AddToCart() {
     try {
       const res = await axios.get(`http://localhost:3000/api/pdc/${titleId}`);
       setCategory(res.data.productCategories);
-      console.log("Fetched categories:", res.data.productCategories);
     } catch (error) {
       console.error("Error fetching categories:", error);
       toast.error("Failed to fetch categories.");
@@ -182,7 +181,7 @@ export default function AddToCart() {
               "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
             }
             alt={book.title}
-            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
+            className="mb-2.5 h-28 w-20 object-cover place-self-center shadow-xl md:h-32 md:w-24"
             onClick={() => {
               if (quantity > 1) {
                 handleReload();

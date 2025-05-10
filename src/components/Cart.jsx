@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/userContext";
+import axios from "axios";
 
 export const Cart = () => {
   const { cart, setCart } = useCart();
@@ -55,7 +56,7 @@ export const Cart = () => {
         subtotal_price: item.price * item.quantity,
       }));
       const payload = {
-        user_id: user._id,
+        user_id: user._id, 
         total_price: totalPriceFinal,
         items: orderItems,
       };

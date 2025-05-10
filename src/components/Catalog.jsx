@@ -56,7 +56,7 @@ export default function Catalog({ id, onClose }) {
             <h1 className="text-lg font-bold">{name}</h1>{" "}
             {/* Make the title stand out */}
             <img
-              className="h-[40%] w-[50%] bg-cover"
+              className="h-48 w-32 rounded-md object-cover"
               src={picture || "https://placehold.co/50x20"}
               alt={name}
             />
