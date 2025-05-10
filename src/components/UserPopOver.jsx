@@ -34,8 +34,8 @@ export function UserPopover() {
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-[var(--color-greenBackground)]">
         <div className="flex w-[50%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
-          <Link className="leading-none font-medium hover:text-[var(--color-radio)]">
-            Username
+          <Link className="leading-none font-medium hover:text-[var(--color-radio)]" to={`/user/${user?._id}`}>
+              {user.name || "User Profile"}
           </Link>
           <Link
             to={`/orders/${user?._id}`}
