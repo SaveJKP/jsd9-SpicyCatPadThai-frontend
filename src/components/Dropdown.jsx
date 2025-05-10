@@ -25,7 +25,12 @@ const Dropdown = ({ apiUrl, value, onChange, label, name, disabled }) => {
               'Content-Type': 'application/json',
             },
           });
-          setOptions(response.data);
+          // Sort the options alphabetically by name 
+          const sortedOptions = response.data.sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+          setOptions(sortedOptions);
+          // setOptions(response.data)
         } catch (error) {
           console.error(`Error fetching ${label} options:`, error);
           setOptions([]);

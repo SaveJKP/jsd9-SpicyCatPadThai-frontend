@@ -7,7 +7,6 @@ import { useCart } from "../context/CartContext";
 import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 import { UserPopover } from "./UserPopOver";
 import { LoginPopover } from "./LoginPopOver";
-import Hamburger from "./Hamburger";
 import { useAuth } from "../context/userContext";
 
 export const Navbar = () => {

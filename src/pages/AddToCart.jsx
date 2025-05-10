@@ -160,6 +160,7 @@ export default function AddToCart() {
 
     const filteredBooks = products.filter((product) =>
       product.categories?.some((cat) => cat.category_name === categoryName),
+      product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
     return filteredBooks
