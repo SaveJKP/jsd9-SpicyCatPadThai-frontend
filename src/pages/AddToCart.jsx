@@ -8,6 +8,7 @@ export default function AddToCart() {
   const [products, setProducts] = useState([]); // รายการ product ทั้งหมดของ title นี้
   const [category, setCategory] = useState([]);
   const [selectedProductVolumeId, setSelectedProductVolumeId] = useState(""); // State สำหรับเก็บ ID volume ที่เลือก
+  const [similar, setSimilar] = useState([]);
   const {
     setCart,
     handleAdd,
@@ -56,6 +57,16 @@ export default function AddToCart() {
       console.error(err);
     }
   };
+  const fetchSimilarBook = async (titleId) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/products/get-similar/${titleId}`,
+      );
+      setSimilar(res.data.similar_books);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     fetchProductById();
@@ -65,6 +76,7 @@ export default function AddToCart() {
     if (product && product.title_id) {
       fetchProductsByTitleId(product.title_id);
       fetchCategoryById(product.title_id);
+      fetchSimilarBook(product.title_id)
     }
   }, [product]);
 
@@ -94,7 +106,7 @@ export default function AddToCart() {
                 quantity: item.quantity + quantity,
                 total: (item.price || 0) * (item.quantity + quantity), // ใช้ item.price ที่อาจมาจาก volume ที่เลือก
               }
-            : item
+            : item,
         );
       } else {
         updatedCart = [
@@ -147,7 +159,7 @@ export default function AddToCart() {
     if (!products || !categoryName) return [];
 
     const filteredBooks = products.filter((product) =>
-      product.categories?.some((cat) => cat.category_name === categoryName)
+      product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
     return filteredBooks
@@ -155,41 +167,37 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  // const similarBooks = category
-  //   ?.map((cat) =>
-  //     getRandomBooks(products, cat.category_id?.category_name, product.product_id),
-  //   )
-  //   .flat()
-  //   .slice(0, 4)
-  //   .map((book, index) => (
-  //     <div
-  //       key={book.product_id || index}
-  //       className="flex flex-col text-center min-[1024px]:w-[50%]"
-  //     >
-  //       <Link to={`/add-to-cart/${book.product_id}`}>
-  //         <img
-  //           src={
-  //             book.img ||
-  //             "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-  //           }
-  //           alt={book.title}
-  //           className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
-  //           onClick={() => {
-  //             if (quantity > 1) {
-  //               handleReload();
-  //             }
-  //           }}
-  //         />
+  const similarBooks = 
 
-  //         <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-  //           <span className="text-clip">{book.name}</span>
-  //           <span>Vol. {book.volume}</span>
-  //           <span>{book.author}</span>
-  //           <span>฿{book.price}</span>
-  //         </p>
-  //       </Link>
-  //     </div>
-  //   ));
+    similar.map((book, index) => (
+      <div
+        key={book.product_id || index}
+        className="flex flex-col text-center min-[1024px]:w-[50%]"
+      >
+        <Link to={`/add-to-cart/${book.product_id}`}>
+          <img
+            src={
+              book.img ||
+              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+            }
+            alt={book.title}
+            className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
+            onClick={() => {
+              if (quantity > 1) {
+                handleReload();
+              }
+            }}
+          />
+
+          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+            <span className="text-clip">{book.name}</span>
+            <span>Vol. {book.volume}</span>
+            <span>{book.author}</span>
+            <span>฿{book.price}</span>
+          </p>
+        </Link>
+      </div>
+    ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
@@ -213,9 +221,9 @@ export default function AddToCart() {
               name="volume"
               value={selectedProductVolumeId} // ควบคุมค่าด้วย state
               onChange={handleVolumeChange}
-              className="w-full cursor-pointer overflow-y-auto rounded bg-white text-black p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full cursor-pointer overflow-y-auto rounded border border-gray-300 bg-white p-2 text-black focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
-              <option value="" disabled className="text-gray-500 hidden">
+              <option value="" disabled className="hidden text-gray-500">
                 Select Volume
               </option>
               {products.length > 0 &&
@@ -225,7 +233,9 @@ export default function AddToCart() {
                     value={p._id}
                     disabled={p.quantity <= 0}
                     className={`cursor-pointer px-4 py-2 text-black hover:bg-gray-100 ${
-                      p.quantity <= 0 ? "text-red-500 bg-gray-50 cursor-not-allowed" : ""
+                      p.quantity <= 0
+                        ? "cursor-not-allowed bg-gray-50 text-red-500"
+                        : ""
                     }`}
                   >
                     {p.name_vol} {p.quantity <= 0 && "(Sold Out)"}
@@ -285,7 +295,7 @@ export default function AddToCart() {
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
             <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {/* {similarBooks} */}
+              {similarBooks}
             </div>
           </div>
         </div>
