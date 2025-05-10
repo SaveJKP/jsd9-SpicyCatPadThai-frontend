@@ -31,15 +31,16 @@ const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
-      { path: "user/:userId", element: <UserProfile /> },
+      { path: "add-to-cart/:id", element: <AddToCart /> },
       {
-        element: <ProtectedRoute />,
+        element:
+        <ProtectedRoute />,
         children: [
-          { path: "user/:userId/settings", element: <UserSetting /> },
           { path: "purchase", element: <Purchase /> },
+          { path: "user/:userId", element: <UserProfile /> },
+          { path: "user/:userId/settings", element: <UserSetting /> },
           { path: "orders/:id", element: <Orders /> },
           { path: "orders/:id/:orderId", element: <OrderDetails /> },
-          { path: "add-to-cart/:id", element: <AddToCart /> },
         ],
       },
     ],
