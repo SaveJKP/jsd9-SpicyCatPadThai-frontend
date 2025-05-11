@@ -25,11 +25,7 @@ export const Cart = () => {
 
   const removeFromCart = (id) => {
     const item = cart.find((item) => item._id === id);
-    if (
-      window.confirm(
-        `Are you sure you want to remove ${item.name_vol} Vol. ${item.volume_no}?`,
-      )
-    ) {
+    if (window.confirm(`Are you sure you want to remove ${item.name_vol}?`)) {
       setCart((prevCart) => prevCart.filter((item) => item._id !== id));
     }
   };
@@ -56,7 +52,7 @@ export const Cart = () => {
         subtotal_price: item.price * item.quantity,
       }));
       const payload = {
-        user_id: user._id, 
+        user_id: user._id,
         total_price: totalPriceFinal,
         items: orderItems,
       };
@@ -65,7 +61,6 @@ export const Cart = () => {
       console.error(err);
     }
   };
-
 
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
@@ -113,20 +108,22 @@ export const Cart = () => {
         </div>
       ) : (
         <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
-          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[1024px]:hidden md:mb-14">
+          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[768px]:hidden">
             Order Summary
           </h2>
           {cart.map((item) => (
             <div key={item._id} className="my-[32px] flex flex-col">
               <div className="flex flex-row justify-center">
-                <img
-                  src={
-                    item.picture ||
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-                  }
-                  className="max-h-[200px] max-w-[200px] object-contain object-top px-[8px]"
-                  alt={item.name_vol}
-                />
+                <div className="max-h-[200px] max-w-[150px]">
+                  <img
+                    src={
+                      item.picture ||
+                      "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+                    }
+                    className="object-contain px-[8px]"
+                    alt={item.name_vol}
+                  />
+                </div>
                 <div className="flex w-[55%] flex-col px-[8px]">
                   <h3 className="pb-[8px] text-xl font-bold">
                     {item.name_vol}
@@ -213,6 +210,12 @@ export const Cart = () => {
             >
               Check out
             </button>
+            <Link
+              to="/"
+              className="flex justify-center py-10 font-bold text-[var(--color-greenBackground)] hover:cursor-pointer hover:text-[var(--color-banner)] hover:underline"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       )}

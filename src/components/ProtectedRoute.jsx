@@ -3,10 +3,9 @@ import { useAuth } from "../context/userContext";
 
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
+  if (loading) return <div>Loading...</div>;
 
-  if (loading) return <div>Loading...</div>; // Wait for auth check
-
-  return user ? children : <Navigate to="/login" replace />;
+  return user ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

@@ -9,6 +9,7 @@ export default function Login() {
   const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -29,7 +30,11 @@ export default function Login() {
       );
       console.log(response);
       setUser(response.data);
-      navigate("/");
+      setMessage("Login successful!");
+      setTimeout(() => {
+        navigate("/");
+        navigate(0);
+      }, 1000);
     } catch (err) {
       console.error(err);
       setError(
@@ -64,11 +69,16 @@ export default function Login() {
               <p className="hidden md:flex lg:hidden">
                 Welcome to bookstore Everything in One place
               </p>
-
-              {error && (
+              {error ? (
                 <div className="mb-4 rounded bg-red-100 px-4 py-2 text-center text-red-700">
                   {error}
                 </div>
+              ) : (
+                message && (
+                  <div className="mb-4 rounded bg-green-100 px-4 py-2 text-center text-green-700">
+                    {message}
+                  </div>
+                )
               )}
 
               {/* Sign In Form */}
