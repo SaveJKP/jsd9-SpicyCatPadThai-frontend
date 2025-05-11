@@ -1,17 +1,19 @@
-import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from "axios";
 import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Register() {
 
   const [data, setData] = useState([]);
+  const [ error, setError ] = useState("");
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('');
+  // const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,6 +21,17 @@ export default function Register() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [cityName, setcityName] = useState('');
   const [countryId, setCountryId] = useState('');
+
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ showConfirmPassword, setShowConfirmPassword ] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
 
   const navigate = useNavigate();
 
@@ -49,9 +62,7 @@ export default function Register() {
 
       console.log(payload);
       setData(...data, response.data);
-      setTimeout(() => {
-        navigate('/login')
-      }, 3000)
+      navigate('/login')
     } catch (err) {
       console.log(err);
     }
@@ -71,23 +82,29 @@ export default function Register() {
                 className="w-[50%] md:w-[27%] lg:w-[25%] flex"/>
                 <h1 className="font-bold">Register</h1>
 
+                {error && (
+                  <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4 text-center">
+                    {error}
+                  </div>
+                )}
+
                 {/* Register Form */}
                 <form className="flex flex-col justify-center items-center gap-4 w-[95%] md:w-[75%]" onSubmit={PostData}>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="first_name" className="w-1/3">First Name:</label>
+                    <label htmlFor="first_name" className="w-1/3">First Name <span className="text-red-400">*</span></label>
                     <input type="text" id="first_name" placeholder="First Name" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={name} onChange={(e) => setName(e.target.value)}/>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="last_name" className="w-1/3">Last Name:</label>
+                    <label htmlFor="last_name" className="w-1/3">Last Name <span className="text-red-400">*</span></label>
                     <input type="text" id="last_name" placeholder="Last Name" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={lastName} onChange={(e) => setLastName(e.target.value)}/>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="date_of_birth" className="w-1/3">Birth Date:</label>
+                    <label htmlFor="date_of_birth" className="w-1/3">Birth Date <span className="text-red-400">*</span></label>
                     <input type="date" id="date_of_birth" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/>
                   </div>
@@ -109,31 +126,41 @@ export default function Register() {
                   </div> */}
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="email" className="w-1/3">Email:</label>
+                    <label htmlFor="email" className="w-1/3">Email <span className="text-red-400">*</span></label>
                     <input type="text" id="email" placeholder="Email" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={email} onChange={(e) => setEmail(e.target.value)}/>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="password" className="w-1/3">Password:</label>
-                    <input type="password" id="password" placeholder="Password" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
-                    value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <div className="flex flex-row justify-between items-center w-full px-12 relative">
+                    <label htmlFor="password" className="w-1/3">Password <span className="text-red-400">*</span></label>
+                    <div className="w-2/3 relative flex items-center">
+                      <input type={showPassword ? 'text' : 'password'} id="password" placeholder="Password" className="w-full bg-white text-banner px-4 py-2 rounded-2xl pr-10" required
+                      value={password} onChange={(e) => setPassword(e.target.value)}/>
+                      <button type="button" onClick={toggleShowPassword} className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-600">
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row justify-between items-center w-full px-12 relative">
+                    <label htmlFor="confirm_password" className="w-1/3">Confirm Password <span className="text-red-400">*</span></label>
+                    <div className="w-2/3 relative flex items-center">
+                      <input type={showConfirmPassword ? 'text' : 'password'} id="confirmPassword" placeholder="Confirm Password" className="w-full bg-white text-banner px-4 py-2 rounded-2xl pr-10" required
+                      value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                      <button type="button" onClick={toggleShowConfirmPassword} className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-600">
+                        {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="confirm_password" className="w-1/3">Confirm Password:</label>
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
-                    value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                  </div>
-
-                  <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="address" className="w-1/3">Address:</label>
+                    <label htmlFor="address" className="w-1/3">Address <span className="text-red-400">*</span></label>
                     <textarea type="text" id="address" placeholder="Address" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={address} onChange={(e) => setAddress(e.target.value)}/>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="phone_number" className="w-1/3">Tel :</label>
+                    <label htmlFor="phone_number" className="w-1/3">Tel <span className="text-red-400">*</span></label>
                     <input type="tel" id="phone_number" placeholder="Phone Number" className="w-2/3 bg-white text-banner px-4 py-2 rounded-2xl" required
                     value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
                   </div>
@@ -162,8 +189,17 @@ export default function Register() {
                       />
                     </div>
                   </div>
+                  <p className="text-xs self-start pl-12 hidden md:block">
+                    By clicking Sign Up, you agree to our <span className="text-blue-400">Terms of Service</span>, <span className="text-blue-400">Privacy Policy</span>, and <span className="text-blue-400">Cookie Policy</span>. These policies are designed to ensure a safe, secure, and personalized experience for all our members.
+                    We are committed to protecting your personal information and will never share your data with third parties without your consent. Our goal is to provide a welcoming and trustworthy environment where you can discover, enjoy, and explore books that match your interests.
+                  </p>
+                  <p className="text-xs self-start pl-12 block md:hidden">By signing up, you agree to our <span className="text-blue-400">Terms of Service</span>, and <span className="text-blue-400">Cookie Policy</span>. We’re committed to keeping your experience safe and personalized.</p>
 
-                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2">
+                  <button type="submit" className=" mt-[3%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2" onClick={() =>
+                    toast("Registration successfully!", {
+                      description: `Welcome to KatsuBook Store, ${name}!`
+                    })}
+                  >
                     Create Account
                   </button>
 

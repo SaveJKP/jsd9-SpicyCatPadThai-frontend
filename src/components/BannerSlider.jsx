@@ -15,13 +15,12 @@ import Autoplay from 'embla-carousel-autoplay'
         Autoplay({ delay: 6000, stopOnInteraction: true })
       )
 
-
     const bannerItems = [
         {
             id:1,
-            title:"Bangkok Legacy",
-            banner: "/bangkoklegacy_banner.jpg",
-            description: "In the heart of Bangkok, Thanawat is pulled into the deadly world of the Thai mafia to protect his family. As danger closes in, he must navigate betrayal, loyalty, and the blurred line between right and wrong."
+            title:"Enjoy 10% OFF with our Katsu Selection!",
+            banner: "../../src/assets/promotion_banner_1.jpg",
+            description: "Discover handpicked books specially curated by our team just for you. Whether you're into fiction, self-help, or inspiration, the Katsu Selection offers something special at an exclusive 10% discount. Don't miss out — this offer is available for a limited time only!"
         },
         {
             id:2,
@@ -35,7 +34,6 @@ import Autoplay from 'embla-carousel-autoplay'
             banner:"/jsd_banner.jpg",
             description: "Generation Thailand JSD9 follows a group of diverse Thais as they take on a tough coding bootcamp. Amid struggles with imposter syndrome and industry pressure, they build lasting friendships and discover their true potential."
         }
-
     ]
 
     return (

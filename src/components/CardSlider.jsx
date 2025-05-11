@@ -16,8 +16,8 @@ export default function CardSlider({name}) {
   useEffect(() => {
     const getItemsCardSlider = async() => {
       try {
-        const response = await axios.get('http://localhost:3000/api/titles/get-all')
-        setBanners(response.data.title || [])
+        const response = await axios.get('http://localhost:3000/products/trending-book')
+        setBanners(response.data.trending || [])
       } catch (err) {
         console.log(err)
         setBanners([])
@@ -44,7 +44,7 @@ export default function CardSlider({name}) {
                    id={banner._id}
                    title={banner.title_name}
                    banner={banner.title_picture}
-                   author={banner.author_id?.author_name}
+                   author={banner.author_name}
                  />
                 ))}
             </CarouselContent>

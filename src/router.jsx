@@ -32,38 +32,15 @@ const router = createBrowserRouter([
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
       { path: "add-to-cart/:id", element: <AddToCart /> },
-      { path: "purchase", element: <Purchase /> },
       {
-        path: "user/:userId/settings",
-        element: (
-          <ProtectedRoute>
-            <UserSetting />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "user/:userId",
-        element: (
-          <ProtectedRoute>
-            <UserProfile />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "orders/:id",
-        element: (
-          <ProtectedRoute>
-            <Orders />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "orders/:id/:orderId",
-        element: (
-          <ProtectedRoute>
-            <OrderDetails />
-          </ProtectedRoute>
-        ),
+        element: <ProtectedRoute />,
+        children: [
+          { path: "purchase", element: <Purchase /> },
+          { path: "user/:userId", element: <UserProfile /> },
+          { path: "user/:userId/settings", element: <UserSetting /> },
+          { path: "orders/:id", element: <Orders /> },
+          { path: "orders/:id/:orderId", element: <OrderDetails /> },
+        ],
       },
     ],
   },
