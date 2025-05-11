@@ -13,6 +13,7 @@ export const Navbar = () => {
   const { user } = useAuth();
 
   const [searchText, setSearchText] = useState('');
+   const navigate = useNavigate();
 
   const { totalQuantity } = useCart();
 

@@ -116,7 +116,7 @@ export default function UserProfile() {
             <Link to={`/orders/${user?._id}`}>
               <GreenButton
                 className="mb-2 w-full"
-                text="Your Orders →"
+                text="My Orders →"
                 onclick=""
               />
             </Link>

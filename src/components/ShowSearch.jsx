@@ -91,7 +91,7 @@ useEffect(() => {
               key={banner._id}
               id={banner._id}
               title={banner.title_name}
-              banner={banner.title_picture}
+              picture={banner.title_picture}
               author={banner.authorInfo?.author_name}
             />
           ))}
