@@ -12,6 +12,7 @@ import Search from "./pages/Search";
 import UserSetting from "./pages/UserSetting";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
+import { SearchOrder } from "./pages/SearchOrder";
 import { AuthProvider } from "./context/userContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrderDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "orders/:id/search-order",
+        element: (
+          <ProtectedRoute>
+            <SearchOrder />
           </ProtectedRoute>
         ),
       },

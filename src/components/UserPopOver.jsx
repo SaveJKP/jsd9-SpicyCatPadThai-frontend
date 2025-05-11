@@ -5,16 +5,14 @@ import {
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/userContext";
-
-const togglePopOver = () => {
-  setPopOverOpen(!popOverOpen);
-};
+import { useState } from "react";
 
 export function UserPopover() {
   const { user, logout } = useAuth();
+  const [popOverOpen, setPopOverOpen] = useState(false);
 
   return (
-    <Popover>
+    <Popover open={popOverOpen} onOpenChange={setPopOverOpen}>
       <PopoverTrigger asChild>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,26 +30,27 @@ export function UserPopover() {
           <Link
             to={`/orders/${user?._id}`}
             className="leading-none font-medium hover:text-[var(--color-radio)]"
+            onClick={() => setPopOverOpen(false)}
           >
             Orders
           </Link>
           <Link
             to={`/user/${user?._id}`}
             className="leading-none font-medium hover:text-[var(--color-radio)]"
+            onClick={() => setPopOverOpen(false)}
           >
             Profile
           </Link>
           <Link
             to="/about"
             className="leading-none font-medium hover:text-[var(--color-radio)]"
-            onClick={togglePopOver}
+            onClick={() => setPopOverOpen(false)}
           >
             About Us
           </Link>
           <button
             onClick={() => {
               logout();
-              togglePopOver();
             }}
             className="my-2 flex justify-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb]"
           >
