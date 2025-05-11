@@ -17,6 +17,8 @@ export const Navbar = () => {
 
   const { totalQuantity } = useCart();
 
+
+
   const handleSearch = () => {
     const textTrimmed = searchText.trim();
     if (textTrimmed !== "") {
