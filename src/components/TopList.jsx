@@ -12,8 +12,11 @@ import React from 'react'
                 </div>
                 <div className="flex flex-col w-[75%] md:w-1/2 justify-center md:mr-12">
                     <h1 className="text-text mb-6 font-bold">Popular Now</h1>
-                    <p className="text-text">
-                        🌟 Discover the series that’s capturing hearts and headlines.
+                    <p className="text-text hidden md:block">
+                        🌟 Discover the series that’s capturing hearts and headlines. These reader-favorite titles are topping the charts and lighting up book communities everywhere.
+                    </p>
+                    <p className="text-text block md:hidden">
+                        🌟 Popular Now: Dive into the most talked-about series — beloved by fans and praised by critics!
                     </p>
                     <TopListSlider />
                 </div>

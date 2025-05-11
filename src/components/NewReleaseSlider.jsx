@@ -1,8 +1,6 @@
 import {
   Carousel,
   CarouselContent,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel"
 import { BookCard } from "./BookCard";
 import { useState } from "react";
@@ -17,7 +15,8 @@ export default function NewReleaseSlider({name}) {
     const getItemsCardSlider = async() => {
       try {
         const response = await axios.get('http://localhost:3000/products/new-release')
-        setBanners(response.data.newRelease || [])
+        console.log(response)
+        setBanners(response.data.titles || [])
       } catch (err) {
         console.log(err)
         setBanners([])
@@ -42,9 +41,9 @@ export default function NewReleaseSlider({name}) {
                    <BookCard
                    key={banner._id}
                    id={banner._id}
-                   title={banner.title_id?.title_name}
-                   banner={banner.picture}
-                   author={banner.author_id?.author_name}
+                   title={banner.title_name}
+                   banner={banner.title_picture}
+                   author={banner.authorDetails.author_name}
                  />
                 ))}
             </CarouselContent>
