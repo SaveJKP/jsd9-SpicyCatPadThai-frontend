@@ -27,8 +27,8 @@ export default function Login() {
         withCredentials: true
       }
     );
-    console.log(response)
-    setUser(response.data);
+    console.log(response.data.user)
+    setUser(response.data.user);
     navigate("/")
     } catch (err) {
       console.error(err);

@@ -35,9 +35,7 @@ export default function ShowAll() {
 
     getItemsShowAll();
   }, []);
-  {
-    /* set index items to show book */
-  }
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentBanners = banners.slice(startIndex, endIndex);
@@ -70,7 +68,7 @@ export default function ShowAll() {
               key={banner._id}
               id={banner._id}
               title={banner.title_name}
-              banner={banner.title_picture}
+              picture={banner.title_picture}
               author={banner.author_id?.author_name}
             />
           ))}

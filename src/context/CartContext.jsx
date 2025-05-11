@@ -10,11 +10,11 @@ export const CartProvider = ({ children }) => {
   });
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   const handleAdd = () => setQuantity((prev) => prev + 1);
   const handleRemove = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-  const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
     const total = cart.reduce((sum, item) => sum + item.quantity, 0);
