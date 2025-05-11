@@ -177,7 +177,7 @@ export default function AddToCart() {
           className="mb-2.5 h-28 w-20 place-self-center object-cover shadow-xl md:h-32 md:w-24"
           onClick={() => {
             if (quantity > 1) {
-              handleReload();
+              handleSetQuantity(1);
             }
           }}
         />
@@ -310,6 +310,7 @@ export default function AddToCart() {
                 if (quantity > 1) {
                   handleSetQuantity(1);
                 }
+                setSelectedProductVolumeId("");
               }}
             >
               {similarBooks}
