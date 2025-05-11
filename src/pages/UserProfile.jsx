@@ -15,7 +15,9 @@ export default function UserProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/auth/user/${userId}`);
+        const res = await axios.get(
+          `http://localhost:3000/api/auth/user/${userId}`,
+        );
         setUser(res.data);
       } catch (error) {
         console.error("Failed to fetch user:", error);
@@ -27,64 +29,82 @@ export default function UserProfile() {
     fetchUser();
   }, [userId]);
 
-  if (loading) return (
-    <div className="h-screen bg-(--color-greenBackground) flex items-center justify-center">
-      <p className="text-center text-lg  text-(--color-text)">Loading...</p>
-    </div>
-  );
-  
-  if (!user) return (
-    <div className="h-screen bg-(--color-greenBackground) flex items-center justify-center">
-      <p className="text-center text-lg  text-(--color-text)">User not found.</p>
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="flex h-screen items-center justify-center bg-(--color-greenBackground)">
+        <p className="text-center text-lg text-(--color-text)">Loading...</p>
+      </div>
+    );
 
+  if (!user)
+    return (
+      <div className="flex h-screen items-center justify-center bg-(--color-greenBackground)">
+        <p className="text-center text-lg text-(--color-text)">
+          User not found.
+        </p>
+      </div>
+    );
 
   return (
-    <div className ="bg-(--color-greenBackground) text-(--color-text) md:px-12 lg:px-72" >
+    <div className="bg-(--color-greenBackground) text-(--color-text) md:px-12 lg:px-72">
       {/* 1. Heading - User Profile */}
-      <section className ="py-8 px-16 ">
-        <h1 className="font-bold text-center">My Account</h1>
+      <section className="px-16 py-8">
+        <h1 className="text-center font-bold">My Account</h1>
       </section>
-          
-      <div className="container__div py-0 md:flex ">
+
+      <div className="container__div py-0 md:flex">
         {/* 2. User display + settings button - User Profile */}
-        <div className="flex flex-col text-center items-center md:w-1/2">
+        <div className="flex flex-col items-center text-center md:w-1/2">
           <img
             src="/logo_cat.jpg"
             alt="profile"
-            className ="w-32 h-32 rounded-full my-4"
+            className="my-4 h-32 w-32 rounded-full"
           />
-          <p className ="mt-2 text-2xl font-bold">{user.name} {user.lastName}</p>
-          <p className ="hidden text-sm mt-4">User ID: {userId}</p>
+          <p className="mt-2 text-2xl font-bold">
+            {user.name} {user.lastName}
+          </p>
+          <p className="mt-4 hidden text-sm">User ID: {userId}</p>
 
-          <Link to ={`/user/${userId}/settings`}>
-            <button className="m-4 text-sm underline cursor-pointer hover:scale-105">Profile and Password Settings</button>
+          <Link to={`/user/${userId}/settings`}>
+            <button className="m-4 cursor-pointer text-sm underline hover:scale-105">
+              Profile and Password Settings
+            </button>
           </Link>
-
-    
         </div>
 
         {/* 3.User Info - User Profile */}
-        <div className ="px-16 mt-4 md:w-1/2 md:px-8 lg:px-16 ">
-            <div className="bg-(--color-box) px-6 rounded-lg md:px-6 py-4">
-              <div className=" profile-detail-text flex flex-col justify-center">
-                <p className="mt-2"><span className="font-bold">Name:</span> <br></br> {user.name} {user.lastName}</p>
-                <p className="mt-2"><span className="font-bold">Email:</span> </p> {user.email}
-                <p className="mt-2"><span className="font-bold">Address:</span></p> {user.address}, {user.city_id.name}, {user.city_id.country_id.name}
-                <p className="mt-2"><span className="font-bold">Phone:</span> </p> {user.phoneNumber}
-                {/* <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday} */}
-              </div>
+        <div className="mt-4 px-16 md:w-1/2 md:px-8 lg:px-16">
+          <div className="rounded-lg bg-(--color-box) px-6 py-4 md:px-6">
+            <div className="profile-detail-text flex flex-col justify-center">
+              <p className="mt-2">
+                <span className="font-bold">Name:</span> <br></br> {user.name}{" "}
+                {user.lastName}
+              </p>
+              <p className="mt-2">
+                <span className="font-bold">Email:</span>{" "}
+              </p>{" "}
+              {user.email}
+              <p className="mt-2">
+                <span className="font-bold">Address:</span>
+              </p>{" "}
+              {user.address}, {user.city_id.name},{" "}
+              {user.city_id.country_id.name}
+              <p className="mt-2">
+                <span className="font-bold">Phone:</span>{" "}
+              </p>{" "}
+              {user.phoneNumber}
+              {/* <p className="mt-2"><span className="font-bold">Birth date:</span></p> {user.birthday} */}
+            </div>
 
-              <Link to = "/purchase">
-                <GreenButton
-                className="w-full mb-2 mt-4"
+            <Link to="/purchase">
+              <GreenButton
+                className="mt-4 mb-2 w-full"
                 text="My Cart →"
                 onclick=""
-                />
-              </Link>
+              />
+            </Link>
 
-              {/* <Link to = "/purchase">
+            {/* <Link to = "/purchase">
                 <GreenButton className="mb-2 mt-4">
                   <span className = "flex items-center gap-2">
                     <span className="whitespace-nowrap">My Cart</span>
@@ -93,30 +113,25 @@ export default function UserProfile() {
                 </GreenButton>
               </Link> */}
 
-              <Link to = "orders/:id">
-                <GreenButton
-                className="w-full mb-2"
+            <Link to={`/orders/${user?._id}`}>
+              <GreenButton
+                className="mb-2 w-full"
                 text="Your Orders →"
                 onclick=""
-                />
-              </Link>
-
-
-              
+              />
+            </Link>
           </div>
           {/* 4.log out button - User Profile */}
-          <div className ="flex flex-col items-center">
-            <Link to = "/login">
+          <div className="flex flex-col items-center">
+            <Link to="/login">
               <BrownButton
-                className="mt-8 md:hidden "
+                className="mt-8 md:hidden"
                 text="Log out"
                 onclick=""
               />
             </Link>
           </div>
-          
         </div>
-        
       </div>
     </div>
   );

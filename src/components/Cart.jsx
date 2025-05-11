@@ -2,11 +2,17 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/userContext";
+import axios from "axios";
 
 export const Cart = () => {
   const { cart, setCart } = useCart();
+  const { user } = useAuth();
 
   const [showCheckout, setShowCheckout] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const totalQuantity = cart.reduce(
     (sum, item) => sum + (item.quantity || 0),
@@ -18,36 +24,47 @@ export const Cart = () => {
   );
 
   const removeFromCart = (id) => {
-    const item = cart.find((item) => item.product_id === id);
-    if (
-      window.confirm(
-        `Are you sure you want to remove ${item.name} Vol. ${item.volume}?`,
-      )
-    ) {
-      setCart((prevCart) => prevCart.filter((item) => item.product_id !== id));
+    const item = cart.find((item) => item._id === id);
+    if (window.confirm(`Are you sure you want to remove ${item.name_vol}?`)) {
+      setCart((prevCart) => prevCart.filter((item) => item._id !== id));
     }
   };
 
   const updateCartQuantity = (id, newQuantity) => {
-    cart.find((item) => item.product_id === id);
+    cart.find((item) => item._id === id);
     if (newQuantity < 1) {
       removeFromCart(id);
     }
     if (newQuantity >= 1) {
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.product_id === id ? { ...item, quantity: newQuantity } : item,
+          item._id === id ? { ...item, quantity: newQuantity } : item,
         ),
       );
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  const postOder = async () => {
+    try {
+      const orderItems = cart.map((item) => ({
+        product_id: item._id,
+        quantity: item.quantity,
+        subtotal_price: item.price * item.quantity,
+      }));
+      const payload = {
+        user_id: user._id,
+        total_price: totalPriceFinal,
+        items: orderItems,
+      };
+      await axios.post("http://localhost:3000/api/create-order", payload);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleCheckoutComplete = () => {
     setCart([]); // Clear the cart after checkout
+    postOder();
     setShowCheckout(true);
 
     // placeholder for posting to the server
@@ -91,23 +108,27 @@ export const Cart = () => {
         </div>
       ) : (
         <div className="= bg-[var(--color-text)] max-sm:rounded-t-2xl md:w-[60%] md:rounded-2xl">
-          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[1024px]:hidden md:mb-14">
+          <h2 className="py-[32px] pl-[16px] text-2xl font-bold min-[768px]:hidden">
             Order Summary
           </h2>
           {cart.map((item) => (
-            <div key={item.product_id} className="my-[32px] flex flex-col">
+            <div key={item._id} className="my-[32px] flex flex-col">
               <div className="flex flex-row justify-center">
-                <img
-                  src={
-                    item.picture ||
-                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-                  }
-                  className="max-h-[200px] max-w-[200px] object-contain object-top px-[8px]"
-                  alt={item.name}
-                />
+                <div className="max-h-[200px] max-w-[150px]">
+                  <img
+                    src={
+                      item.picture ||
+                      "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+                    }
+                    className="object-contain px-[8px]"
+                    alt={item.name_vol}
+                  />
+                </div>
                 <div className="flex w-[55%] flex-col px-[8px]">
-                  <h3 className="pb-[8px] text-xl font-bold">{item.name}</h3>
-                  <p className="pb-[8px]">Vol. {item.volume}</p>
+                  <h3 className="pb-[8px] text-xl font-bold">
+                    {item.name_vol}
+                  </h3>
+                  <p className="pb-[8px]">Vol. {item.volume_no}</p>
                   <p className="pb-[8px]">{item.author}</p>
                   <p className="pb-[8px]">฿{item.price.toFixed(2)} </p>
 
@@ -121,10 +142,7 @@ export const Cart = () => {
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
                         onClick={() => {
-                          updateCartQuantity(
-                            item.product_id,
-                            item.quantity - 1,
-                          );
+                          updateCartQuantity(item._id, item.quantity - 1);
                         }}
                       >
                         <path d="M200-440v-80h560v80H200Z" />
@@ -140,10 +158,7 @@ export const Cart = () => {
                         fill="#e3e3e3"
                         className="cursor-pointer bg-[#939393]"
                         onClick={() => {
-                          updateCartQuantity(
-                            item.product_id,
-                            item.quantity + 1,
-                          );
+                          updateCartQuantity(item._id, item.quantity + 1);
                         }}
                       >
                         <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
@@ -158,7 +173,7 @@ export const Cart = () => {
                         fill="#1e1e1e"
                         className="cursor-pointer"
                         onClick={() => {
-                          removeFromCart(item.product_id);
+                          removeFromCart(item._id);
                         }}
                       >
                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
@@ -195,6 +210,12 @@ export const Cart = () => {
             >
               Check out
             </button>
+            <Link
+              to="/"
+              className="flex justify-center py-10 font-bold text-[var(--color-greenBackground)] hover:cursor-pointer hover:text-[var(--color-banner)] hover:underline"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       )}

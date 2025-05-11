@@ -12,17 +12,7 @@ import { useAuth } from "../context/userContext";
 export const Navbar = () => {
   const { user } = useAuth();
 
-  const token = localStorage.getItem("token");
-
-  const [orders, setOrders] = useState(null);
-
   const { totalQuantity } = useCart();
-
-  const handleReload = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  };
 
   return (
     <>

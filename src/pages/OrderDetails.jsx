@@ -5,6 +5,7 @@ import axios from "axios";
 export default function OrderDetails() {
   const { orderId } = useParams();
   const [orderDetails, setOrderDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [userDetails, setUserDetails] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [order, setOrder] = useState(null);
@@ -16,11 +17,13 @@ export default function OrderDetails() {
         const response = await axios.get(
           `http://localhost:3000/api/get-order-by-orderid/${orderId}`,
         );
-
+        console.log(response.data);
+        setLoading(true);
         setOrder(response.data.order);
         setOrderDetails(response.data.orderDetails);
         setUserDetails(response.data.userDetails);
         setPaymentMethod(response.data.paymentMethod);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -31,9 +34,25 @@ export default function OrderDetails() {
     }
   }, [orderId]);
 
+  if (loading) {
+    return <p className="py-20 text-center text-white">Loading...</p>;
+  }
+
   if (!order || orderDetails.length === 0) {
     return (
-      <p className="py-20 text-center text-white">No order details found</p>
+      <>
+        <p className="py-20 text-center text-white">
+          No order details found
+          <button
+            className="my-[32px] flex justify-self-center rounded-[10px] bg-[var(--color-buttonBrown)] px-[66px] py-[10px] text-white hover:cursor-pointer"
+            onClick={() => {
+              navigate(`/orders/${order?.user_id}`);
+            }}
+          >
+            Back to Orders
+          </button>
+        </p>
+      </>
     );
   }
 
@@ -91,12 +110,13 @@ export default function OrderDetails() {
                         </h3>
 
                         <p>{item.product_id?.author_id?.author_name}</p>
-                        <p>฿{item.price?.toFixed(2) || 0}</p>
+                        <p>฿{item.product_id?.price.toFixed(2) || 0}</p>
 
                         <div className="flex flex-row justify-between py-4">
                           <p className="text-base">Qty: {item.quantity}</p>
                           <p className="text-base">
-                            Total price: ฿{item.price * item.quantity}
+                            Total price: ฿
+                            {item.product_id?.price * item.quantity}
                           </p>
                         </div>
                       </div>
@@ -110,7 +130,7 @@ export default function OrderDetails() {
           <div className="w-[50%] border border-[var(--color-radio)] p-[16px] sm:max-[815px]:w-full">
             <div className="flex flex-row items-end justify-between pt-2 pb-9 text-2xl font-extrabold sm:max-md:my-5 sm:max-md:w-full">
               <p className="font-semibold">Grand total:</p>
-              <p>฿{total.toFixed(2)}</p>
+              <p>฿{order.total_price.toFixed(2)}</p>
             </div>
             <p className="font-bold">Payment Information</p>
             <div className="flex flex-col sm:max-md:flex-col">
@@ -123,10 +143,12 @@ export default function OrderDetails() {
                 <p>{userDetails.address}</p>
                 <p>{userDetails.city_id?.name}</p>
                 <p>{userDetails.phoneNumber}</p>
+                <h4 className="pt-5 font-semibold">Tracking Number</h4>
+                <p>{order.tracking_number}</p>
                 <h4 className="pt-5 font-semibold">Payment Method</h4>
                 <p>
-                  {paymentMethod?.charAt(0).toUpperCase() +
-                    paymentMethod?.slice(1)}
+                  {order.payment_method?.charAt(0).toUpperCase() +
+                    order.payment_method?.slice(1)}
                 </p>
               </div>
             </div>

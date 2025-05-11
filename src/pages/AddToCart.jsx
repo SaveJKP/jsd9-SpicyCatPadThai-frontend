@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useCart } from "../context/CartContext.jsx";
 import axios from "axios";
 
 export default function AddToCart() {
-  const { id } = useParams();
+  const [products, setProducts] = useState([]); // รายการ product ทั้งหมดของ title นี้
   const [category, setCategory] = useState([]);
-  const { setCart } = useCart();
+  const [selectedProductVolumeId, setSelectedProductVolumeId] = useState(""); // State สำหรับเก็บ ID volume ที่เลือก
+  const [similar, setSimilar] = useState([]);
   const {
+    setCart,
     handleAdd,
     handleRemove,
     quantity,
@@ -18,12 +20,14 @@ export default function AddToCart() {
     setQuantity,
   } = useCart();
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const handleSetQuantity = (newQuantity) => {
     setQuantity(newQuantity);
   };
 
-  // Fetch product by ID from mock data
-  const fetchProductsById = async () => {
+  const fetchProductById = async () => {
     try {
       const res = await axios.get(`http://localhost:3000/products/${id}`);
       setProduct(res.data.product);
@@ -37,7 +41,6 @@ export default function AddToCart() {
     try {
       const res = await axios.get(`http://localhost:3000/api/pdc/${titleId}`);
       setCategory(res.data.productCategories);
-      console.log("Fetched categories:", res.data.productCategories);
     } catch (error) {
       console.error("Error fetching categories:", error);
       toast.error("Failed to fetch categories.");
@@ -45,34 +48,62 @@ export default function AddToCart() {
     }
   };
 
-  useEffect(() => {
-    fetchProductsById();
-    const storedCart = localStorage.getItem("cart");
-    const parsedCart = storedCart ? JSON.parse(storedCart) : [];
-    setCart(parsedCart);
-  }, []);
+  const fetchProductsByTitleId = async (titleId) => {
+    try {
+      const res = await axios.get(`http://localhost:3000/productss/${titleId}`);
+      setProducts(res.data.product);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const fetchSimilarBook = async (titleId) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/products/get-similar/${titleId}`,
+      );
+      setSimilar(res.data.similar_books);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    if (product?.title_id) {
+    fetchProductById();
+  }, [id]);
+
+  useEffect(() => {
+    if (product && product.title_id) {
+      fetchProductsByTitleId(product.title_id);
       fetchCategoryById(product.title_id);
+      fetchSimilarBook(product.title_id);
     }
   }, [product]);
 
+  const handleVolumeChange = (event) => {
+    const selectedId = event.target.value;
+    setSelectedProductVolumeId(selectedId);
+
+    // Find the selected product volume from the 'products' array
+    const selectedVolume = products.find((p) => p._id === selectedId);
+    if (selectedVolume) {
+      // อัปเดต 'product' state ด้วย volume ที่เลือก
+      setProduct(selectedVolume);
+    }
+  };
+
   const handleAddToCart = () => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find(
-        (item) => item.product_id === product.product_id,
-      );
+      const existingItem = prevCart.find((item) => item._id === product._id);
 
       let updatedCart;
 
       if (existingItem) {
         updatedCart = prevCart.map((item) =>
-          item.product_id === product.product_id
+          item._id === product._id
             ? {
                 ...item,
                 quantity: item.quantity + quantity,
-                total: item.total + totalPrice,
+                total: (item.price || 0) * (item.quantity + quantity), // ใช้ item.price ที่อาจมาจาก volume ที่เลือก
               }
             : item,
         );
@@ -82,13 +113,14 @@ export default function AddToCart() {
           {
             ...product,
             quantity,
-            total: quantity * product.price,
+            total: (product.price || 0) * quantity, // ใช้ product.price ของ volume ที่เลือก
           },
         ];
       }
 
       return updatedCart;
     });
+    toast("Added to Cart!");
   };
 
   if (!product) {
@@ -119,7 +151,9 @@ export default function AddToCart() {
   const getRandomBooks = (products, categoryName, excludeId) => {
     if (!products || !categoryName) return [];
 
-    const filteredBooks = products.filter((product) =>
+    const filteredBooks = products.filter(
+      (product) =>
+        product.categories?.some((cat) => cat.category_name === categoryName),
       product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
@@ -128,43 +162,53 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  // const similarBooks = category?.flatMap((cat) =>
-  //   getRandomBooks(products, cat.category_id?.category_name, product.product_id),
-  // )
-  //   .slice(0, 4)
-  //   .map((book, index) => (
-  //     <div
-  //       key={book.product_id || index}
-  //       className="flex flex-col text-center min-[1024px]:w-[50%]"
-  //     >
-  //       <Link to={`/add-to-cart/${book.product_id}`}>
-  //         <img
-  //           src={
-  //             book.img ||
-  //             "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-  //           }
-  //           alt={book.title}
-  //           className="mb-2.5 max-h-[150px] max-w-[250px] place-self-center shadow-xl"
-  //           onClick={() => {
-  //             if (quantity > 1) {
-  //               handleReload();
-  //             }
-  //           }}
-  //         />
+  const similarBooks = similar.map((book, index) => (
+    <div
+      key={book.product_id || index}
+      className="flex flex-col text-center min-[1024px]:w-[50%]"
+    >
+      <Link to={`/add-to-cart/${book.product_id}`}>
+        <img
+          src={
+            book.img ||
+            "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+          }
+          alt={book.title}
+          className="mb-2.5 h-28 w-20 place-self-center object-cover shadow-xl md:h-32 md:w-24"
+          onClick={() => {
+            if (quantity > 1) {
+              handleSetQuantity(1);
+            }
+          }}
+        />
 
-  //         <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-  //           <span className="text-clip">{book.name}</span>
-  //           <span>Vol. {book.volume}</span>
-  //           <span>{book.author}</span>
-  //           <span>฿{book.price}</span>
-  //         </p>
-  //       </Link>
-  //     </div>
-  //   ));
+        <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+          <span className="text-clip">{book.name}</span>
+          <span>Vol. {book.volume}</span>
+          <span>{book.author}</span>
+          <span>฿{book.price}</span>
+        </p>
+      </Link>
+    </div>
+  ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
       <div className="container__div text-[var(--color-text)]">
+        <Link to="/" className="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#e3e3e3"
+          >
+            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+          </svg>
+          <span className="py-5 text-base text-[var(--color-text)]">
+            Back to Home
+          </span>
+        </Link>
         <div className="grid grid-cols-1 gap-4 min-[1024px]:grid-cols-2 md:gap-10 md:p-10 md:px-20">
           {/* Product image */}
           <div className="w-[60%] place-self-center">
@@ -180,9 +224,31 @@ export default function AddToCart() {
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
             <p className="text-2xl font-bold md:text-3xl">{product.name_vol}</p>
-            <p className="text-xl font-bold md:text-2xl">
-              Vol. {product.volume_no}
-            </p>
+            <select
+              name="volume"
+              value={selectedProductVolumeId} // ควบคุมค่าด้วย state
+              onChange={handleVolumeChange}
+              className="w-full cursor-pointer overflow-y-auto rounded border border-gray-300 bg-white p-2 text-black focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <option value="" disabled className="hidden text-gray-500">
+                Select Volume
+              </option>
+              {products.length > 0 &&
+                products.map((p) => (
+                  <option
+                    key={p._id}
+                    value={p._id}
+                    disabled={p.quantity <= 0}
+                    className={`cursor-pointer px-4 py-2 text-black hover:bg-gray-100 ${
+                      p.quantity <= 0
+                        ? "cursor-not-allowed bg-gray-50 text-red-500"
+                        : ""
+                    }`}
+                  >
+                    {p.name_vol} {p.quantity <= 0 && "(Sold Out)"}
+                  </option>
+                ))}
+            </select>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
 
@@ -218,7 +284,6 @@ export default function AddToCart() {
               onClick={() => {
                 handleAddToCart();
                 handleSetQuantity(1);
-                toast("Added to Cart!");
               }}
             >
               Add to Cart
@@ -239,8 +304,16 @@ export default function AddToCart() {
           {/* Similar books */}
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
-            <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
-              {/* {similarBooks} */}
+            <div
+              className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5"
+              onClick={() => {
+                if (quantity > 1) {
+                  handleSetQuantity(1);
+                }
+                setSelectedProductVolumeId("");
+              }}
+            >
+              {similarBooks}
             </div>
           </div>
         </div>
@@ -248,13 +321,12 @@ export default function AddToCart() {
       {/* Sticky AddToCart Bar */}
       <div className="sticky bottom-0 overflow-hidden border-t-1 border-[#eef1f34d] bg-[var(--color-greenBackground)] text-[var(--color-text)] min-[1024px]:hidden">
         <div className="container__div flex w-full flex-row justify-between px-[16px]">
-          <p className="p-2 text-2xl">฿{quantity * product.price}</p>
+          <p className="p-2 text-2xl">฿{quantity * (product.price || 0)}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
             onClick={() => {
               handleAddToCart();
               handleSetQuantity(1);
-              toast("Added to cart!");
             }}
           >
             Add to Cart
