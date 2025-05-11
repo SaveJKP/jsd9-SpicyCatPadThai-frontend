@@ -41,13 +41,13 @@ export function UserPopover() {
           >
             My Profile
           </Link>
-          <Link
+          {/* <Link
             to="/about"
             className="leading-none font-bold hover:text-[var(--color-radio)] text-m"
             onClick={() => setPopOverOpen(false)}
           >
             About Us
-          </Link>
+          </Link> */}
           <button
             onClick={() => {
               logout();
