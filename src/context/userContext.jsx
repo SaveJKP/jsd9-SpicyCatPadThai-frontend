@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
                     withCredentials: true
                 });
                 setUser(response.data.user);
-                console.log(response.data.user)
                 setIsUser(true); // <-- SET isUser to true
             } catch (err) {
                 console.error("Not authenticated", err);
