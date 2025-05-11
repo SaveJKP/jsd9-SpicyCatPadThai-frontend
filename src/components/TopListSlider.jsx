@@ -9,6 +9,8 @@ import {
     CardDescription,
     CardTitle,
 } from "@/components/ui/card"
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { bannersWithCategories } from "../data/ShowAll";
 
 export function TopListCard({title, banner, author, rank}) {
@@ -26,6 +28,21 @@ export function TopListCard({title, banner, author, rank}) {
 }
 export default function TopListSlider() {
   const relevantBooks = bannersWithCategories;
+
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    const fetchNewRelease = async () => {
+      try {
+        const response = await axios.get("");
+        setBooks(response.data.newRelease);
+      } catch (err) {
+        console.error("Error fetching new release:", err);
+      }
+    };
+
+    fetchNewRelease();
+  }, []);
 
   return  (
     <div className="w-full px-4 md:px-8 py-8">

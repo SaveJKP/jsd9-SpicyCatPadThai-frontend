@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from "axios";
 import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Register() {
 
@@ -11,7 +11,7 @@ export default function Register() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('');
+  // const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -49,9 +49,7 @@ export default function Register() {
 
       console.log(payload);
       setData(...data, response.data);
-      setTimeout(() => {
-        navigate('/login')
-      }, 3000)
+      navigate('/login')
     } catch (err) {
       console.log(err);
     }
@@ -163,7 +161,11 @@ export default function Register() {
                     </div>
                   </div>
 
-                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2">
+                  <button type="submit" className=" mt-[5%] w-[50%] bg-buttonBlue font-semibold hover:cursor-pointer rounded-2xl px-1 py-2" onClick={() =>
+                    toast("Registration successfully!", {
+                      description: `Welcome to KatsuBook Store, ${name}!`
+                    })}
+                  >
                     Create Account
                   </button>
 
