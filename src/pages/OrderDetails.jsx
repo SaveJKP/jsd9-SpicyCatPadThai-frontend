@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function OrderDetails() {
@@ -17,7 +18,6 @@ export default function OrderDetails() {
         const response = await axios.get(
           `https://katsubook-backend.onrender.com/api/get-order-by-orderid/${orderId}`,
         );
-        console.log(response.data);
         setLoading(true);
         setOrder(response.data.order);
         setOrderDetails(response.data.orderDetails);
@@ -49,7 +49,7 @@ export default function OrderDetails() {
               navigate(`/orders/${order?.user_id}`);
             }}
           >
-            Back to Orders
+            Back to My Orders
           </button>
         </p>
       </>
@@ -64,6 +64,21 @@ export default function OrderDetails() {
   return (
     <div className="bg-[var(--color-text)]">
       <div className="container__div bg-[var(--color-text)]">
+        <Link
+          to={`/orders/${order?.user_id}`}
+          className="flex items-center gap-2 pl-[16px]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="currentColor"
+          >
+            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+          </svg>
+          <span className="py-5 text-base">Back to My Orders</span>
+        </Link>
         <h2 className="py-[16px] pl-[16px] text-2xl font-bold">
           Order Details
         </h2>
@@ -88,7 +103,7 @@ export default function OrderDetails() {
                     day: "numeric",
                   })}
                 </p>
-                <p className="pt-5 font-bold">Items Ordered</p>
+                <p className="py-5 font-bold">Items Ordered</p>
 
                 {orderDetails.map((item) => (
                   <div
@@ -96,14 +111,13 @@ export default function OrderDetails() {
                     className="mb-[16px] flex w-full flex-col"
                   >
                     <div className="flex flex-row">
-                      <img
-                        src={
-                          item.product_id?.picture ||
-                          "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-                        }
-                        className="max-h-[150px] max-w-[200px] object-contain object-top px-[8px]"
-                        alt={item.product_id?.name_vol}
-                      />
+                      <div className="max-h-[100px] max-w-[100px]">
+                        <img
+                          src={item.product_id?.picture}
+                          className="object-contain px-[8px]"
+                          alt={item.product_id?.name_vol}
+                        />
+                      </div>
                       <div className="flex w-full flex-col gap-1.5 px-[8px]">
                         <h3 className="text-lg font-bold">
                           {item.product_id?.name_vol}
@@ -161,7 +175,7 @@ export default function OrderDetails() {
               navigate(`/orders/${order?.user_id}`);
             }}
           >
-            Back to Orders
+            Back to My Orders
           </button>
         </div>
       </div>

@@ -99,7 +99,7 @@ export default function UserProfile() {
           },
         },
       );
-      console.log("User updated:", res.data);
+
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Error updating user:", error);

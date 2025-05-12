@@ -63,11 +63,10 @@ export default function Register() {
         },
       );
 
-      console.log(payload);
       setData(...data, response.data);
       navigate("/login");
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 

@@ -35,7 +35,19 @@ export default function Footer() {
             <p>Enquiry</p>
           </Link>
         </div>
-        <div className="mt-[16px] flex flex-row items-center min-[1024px]:justify-self-center">
+        <div className="my-5 flex gap-5 min-[1024px]:justify-self-center">
+          <p>Find Us On:</p>
+          <Link to="#facebook">
+            <img src="./Facebook_Logo_Secondary.png" className="h-[20px]"></img>
+          </Link>
+          <Link to="#X">
+            <img src="./x_logo-white.png" className="h-[20px]"></img>
+          </Link>
+          <Link to="#instagram">
+            <img src="./Instagram_Glyph_White.png" className="h-[20px]"></img>
+          </Link>
+        </div>
+        <div className="mt-[72px] flex flex-row items-center min-[1024px]:justify-self-center">
           <img
             src={logo_katsubook_notext}
             alt="logo_bookstore"
@@ -47,6 +59,7 @@ export default function Footer() {
             className="h-[30px] max-sm:hidden"
           />
         </div>
+
         <p className="py-[10px] min-[1024px]:justify-self-center">
           &copy; 2025 KatsuBook. All Rights Reserved
         </p>

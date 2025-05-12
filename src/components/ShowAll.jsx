@@ -29,7 +29,7 @@ export default function ShowAll() {
         );
         setBanners(response.data.title);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
 

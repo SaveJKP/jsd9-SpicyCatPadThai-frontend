@@ -15,13 +15,10 @@ export function SearchOrder() {
 
   const getOrderResults = async () => {
     try {
-      console.log("User context:", user);
       const response = await axios.get(
         `https://katsubook-backend.onrender.com/api/search-order?query=${query}`,
         { withCredentials: true },
       );
-
-      console.log("Response data:", response.data);
 
       if (Array.isArray(response.data.searchResults)) {
         setSearchResults(response.data.searchResults);
@@ -98,6 +95,15 @@ export function SearchOrder() {
                       })}
                     </p>
                     <p>Total: ฿{order.total_price.toFixed(2)}</p>
+                    <p
+                      className="min-[1024px]]:hidden cursor-pointer py-5 text-[var(--color-greenBackground)] hover:text-[var(--color-box)]"
+                      onClick={() => {
+                        navigate(`/orders/${order.user_id}/${order.order_id}`);
+                        handleScrollToTop();
+                      }}
+                    >
+                      View Order Detail
+                    </p>
                   </div>
                 ))
               ) : (

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/userContext";
 import axios from "axios";
+import { RadioGroupPayment } from "./RadioGroupPayment";
 
 export const Cart = () => {
   const { cart, setCart } = useCart();
@@ -119,10 +120,7 @@ export const Cart = () => {
               <div className="flex flex-row justify-center">
                 <div className="max-h-[200px] max-w-[150px]">
                   <img
-                    src={
-                      item.picture ||
-                      "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-                    }
+                    src={item.picture}
                     className="object-contain px-[8px]"
                     alt={item.name_vol}
                   />
@@ -204,6 +202,9 @@ export const Cart = () => {
               Total
               <span>฿{totalPriceFinal.toFixed(2)}</span>
             </p>
+            <form>
+              <RadioGroupPayment className="py-10" />
+            </form>
             <button
               className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e] md:mt-[200px]"
               onClick={() => {

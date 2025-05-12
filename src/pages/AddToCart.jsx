@@ -201,7 +201,7 @@ export default function AddToCart() {
   return (
     <div className="bg-[var(--color-greenBackground)]">
       <div className="container__div text-[var(--color-text)]">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 pl-[16px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

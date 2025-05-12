@@ -3,7 +3,6 @@ import axios from "axios";
 export async function GetData(url) {
   try {
     const response = await axios.get(url);
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.error(e);

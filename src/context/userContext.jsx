@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const response = await axios.get(
           "https://katsubook-backend.onrender.com/api/auth/profile",
+
           {
             withCredentials: true,
           },

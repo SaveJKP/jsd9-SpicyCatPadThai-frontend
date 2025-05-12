@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useAuth } from "../context/userContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Orders() {
@@ -47,16 +48,28 @@ export default function Orders() {
   return (
     <div className="bg-[var(--color-text)]">
       <div className="container__div pb-2">
-        <h2 className="py-[16px] pl-[16px] text-2xl font-bold">Your Orders</h2>
+        <Link to="/" className="flex items-center gap-2 pl-[16px]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="currentColor"
+          >
+            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+          </svg>
+          <span className="py-5 text-base">Continue Shopping</span>
+        </Link>
+        <h2 className="py-[16px] pl-[16px] text-2xl font-bold">My Orders</h2>
         {/* Search Field */}
         <form onSubmit={handleSubmit}>
           <div className="flex justify-center pl-7">
             <input
               type="text"
-              placeholder="You can search by Order No., Book name, Author name, Tracking Number, or Order Status"
+              placeholder="Order No.,Tracking no., Order Status, Book name, or Author name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="hover:border-lightgray bg-text relative my-[16px] h-[65%] w-full rounded-lg border-2 border-[var(--color-greenBackground)] p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500"
+              className="hover:border-lightgray bg-text relative my-[16px] h-[65%] w-full rounded-lg border-2 border-[var(--color-greenBackground)] p-[12px] text-sm text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500"
             />
             <button type="submit">
               <svg
@@ -78,6 +91,9 @@ export default function Orders() {
                 .sort(
                   (prev, latest) =>
                     new Date(latest.createdOn) - new Date(prev.createdOn),
+                )
+                .sort((prevOrder, latestOrder) =>
+                  latestOrder._id.localeCompare(prevOrder._id),
                 )
                 .map((order) => {
                   return (
@@ -126,14 +142,13 @@ export default function Orders() {
                               className="mb-[16px] flex w-full flex-col"
                             >
                               <div className="mt-10 flex flex-row">
-                                <img
-                                  src={
-                                    item.product_id.picture ||
-                                    "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-                                  }
-                                  className="max-h-[150px] max-w-[200px] object-contain px-[8px] sm:max-md:w-[40%]"
-                                  alt={item.product_id.name_vol}
-                                />
+                                <div className="max-h-[200px] max-w-[150px] sm:max-md:w-[55%]">
+                                  <img
+                                    src={item.product_id.picture}
+                                    className="object-contain px-[8px]"
+                                    alt={item.product_id.name_vol}
+                                  />
+                                </div>
                                 <div className="flex w-full flex-col gap-1.5 px-[8px]">
                                   <h3 className="text-lg font-bold sm:max-md:text-base">
                                     {item.product_id.title_id?.title_name}

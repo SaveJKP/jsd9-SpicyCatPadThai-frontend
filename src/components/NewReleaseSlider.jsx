@@ -13,10 +13,9 @@ export default function NewReleaseSlider({ name }) {
         const response = await axios.get(
           "https://katsubook-backend.onrender.com/products/new-release",
         );
-        console.log(response);
         setBanners(response.data.titles || []);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setBanners([]);
       }
     };

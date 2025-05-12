@@ -29,14 +29,14 @@ export function UserPopover() {
           <p className="text-xl leading-none font-bold">Hello! {user?.name}</p>
           <Link
             to={`/orders/${user?._id}`}
-            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
             onClick={() => setPopOverOpen(false)}
           >
             My Orders
           </Link>
           <Link
             to={`/user/${user?._id}`}
-            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
             onClick={() => setPopOverOpen(false)}
           >
             My Profile
