@@ -12,7 +12,9 @@ export default function Catalog({ id, onClose }) {
 
   const fetchTitleById = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/titles/${id}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/api/titles/${id}`,
+      );
       setName(res.data.title_name);
       setDescription(res.data.title_description);
       setPicture(res.data.title_picture);
@@ -22,7 +24,9 @@ export default function Catalog({ id, onClose }) {
   };
   const fetchProductsByTitleId = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/productss/${id}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/productss/${id}`,
+      );
       setProducts(res.data.product);
     } catch (err) {
       console.error(err);
@@ -69,26 +73,29 @@ export default function Catalog({ id, onClose }) {
                 onChange={handleVolumeChange}
                 className="w-full cursor-pointer overflow-y-auto rounded bg-[#444] text-white"
               >
-                <option value="" disabled className="hidden">Select Volume</option>
-                {products.length > 0 && products.map((product) =>
-                  product.quantity > 0 ? (
-                    <option
-                      key={product._id}
-                      value={product._id}
-                      className="cursor-pointer px-4 py-2 text-gray-300 hover:bg-[#555]"
-                    >
-                      {product.name_vol}
-                    </option>
-                  ) : (
-                    <option
-                      key={product._id}
-                      disabled
-                      className="cursor-not-allowed px-4 py-2 text-red-500"
-                    >
-                      {product.name_vol} (Sold Out)
-                    </option>
-                  ),
-                )}
+                <option value="" disabled className="hidden">
+                  Select Volume
+                </option>
+                {products.length > 0 &&
+                  products.map((product) =>
+                    product.quantity > 0 ? (
+                      <option
+                        key={product._id}
+                        value={product._id}
+                        className="cursor-pointer px-4 py-2 text-gray-300 hover:bg-[#555]"
+                      >
+                        {product.name_vol}
+                      </option>
+                    ) : (
+                      <option
+                        key={product._id}
+                        disabled
+                        className="cursor-not-allowed px-4 py-2 text-red-500"
+                      >
+                        {product.name_vol} (Sold Out)
+                      </option>
+                    ),
+                  )}
               </select>
             </div>
           </div>

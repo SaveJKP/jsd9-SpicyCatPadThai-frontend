@@ -29,7 +29,9 @@ export default function AddToCart() {
 
   const fetchProductById = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/products/${id}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/products/${id}`,
+      );
       setProduct(res.data.product);
     } catch (err) {
       console.error("Error fetching product:", err);
@@ -39,7 +41,9 @@ export default function AddToCart() {
 
   const fetchCategoryById = async (titleId) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/pdc/${titleId}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/api/pdc/${titleId}`,
+      );
       setCategory(res.data.productCategories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -50,7 +54,9 @@ export default function AddToCart() {
 
   const fetchProductsByTitleId = async (titleId) => {
     try {
-      const res = await axios.get(`http://localhost:3000/productss/${titleId}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/productss/${titleId}`,
+      );
       setProducts(res.data.product);
     } catch (err) {
       console.error(err);
@@ -59,7 +65,7 @@ export default function AddToCart() {
   const fetchSimilarBook = async (titleId) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/products/get-similar/${titleId}`,
+        `https://katsubook-backend.onrender.com/products/get-similar/${titleId}`,
       );
       setSimilar(res.data.similar_books);
     } catch (err) {
@@ -75,7 +81,7 @@ export default function AddToCart() {
     if (product && product.title_id) {
       fetchProductsByTitleId(product.title_id);
       fetchCategoryById(product.title_id);
-      fetchSimilarBook(product.title_id)
+      fetchSimilarBook(product.title_id);
     }
   }, [product]);
 
@@ -149,17 +155,12 @@ export default function AddToCart() {
     );
   });
 
-  const handleReload = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  };
-
   const getRandomBooks = (products, categoryName, excludeId) => {
     if (!products || !categoryName) return [];
 
-    const filteredBooks = products.filter((product) =>
-      product.categories?.some((cat) => cat.category_name === categoryName),
+    const filteredBooks = products.filter(
+      (product) =>
+        product.categories?.some((cat) => cat.category_name === categoryName),
       product.categories?.some((cat) => cat.category_name === categoryName),
     );
 
@@ -168,41 +169,53 @@ export default function AddToCart() {
       .sort(() => Math.random() - 0.5);
   };
 
-  const similarBooks = 
-
-    similar.map((book, index) => (
-      <div
-        key={book.product_id || index}
-        className="flex flex-col text-center min-[1024px]:w-[50%]"
-      >
-        <Link to={`/add-to-cart/${book.product_id}`}>
-          <img
-            src={
-              book.img ||
-              "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+  const similarBooks = similar.map((book, index) => (
+    <div
+      key={book.product_id || index}
+      className="flex flex-col text-center min-[1024px]:w-[50%]"
+    >
+      <Link to={`/add-to-cart/${book.product_id}`}>
+        <img
+          src={
+            book.img ||
+            "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
+          }
+          alt={book.title}
+          className="mb-2.5 h-28 w-20 place-self-center object-cover shadow-xl md:h-32 md:w-24"
+          onClick={() => {
+            if (quantity > 1) {
+              handleSetQuantity(1);
             }
-            alt={book.title}
-            className="mb-2.5 h-28 w-20 object-cover place-self-center shadow-xl md:h-32 md:w-24"
-            onClick={() => {
-              if (quantity > 1) {
-                handleReload();
-              }
-            }}
-          />
+          }}
+        />
 
-          <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
-            <span className="text-clip">{book.name}</span>
-            <span>Vol. {book.volume}</span>
-            <span>{book.author}</span>
-            <span>฿{book.price}</span>
-          </p>
-        </Link>
-      </div>
-    ));
+        <p className="flex flex-col justify-center pb-5 text-sm md:text-center">
+          <span className="text-clip">{book.name}</span>
+          <span>Vol. {book.volume}</span>
+          <span>{book.author}</span>
+          <span>฿{book.price}</span>
+        </p>
+      </Link>
+    </div>
+  ));
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
       <div className="container__div text-[var(--color-text)]">
+        <Link to="/" className="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#e3e3e3"
+          >
+            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+          </svg>
+          <span className="py-5 text-base text-[var(--color-text)]">
+            Back to Home
+          </span>
+        </Link>
         <div className="grid grid-cols-1 gap-4 min-[1024px]:grid-cols-2 md:gap-10 md:p-10 md:px-20">
           {/* Product image */}
           <div className="w-[60%] place-self-center">
@@ -275,7 +288,10 @@ export default function AddToCart() {
 
             <button
               className="mb-4 rounded-lg bg-[var(--color-buttonBlue)] px-4 py-2 text-lg text-white shadow hover:cursor-pointer hover:bg-[#2e648ecc] md:mt-10 md:text-2xl"
-              onClick={handleAddToCart}
+              onClick={() => {
+                handleAddToCart();
+                handleSetQuantity(1);
+              }}
             >
               Add to Cart
             </button>
@@ -295,7 +311,15 @@ export default function AddToCart() {
           {/* Similar books */}
           <div className="mb-[50px] flex flex-col gap-3 space-y-2 rounded-[10px] bg-[var(--color-box)] px-[24px] py-[16px] text-[var(--cls-white)] md:pt-[18px]">
             <h3>Other books you may like:</h3>
-            <div className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5">
+            <div
+              className="grid grid-cols-1 place-content-between md:flex md:flex-row md:py-5"
+              onClick={() => {
+                if (quantity > 1) {
+                  handleSetQuantity(1);
+                }
+                setSelectedProductVolumeId("");
+              }}
+            >
               {similarBooks}
             </div>
           </div>
@@ -307,7 +331,10 @@ export default function AddToCart() {
           <p className="p-2 text-2xl">฿{quantity * (product.price || 0)}</p>
           <button
             className="my-1 rounded-lg bg-[var(--color-buttonBlue)] px-4 text-lg shadow hover:cursor-pointer hover:bg-[#2e648ecc]"
-            onClick={handleAddToCart}
+            onClick={() => {
+              handleAddToCart();
+              handleSetQuantity(1);
+            }}
           >
             Add to Cart
           </button>

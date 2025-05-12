@@ -3,24 +3,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/userContext";
-
-/* const handleLogout = () => {
-  localStorage.removeItem("token");
-}; */
-
-// const [popOverOpen, setPopOverOpen] = useState(false);
-const togglePopOver = () => {
-  setPopOverOpen(!popOverOpen);
-};
+import { useState } from "react";
 
 export function UserPopover() {
   const { user, logout } = useAuth();
+  const [popOverOpen, setPopOverOpen] = useState(false);
 
   return (
-    <Popover>
+    <Popover open={popOverOpen} onOpenChange={setPopOverOpen}>
       <PopoverTrigger asChild>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,33 +25,37 @@ export function UserPopover() {
         </svg>
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-[var(--color-greenBackground)]">
-        <div className="flex w-[50%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
-          <Link className="leading-none font-medium hover:text-[var(--color-radio)]" to={`/user/${user?._id}`}>
-              {user.name || "User Profile"}
-          </Link>
+        <div className="flex w-[60%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
+          <p className="text-xl leading-none font-bold">Hello! {user?.name}</p>
           <Link
             to={`/orders/${user?._id}`}
-            className="leading-none font-medium hover:text-[var(--color-radio)]"
+            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            onClick={() => setPopOverOpen(false)}
           >
-            Orders
+            My Orders
           </Link>
           <Link
+            to={`/user/${user?._id}`}
+            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            onClick={() => setPopOverOpen(false)}
+          >
+            My Profile
+          </Link>
+          {/* <Link
             to="/about"
             className="leading-none font-medium hover:text-[var(--color-radio)]"
-            onClick={togglePopOver}
+            onClick={() => setPopOverOpen(false)}
           >
             About Us
-          </Link>
-          <Link
-            to={"/login"}
+          </Link> */}
+          <button
             onClick={() => {
               logout();
-              togglePopOver();
             }}
-            className="my-2 flex justify-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#bc7142cb]"
+            className="my-2 flex justify-center rounded-xl bg-[var(--color-buttonBrown)] p-[8px] text-center text-[16px] hover:bg-[#e3d2c8cb]"
           >
             Log out
-          </Link>
+          </button>
         </div>
       </PopoverContent>
     </Popover>

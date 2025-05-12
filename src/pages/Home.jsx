@@ -1,5 +1,6 @@
 import BannerSlider from "../components/BannerSlider"
 import CardSlider from "../components/CardSlider"
+import NewReleaseSlider from "../components/NewReleaseSlider"
 import ShowAll from "../components/ShowAll"
 import TopList from "../components/TopList"
 import { useState } from "react";
@@ -17,7 +18,7 @@ export default function Home() {
         <div className="bg-greenBackground">
           <div className="container__div">
               <CardSlider name="🥇 Trending Manga"/>
-              <CardSlider name="🆕 New Releases"/>
+              <NewReleaseSlider name="🆕 New Releases"/>
           </div>
         </div>
 
