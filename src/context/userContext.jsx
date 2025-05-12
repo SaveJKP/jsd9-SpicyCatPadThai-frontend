@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/auth/profile",
+          "https://katsubook-backend.onrender.com/api/auth/profile",
           {
             withCredentials: true,
           },
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/auth/logout",
+        "https://katsubook-backend.onrender.com/api/auth/logout",
         {},
         {
           withCredentials: true,

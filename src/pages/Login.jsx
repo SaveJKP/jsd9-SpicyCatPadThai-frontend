@@ -19,7 +19,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        "https://katsubook-backend.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -28,12 +28,10 @@ export default function Login() {
           withCredentials: true,
         },
       );
-      console.log(response);
       setUser(response.data);
       setMessage("Login successful!");
       setTimeout(() => {
         navigate("/");
-        navigate(0);
       }, 1000);
     } catch (err) {
       console.error(err);

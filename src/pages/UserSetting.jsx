@@ -43,7 +43,7 @@ export default function UserProfile() {
     const fetchUserData = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/auth/user/${userId}`,
+          `https://katsubook-backend.onrender.com/api/auth/user/${userId}`,
         );
         setUser(res.data);
         setUpdatedUser({
@@ -66,7 +66,7 @@ export default function UserProfile() {
   }, [userId]);
 
   const cityApiUrl = updatedUser.countryId
-    ? `http://localhost:3000/api/auth/country/${updatedUser.countryId}/cities`
+    ? `https://katsubook-backend.onrender.com/api/auth/country/${updatedUser.countryId}/cities`
     : null;
 
   //0.2Handle change
@@ -91,7 +91,7 @@ export default function UserProfile() {
 
     try {
       const res = await axios.patch(
-        `http://localhost:3000/api/auth/user/${userId}`,
+        `https://katsubook-backend.onrender.com/api/auth/user/${userId}`,
         payload,
         {
           headers: {
@@ -117,7 +117,7 @@ export default function UserProfile() {
 
     try {
       const res = await axios.patch(
-        `http://localhost:3000/api/auth/user/${userId}/password`,
+        `https://katsubook-backend.onrender.com/api/auth/user/${userId}/password`,
         {
           currentPassword: updatedUser.currentPassword,
           newPassword: updatedUser.newPassword,
@@ -239,7 +239,7 @@ export default function UserProfile() {
                     </div>
                     <div className="space-y-1">
                       <Dropdown
-                        apiUrl="http://localhost:3000/api/auth/country"
+                        apiUrl="https://katsubook-backend.onrender.com/api/auth/country"
                         value={updatedUser.countryId}
                         onChange={(selectedCountryId) => {
                           setUpdatedUser((prev) => ({

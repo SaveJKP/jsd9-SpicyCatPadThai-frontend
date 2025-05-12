@@ -16,7 +16,7 @@ export default function UserProfile() {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/auth/user/${userId}`,
+          `https://katsubook-backend.onrender.com/api/auth/user/${userId}`,
         );
         setUser(res.data);
       } catch (error) {

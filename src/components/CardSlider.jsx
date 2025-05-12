@@ -16,7 +16,7 @@ export default function CardSlider({ name }) {
     const getItemsCardSlider = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/products/trending-book",
+          "https://katsubook-backend.onrender.com/products/trending-book",
         );
         setBanners(response.data.trending || []);
       } catch (err) {

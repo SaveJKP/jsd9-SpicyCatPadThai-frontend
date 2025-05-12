@@ -10,7 +10,7 @@ import {
 import { BookCard } from "./BookCard";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function ShowSearch() {
@@ -21,34 +21,33 @@ export default function ShowSearch() {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(banners.length / itemsPerPage);
-  const location = useLocation(); //get quey from url e.g.,  If the URL is http://localhost:3000/search?query=naruto, then location.search is "?query=naruto
+  const location = useLocation(); //get quey from url e.g.,  If the URL is https://katsubook-backend.onrender.com/search?query=naruto, then location.search is "?query=naruto
   const queryParams = new URLSearchParams(location.search);
   const searchText = (queryParams.get("query") || "").trim(); //get the query text e.g, naruto
 
-useEffect(() => {
-
-  if (!searchText) {
-    setBanners([]);
-    setCurrentPage(1);
-    return;
-  }
-
-  const fetchSearchResults = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/api/titles/search?query=${encodeURIComponent(searchText)}`
-      );
-      setBanners(response.data.title || []);
-      setCurrentPage(1);
-    } catch (err) {
-      console.error("Error fetching search results:", err);
+  useEffect(() => {
+    if (!searchText) {
       setBanners([]);
       setCurrentPage(1);
+      return;
     }
-  };
 
-  fetchSearchResults();
-}, [location.search]);
+    const fetchSearchResults = async () => {
+      try {
+        const response = await axios.get(
+          `https://katsubook-backend.onrender.com/api/titles/search?query=${encodeURIComponent(searchText)}`,
+        );
+        setBanners(response.data.title || []);
+        setCurrentPage(1);
+      } catch (err) {
+        console.error("Error fetching search results:", err);
+        setBanners([]);
+        setCurrentPage(1);
+      }
+    };
+
+    fetchSearchResults();
+  }, [location.search]);
   {
     /* set index items to show book */
   }
@@ -75,27 +74,30 @@ useEffect(() => {
   }
 
   return (
-    <div  className="container__div">
+    <div className="container__div">
       <div className="flex flex-col items-start justify-start">
-        <h2 className="px-[10%] text-white text-3xl md:text-4xl mt-12 font-semibold">Search Result: {searchText} </h2>
-        
+        <h2 className="mt-12 px-[10%] text-3xl font-semibold text-white md:text-4xl">
+          Search Result: {searchText}{" "}
+        </h2>
+
         {banners.length === 0 && searchText !== "" ? (
-          <div className="flex justify-center items-center w-full h-96">
-            <p className="text-white text-2xl font-medium">Book title not found</p>
+          <div className="flex h-96 w-full items-center justify-center">
+            <p className="text-2xl font-medium text-white">
+              Book title not found
+            </p>
           </div>
         ) : (
-        
-        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-8 justify-center items-center self-center">
-          {currentBanners.map((banner) => (
-            <BookCard
-              key={banner._id}
-              id={banner._id}
-              title={banner.title_name}
-              picture={banner.title_picture}
-              author={banner.authorInfo?.author_name}
-            />
-          ))}
-        </section>
+          <section className="grid grid-cols-2 items-center justify-center gap-4 self-center p-8 md:grid-cols-4 lg:grid-cols-6">
+            {currentBanners.map((banner) => (
+              <BookCard
+                key={banner._id}
+                id={banner._id}
+                title={banner.title_name}
+                picture={banner.title_picture}
+                author={banner.authorInfo?.author_name}
+              />
+            ))}
+          </section>
         )}
       </div>
 
