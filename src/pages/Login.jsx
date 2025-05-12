@@ -28,12 +28,10 @@ export default function Login() {
           withCredentials: true,
         },
       );
-      console.log(response);
       setUser(response.data);
       setMessage("Login successful!");
       setTimeout(() => {
         navigate("/");
-        navigate(0);
       }, 1000);
     } catch (err) {
       console.error(err);
