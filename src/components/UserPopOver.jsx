@@ -5,12 +5,20 @@ import {
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/userContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function UserPopover() {
-  const { user, logout } = useAuth();
   const [popOverOpen, setPopOverOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
+  const { user, logout } = useAuth();
 
+  useEffect(() => {
+    if (user) {
+      setUsername(user.name || "");
+      setUserId(user._id || "");
+    }
+  }, [user]);
   return (
     <Popover open={popOverOpen} onOpenChange={setPopOverOpen}>
       <PopoverTrigger asChild>
@@ -26,17 +34,17 @@ export function UserPopover() {
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-[var(--color-greenBackground)]">
         <div className="flex w-[60%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
-          <p className="text-xl leading-none font-bold">Hello! {user?.name}</p>
+          <p className="text-xl leading-none font-bold">Hello! {username}</p>
           <Link
-            to={`/orders/${user?._id}`}
-            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            to={`/orders/${userId}`}
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
             onClick={() => setPopOverOpen(false)}
           >
             My Orders
           </Link>
           <Link
-            to={`/user/${user?._id}`}
-            className="leading-none font-medium hover:text-[var(--color-radio)] "
+            to={`/user/${userId}`}
+            className="leading-none font-medium hover:text-[var(--color-radio)]"
             onClick={() => setPopOverOpen(false)}
           >
             My Profile
