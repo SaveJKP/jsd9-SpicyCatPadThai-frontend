@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import BrownButton from "../components/BrownButton";
 import GreenButton from "../components/GreenButton";
-import users from "../data/users";
 import { Button } from "@/components/ui/button";
 import {
   Card,

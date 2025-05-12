@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BrownButton from "../components/BrownButton";
 import GreenButton from "../components/GreenButton";
-import users from "../data/users";
 
 export default function UserProfile() {
   const { userId } = useParams();
@@ -117,16 +116,6 @@ export default function UserProfile() {
               <GreenButton
                 className="mb-2 w-full"
                 text="My Orders →"
-                onclick=""
-              />
-            </Link>
-          </div>
-          {/* 4.log out button - User Profile */}
-          <div className="flex flex-col items-center">
-            <Link to="/login">
-              <BrownButton
-                className="mt-8 md:hidden"
-                text="Log out"
                 onclick=""
               />
             </Link>

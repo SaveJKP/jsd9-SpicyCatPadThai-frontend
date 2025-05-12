@@ -149,7 +149,7 @@ export default function AddToCart() {
         key={categoryItem._id}
         className="mr-[8px] rounded-[8px] bg-[#2C2C2C] p-[8px] text-sm"
       >
-        {categoryItem.category_id?.category_name || "N/A"}
+        {categoryItem.category_id?.category_name || null}
       </span>
     );
   });
@@ -175,10 +175,7 @@ export default function AddToCart() {
     >
       <Link to={`/add-to-cart/${book.product_id}`}>
         <img
-          src={
-            book.img ||
-            "https://mir-s3-cdn-cf.behance.net/project_modules/1400/cdd17c167263253.6425cd49aab91.jpg"
-          }
+          src={book.img}
           alt={book.title}
           className="mb-2.5 h-28 w-20 place-self-center object-cover shadow-xl md:h-32 md:w-24"
           onClick={() => {
@@ -219,10 +216,7 @@ export default function AddToCart() {
           {/* Product image */}
           <div className="w-[60%] place-self-center">
             <img
-              src={
-                product.picture ||
-                "https://www.geeksandgamers.com/wp-content/uploads/hm_bbpui/282793/yko8lqxg8dvq18y6w7jkxg3746zhr7hi.jpg"
-              }
+              src={product.picture}
               alt="book-cover"
               className="w-[350px] place-self-center object-cover shadow-lg"
             />

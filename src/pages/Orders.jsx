@@ -38,7 +38,19 @@ export default function Orders() {
   }
 
   if (orders.length === 0) {
-    return <p className="py-20 text-center text-white">No orders found</p>;
+    return (
+      <div className="py-20 text-center text-white">
+        <p className="text-xl">No orders found</p>
+        <button
+          className="my-[64px] flex justify-self-center rounded-[10px] bg-[var(--color-buttonBrown)] px-[66px] py-[10px] text-white hover:cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Continue Shopping
+        </button>
+      </div>
+    );
   }
 
   const handleSubmit = (e) => {
