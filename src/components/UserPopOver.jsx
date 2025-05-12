@@ -26,7 +26,7 @@ export function UserPopover() {
       </PopoverTrigger>
       <PopoverContent className="w-80 bg-[var(--color-greenBackground)]">
         <div className="flex w-[60%] flex-col gap-6 justify-self-center text-center text-[var(--color-text)]">
-          <p className="text-xl leading-none font-bold">Hello! {username}</p>
+          <p className="text-xl leading-none font-bold">Hello! {user?.name}</p>
           <Link
             to={`/orders/${user?._id}`}
             className="leading-none font-medium hover:text-[var(--color-radio)]"
