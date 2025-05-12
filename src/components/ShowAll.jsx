@@ -62,7 +62,7 @@ export default function ShowAll() {
     <div  className="container__div">
       <div className="flex flex-col items-start justify-start">
         <h2 className="px-[12%] text-white text-3xl md:text-4xl mt-12 font-semibold">📚 All Series</h2>
-        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-8 justify-center items-center self-center">
+        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:p-3 md:p-8 justify-center items-center self-center">
           {currentBanners.map((banner) => (
             <BookCard
               key={banner._id}
