@@ -10,12 +10,11 @@ import { LoginPopover } from "./LoginPopOver";
 import { useAuth } from "../context/userContext";
 
 export const Navbar = () => {
+  const [searchText, setSearchText] = useState("");
+
   const { user } = useAuth();
-
-  const [searchText, setSearchText] = useState('');
-   const navigate = useNavigate();
-
   const { totalQuantity } = useCart();
+  const navigate = useNavigate();
 
 
 
@@ -76,11 +75,11 @@ export const Navbar = () => {
                 type="text"
                 placeholder="Search"
                 className="hover:border-lightgray bg-text relative left-10 my-[5%] h-[65%] w-full rounded-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[815px]:hidden"
-                onClick={() => navigate('/search')}
+                onClick={() => navigate("/search")}
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     e.preventDefault();
                     handleSearch();
                   }

@@ -127,6 +127,7 @@ export default function AddToCart() {
       return updatedCart;
     });
     toast("Added to Cart!");
+    setQuantity(1)
   };
 
   if (!product) {

@@ -19,13 +19,13 @@ export function BookCard({ id,title, picture, author }) {
   return (
     <>
       <div>
-        <Card onClick={handleOpenModal} className="bg-box border-banner flex h-75 w-45 flex-col items-center justify-center hover:cursor-pointer">
-          <img src={ picture || "https://placehold.co/200x250"} alt={title} className="w-full aspect-[3/4] object-cover -mb-8 p-4" />
+        <Card onClick={handleOpenModal} className="bg-box border-banner flex h-70 w-40 flex-col items-center justify-center hover:cursor-pointer">
+          <img src={ picture || "https://placehold.co/200x250"} alt={title} className="w-full aspect-[3/4] object-cover mt-2 -mb-8 p-3" />
           <CardContent>
-            <CardTitle className="text-text text-lg font-bold line-clamp-1">
+            <CardTitle className="text-text text-md font-bold line-clamp-2">
               {title}
             </CardTitle>
-            <p className="text-text flex items-center justify-start opacity-75 md:justify-center truncate">
+            <p className="text-text flex mb-4 items-center justify-start opacity-75 md:justify-center truncate">
               {author}
             </p>
           </CardContent>
