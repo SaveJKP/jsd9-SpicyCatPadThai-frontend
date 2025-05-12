@@ -11,7 +11,7 @@ export default function NewReleaseSlider({ name }) {
     const getItemsCardSlider = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/products/new-release",
+          "https://katsubook-backend.onrender.com/products/new-release",
         );
         console.log(response);
         setBanners(response.data.titles || []);

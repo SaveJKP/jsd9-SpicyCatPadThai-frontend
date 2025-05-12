@@ -17,7 +17,7 @@ export function SearchOrder() {
     try {
       console.log("User context:", user);
       const response = await axios.get(
-        `http://localhost:3000/api/search-order?query=${query}`,
+        `https://katsubook-backend.onrender.com/api/search-order?query=${query}`,
         { withCredentials: true },
       );
 

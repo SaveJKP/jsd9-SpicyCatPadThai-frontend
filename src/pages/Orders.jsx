@@ -17,7 +17,7 @@ export default function Orders() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/get-order-by-userid/${user._id}`,
+          `https://katsubook-backend.onrender.com/api/get-order-by-userid/${user._id}`,
         );
 
         setLoading(true);

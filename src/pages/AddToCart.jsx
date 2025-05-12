@@ -29,7 +29,9 @@ export default function AddToCart() {
 
   const fetchProductById = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/products/${id}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/products/${id}`,
+      );
       setProduct(res.data.product);
     } catch (err) {
       console.error("Error fetching product:", err);
@@ -39,7 +41,9 @@ export default function AddToCart() {
 
   const fetchCategoryById = async (titleId) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/pdc/${titleId}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/api/pdc/${titleId}`,
+      );
       setCategory(res.data.productCategories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -50,7 +54,9 @@ export default function AddToCart() {
 
   const fetchProductsByTitleId = async (titleId) => {
     try {
-      const res = await axios.get(`http://localhost:3000/productss/${titleId}`);
+      const res = await axios.get(
+        `https://katsubook-backend.onrender.com/productss/${titleId}`,
+      );
       setProducts(res.data.product);
     } catch (err) {
       console.error(err);
@@ -59,7 +65,7 @@ export default function AddToCart() {
   const fetchSimilarBook = async (titleId) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/products/get-similar/${titleId}`,
+        `https://katsubook-backend.onrender.com/products/get-similar/${titleId}`,
       );
       setSimilar(res.data.similar_books);
     } catch (err) {

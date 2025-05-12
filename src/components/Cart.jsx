@@ -56,7 +56,10 @@ export const Cart = () => {
         total_price: totalPriceFinal,
         items: orderItems,
       };
-      await axios.post("http://localhost:3000/api/create-order", payload);
+      await axios.post(
+        "https://jsd9-spicycatpadthai-backend-testing.onrender.com/api/create-order",
+        payload,
+      );
     } catch (err) {
       console.error(err);
     }
