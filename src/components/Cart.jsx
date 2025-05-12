@@ -57,7 +57,7 @@ export const Cart = () => {
         items: orderItems,
       };
       await axios.post(
-        "https://jsd9-spicycatpadthai-backend-testing.onrender.com/api/create-order",
+        "https://katsubook-backend.onrender.com/api/create-order",
         payload,
       );
     } catch (err) {
