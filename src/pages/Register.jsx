@@ -36,6 +36,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   const PostData = async (e) => {
+    e.preventDefault();
+
     const payload = {
       name,
       lastName,

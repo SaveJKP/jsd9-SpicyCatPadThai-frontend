@@ -121,7 +121,7 @@ export default function Login() {
                   </button>
                 </div>
 
-                <Link to="/forgot-password">Forget Your password?</Link>
+                {/* <Link to="/forgot-password">Forget Your password?</Link> */}
                 <div className="flex w-[65%] flex-col items-center justify-center gap-4 md:w-[35%] lg:w-[50%]">
                   <Separator />
                   <Button
