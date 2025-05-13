@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/userContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function UserPopover() {
   const [popOverOpen, setPopOverOpen] = useState(false);
