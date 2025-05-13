@@ -98,9 +98,9 @@ export default function Catalog({ id, onClose }) {
                 {products.length > 0 &&
                   products.map((product) => {
                     // DEBUG: Log product details for new release check
-                    console.log(
+                    /* console.log(
                       `Checking product: ${product.name_vol}, Released Date: ${product.releasedDate}, Is New: ${isNewRelease(product.releasedDate)}`,
-                    );
+                    ); */
 
                     const isNew = isNewRelease(product.releasedDate);
                     return product.quantity > 0 ? (
