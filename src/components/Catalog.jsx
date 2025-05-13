@@ -2,6 +2,24 @@ import { useState, useEffect } from "react";
 // import { GetData } from "../utils/API";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+const isNewRelease = (releaseDateString) => {
+  if (!releaseDateString) {
+    return false;
+  }
+
+  const releaseDate = new Date(releaseDateString);
+  const currentDate = new Date();
+
+  const normalizedReleaseDate = new Date(releaseDate.getFullYear(), releaseDate.getMonth(), releaseDate.getDate());
+  const normalizedCurrentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+  const fourteenDaysInMs = 14 * 24 * 60 * 60 * 1000;
+  const timeDifference = normalizedCurrentDate.getTime() - normalizedReleaseDate.getTime();
+
+  return timeDifference >= 0 && timeDifference <= fourteenDaysInMs || timeDifference < 0;// <0 because in database collection have a book that released date more than present
+};
+
 export default function Catalog({ id, onClose }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -27,6 +45,7 @@ export default function Catalog({ id, onClose }) {
       const res = await axios.get(
         `https://katsubook-backend.onrender.com/productss/${id}`,
       );
+      console.log(res)
       setProducts(res.data.product);
     } catch (err) {
       console.error(err);
@@ -77,14 +96,20 @@ export default function Catalog({ id, onClose }) {
                   Select Volume
                 </option>
                 {products.length > 0 &&
-                  products.map((product) =>
-                    product.quantity > 0 ? (
+                  products.map((product) => {
+                    // DEBUG: Log product details for new release check
+                    console.log(
+                      `Checking product: ${product.name_vol}, Released Date: ${product.releasedDate}, Is New: ${isNewRelease(product.releasedDate)}`,
+                    );
+
+                    const isNew = isNewRelease(product.releasedDate);
+                    return product.quantity > 0 ? (
                       <option
                         key={product._id}
                         value={product._id}
                         className="cursor-pointer px-4 py-2 text-gray-300 hover:bg-[#555]"
                       >
-                        {product.name_vol}
+                        {product.name_vol} {isNew && "(New)"}
                       </option>
                     ) : (
                       <option
@@ -92,10 +117,10 @@ export default function Catalog({ id, onClose }) {
                         disabled
                         className="cursor-not-allowed px-4 py-2 text-red-500"
                       >
-                        {product.name_vol} (Sold Out)
+                        {product.name_vol} {isNew && "(New)"} (Sold Out)
                       </option>
-                    ),
-                  )}
+                    );
+                  })}
               </select>
             </div>
           </div>
