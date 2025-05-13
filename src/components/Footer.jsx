@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div className="bg-[var(--color-greenBackground)] text-[var(--color-text)]">
       <div className="container__div px-[16px]">
-        <div className="flex flex-col justify-center pt-40 text-lg min-[1024px]:flex-row min-[1024px]:gap-5 sm:max-[815px]:leading-10">
+        <div className="flex flex-col justify-center pt-20 text-lg min-[1024px]:flex-row min-[1024px]:gap-5 sm:max-[815px]:leading-10">
           <Link to="/about">
             <p>About Us</p>
           </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
           </Link>
         </div>
         <div className="my-5 flex gap-5 min-[1024px]:justify-self-center">
-          <p>Find Us On:</p>
+          <p>Find Us:</p>
           <Link to="#facebook">
             <img src="./Facebook_Logo_Secondary.png" className="h-[20px]"></img>
           </Link>
