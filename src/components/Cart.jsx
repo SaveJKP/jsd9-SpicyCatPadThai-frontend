@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/userContext";
@@ -45,7 +45,7 @@ export const Cart = () => {
     }
   };
 
-  const postOder = async () => {
+  const postOrder = async () => {
     try {
       const orderItems = cart.map((item) => ({
         product_id: item._id,
@@ -67,11 +67,11 @@ export const Cart = () => {
   };
 
   const handleCheckoutComplete = () => {
-    setCart([]); // Clear the cart after checkout
-    postOder();
-    setShowCheckout(true);
-
-    // placeholder for posting to the server
+    setTimeout(() => {
+      setCart([]); // Clear the cart after checkout
+      postOrder();
+      setShowCheckout(true);
+    }, 2000);
   };
 
   const handleScrollToTop = () => {
@@ -88,12 +88,17 @@ export const Cart = () => {
           Thank you for shopping with us! <br />
           Your order has been processed.
         </p>
-
+        <Link
+          to={`/orders/${user?._id}`}
+          className="bg-buttonBlue rounded-2xl px-[58px] py-2 text-xl text-[var(--color-white)] hover:bg-[#7aaed6]"
+        >
+          See your order history
+        </Link>
         <Link
           to="/"
           className="rounded-2xl bg-[var(--color-buttonBrown)] px-[58px] py-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e]"
         >
-          Go to Home
+          Continue Shopping
         </Link>
       </div>
     );
@@ -206,7 +211,7 @@ export const Cart = () => {
               <RadioGroupPayment className="py-10" />
             </form>
             <button
-              className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:bg-[#bc71427e] md:mt-[200px]"
+              className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:cursor-pointer hover:bg-[#bc71427e] md:mt-[200px]"
               onClick={() => {
                 handleCheckoutComplete();
                 handleScrollToTop();
