@@ -73,7 +73,7 @@ export const Navbar = () => {
             <div className="flex w-[30%] items-center sm:max-md:hidden">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search by title, author, description, or category"
                 className="hover:border-lightgray bg-text relative left-10 my-[5%] h-[65%] w-full rounded-lg border border-none p-[12px] text-[var(--color-banner)] transition-all duration-300 focus:border-[2px] focus:border-gray-500 sm:max-[815px]:hidden"
                 onClick={() => navigate("/search")}
                 value={searchText}
