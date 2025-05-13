@@ -3,14 +3,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { useAuth } from "../context/userContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 
 export default function Login() {
   const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -93,13 +102,24 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="text-banner w-[65%] rounded-2xl bg-white px-4 py-2 md:w-[35%] lg:w-[50%]"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                {/* Password Input with Toggle */}
+                <div className="relative w-[65%] md:w-[35%] lg:w-[50%]">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="text-banner w-full rounded-2xl bg-white px-4 py-2 pr-10"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={toggleShowPassword}
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-600 hover:cursor-pointer"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
 
                 <Link to="/forgot-password">Forget Your password?</Link>
                 <div className="flex w-[65%] flex-col items-center justify-center gap-4 md:w-[35%] lg:w-[50%]">
