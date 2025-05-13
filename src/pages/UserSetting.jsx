@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import BrownButton from "../components/BrownButton";
 import GreenButton from "../components/GreenButton";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {
   Card,
   CardContent,
@@ -36,6 +38,20 @@ export default function UserProfile() {
 
   const [loading, setLoading] = useState(true); // For loading state
   const [isSubmitting, setIsSubmitting] = useState(false); // For handling the submit state
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const [error, setError] = useState("");
+  const [message, setMessage ] = useState("");
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   // 0.1 Fetch user data from API
   useEffect(() => {
@@ -73,11 +89,10 @@ export default function UserProfile() {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
   };
 
-  //0.3 Handle form submission (send updated data to backend)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // Disable the button while submitting
+    setIsSubmitting(true);
 
     const payload = {
       name: updatedUser.name,
@@ -104,7 +119,7 @@ export default function UserProfile() {
       console.error("Error updating user:", error);
       alert("Failed to update profile. Please try again later.");
     } finally {
-      setIsSubmitting(false); // Re-enable the button after submitting
+      setIsSubmitting(false);
     }
   };
 
@@ -113,6 +128,27 @@ export default function UserProfile() {
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const { newPassword } = updatedUser;
+
+    if (newPassword.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      toast.error("Password must be at least 6 characters long.");
+      setIsSubmitting(false);
+      return;
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>_]/.test(newPassword)) {
+      setError("Password must contain at least one special character.");
+      toast.error("Password must contain at least one special character.");
+      setIsSubmitting(false);
+      return;
+    }
+    if (/\s/.test(newPassword)) {
+      setError("Password cannot contain spaces.");
+      toast.error("Password cannot contain spaces.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const res = await axios.patch(
@@ -127,10 +163,8 @@ export default function UserProfile() {
           },
         },
       );
-
       alert("Password changed successfully!");
       setUpdatedUser((prev) => ({
-        //copy everything from previous state such as name email to change only password. After copying and changing password,  reset password fields and  and
         ...prev,
         currentPassword: "",
         newPassword: "",
@@ -263,7 +297,7 @@ export default function UserProfile() {
                         }}
                         label="City"
                         name="cityId"
-                        disabled={!updatedUser.countryId} // Disable if no country selected
+                        disabled={!updatedUser.countryId}
                       />
                     </div>
                     <div className="space-y-1">
@@ -303,23 +337,41 @@ export default function UserProfile() {
                   <CardContent className="space-y-2">
                     <div className="space-y-1">
                       <Label htmlFor="current">Current password</Label>
-                      <Input
-                        id="current"
-                        type="password"
-                        name="currentPassword"
-                        value={updatedUser.currentPassword}
-                        onChange={handleChange}
-                      />
+                      <div className="relative">
+                        <Input
+                          id="current"
+                          type={showPassword ? "text" : "password"}
+                          name="currentPassword"
+                          value={updatedUser.currentPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={toggleShowPassword}
+                          className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-600 hover:cursor-pointer"
+                        >
+                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
                     </div>
                     <div className="space-y-1">
                       <Label htmlFor="new">New password</Label>
-                      <Input
-                        id="new"
-                        type="password"
-                        name="newPassword"
-                        value={updatedUser.newPassword}
-                        onChange={handleChange}
-                      />
+                      <div className="relative">
+                        <Input
+                          id="new"
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="newPassword"
+                          value={updatedUser.newPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          onClick={toggleShowConfirmPassword}
+                          className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-600 hover:cursor-pointer "
+                        >
+                          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                      </div>
                     </div>
                   </CardContent>
                   <CardFooter>
