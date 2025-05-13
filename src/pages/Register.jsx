@@ -54,6 +54,21 @@ export default function Register() {
       setError("Passwords do not match.");
       return;
     }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      toast.error("Password must be at least 6 characters long.");
+      return;
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>_]/.test(password)) {
+      setError("Password must contain at least one special character.");
+      toast.error("Password must contain at least one special character.");
+      return;
+    }
+    if (/\s/.test(password)) {
+      setError("Password cannot contain spaces.");
+      toast.error("Password cannot contain spaces.");
+      return;
+    }
 
     try {
       const response = await axios.post(
