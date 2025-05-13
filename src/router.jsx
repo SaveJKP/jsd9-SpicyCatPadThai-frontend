@@ -12,6 +12,7 @@ import Search from "./pages/Search";
 import UserSetting from "./pages/UserSetting";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
+import ResetPassword from "./pages/ResetPassword";
 import { SearchOrder } from "./pages/SearchOrder";
 import { AuthProvider } from "./context/userContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: "error-handling", element: <ErrorHandling /> },
       { path: "search", element: <Search /> },
       { path: "add-to-cart/:id", element: <AddToCart /> },
+      { path: "reset-password", element: <ResetPassword /> },
       {
         element: <ProtectedRoute />,
         children: [
