@@ -45,7 +45,6 @@ export default function Catalog({ id, onClose }) {
       const res = await axios.get(
         `https://katsubook-backend.onrender.com/productss/${id}`,
       );
-      console.log(res)
       setProducts(res.data.product);
     } catch (err) {
       console.error(err);
