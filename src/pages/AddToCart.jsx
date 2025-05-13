@@ -23,7 +23,6 @@ export default function AddToCart() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const isNew = isNewRelease(product.releasedDate);
 
   const handleSetQuantity = (newQuantity) => {
     setQuantity(newQuantity);
@@ -197,6 +196,8 @@ export default function AddToCart() {
       </Link>
     </div>
   ));
+
+  const isNew = isNewRelease(product.releasedDate);
 
   return (
     <div className="bg-[var(--color-greenBackground)]">
