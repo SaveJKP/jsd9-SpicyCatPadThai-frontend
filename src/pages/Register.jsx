@@ -8,6 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 export default function Register() {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
+  const [message, setMessage ] = useState("");
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -64,6 +65,10 @@ export default function Register() {
       );
 
       setData(...data, response.data);
+      setMessage("Registration Successful!");
+      toast("Registration successfully!", {
+        description: `Welcome to KatsuBook Store, ${name}!`,
+      })
       navigate("/login");
     } catch (err) {
       console.error(err);
@@ -87,10 +92,16 @@ export default function Register() {
               />
               <h1 className="font-bold">Register</h1>
 
-              {error && (
+              {error ?  (
                 <div className="mb-4 rounded bg-red-100 px-4 py-2 text-center text-red-700">
                   {error}
                 </div>
+              ) : (
+                message && (
+                  <div className="mb-4 rounded bg-green-100 px-4 py-2 text-center text-green-700">
+                    {message}
+                  </div>
+               )
               )}
 
               {/* Register Form */}
@@ -298,11 +309,6 @@ export default function Register() {
                 <button
                   type="submit"
                   className="bg-buttonBlue mt-[3%] w-[50%] rounded-2xl px-1 py-2 font-semibold hover:cursor-pointer"
-                  onClick={() =>
-                    toast("Registration successfully!", {
-                      description: `Welcome to KatsuBook Store, ${name}!`,
-                    })
-                  }
                 >
                   Create Account
                 </button>
