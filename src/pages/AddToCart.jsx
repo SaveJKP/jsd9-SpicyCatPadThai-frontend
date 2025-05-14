@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useCart } from "../context/CartContext.jsx";
+import { isNewRelease } from "../components/NewReleaseTrigger.jsx";
 import axios from "axios";
 
 export default function AddToCart() {
@@ -127,7 +128,7 @@ export default function AddToCart() {
       return updatedCart;
     });
     toast("Added to Cart!");
-    setQuantity(1)
+    setQuantity(1);
   };
 
   if (!product) {
@@ -196,6 +197,8 @@ export default function AddToCart() {
     </div>
   ));
 
+  const isNew = isNewRelease(product.releasedDate);
+
   return (
     <div className="bg-[var(--color-greenBackground)]">
       <div className="container__div text-[var(--color-text)]">
@@ -224,7 +227,9 @@ export default function AddToCart() {
           </div>
           {/* Product info */}
           <div className="space-y-2 rounded-[10px] bg-[var(--color-buttonBrown)] p-[32px] py-12 text-[var(--cls-white)] max-sm:pt-[30px]">
-            <p className="text-2xl font-bold md:text-3xl">{product.name_vol}</p>
+            <p className="text-2xl font-bold md:text-3xl">
+              {product.name_vol} {product.releasedDate && isNew && "(New)"}
+            </p>
             <select
               name="volume"
               value={selectedProductVolumeId} // ควบคุมค่าด้วย state
@@ -234,21 +239,26 @@ export default function AddToCart() {
               <option value="" disabled className="hidden text-gray-500">
                 Select Volume
               </option>
+
               {products.length > 0 &&
-                products.map((p) => (
-                  <option
-                    key={p._id}
-                    value={p._id}
-                    disabled={p.quantity <= 0}
-                    className={`cursor-pointer px-4 py-2 text-black hover:bg-gray-100 ${
-                      p.quantity <= 0
-                        ? "cursor-not-allowed bg-gray-50 text-red-500"
-                        : ""
-                    }`}
-                  >
-                    {p.name_vol} {p.quantity <= 0 && "(Sold Out)"}
-                  </option>
-                ))}
+                products.map((p) => {
+                  const isNew = isNewRelease(p.releasedDate);
+                  return (
+                    <option
+                      key={p._id}
+                      value={p._id}
+                      disabled={p.quantity <= 0}
+                      className={`cursor-pointer px-4 py-2 text-black hover:bg-gray-100 ${
+                        p.quantity <= 0
+                          ? "cursor-not-allowed bg-gray-50 text-red-500"
+                          : ""
+                      }`}
+                    >
+                      {p.name_vol} {p.releasedDate && isNew && "(New)"}
+                      {p.quantity <= 0 && "(Sold Out)"}
+                    </option>
+                  );
+                })}
             </select>
             <p className="text-2xl">{product.author}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>

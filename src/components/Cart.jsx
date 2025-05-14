@@ -8,6 +8,8 @@ import { RadioGroupPayment } from "./RadioGroupPayment";
 
 export const Cart = () => {
   const { cart, setCart } = useCart();
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const { user } = useAuth();
 
   const [showCheckout, setShowCheckout] = useState(false);
@@ -63,22 +65,17 @@ export const Cart = () => {
       );
     } catch (err) {
       console.error(err);
+      setError("Something went wrong. Please try again.");
     }
   };
 
   const handleCheckoutComplete = () => {
+    setMessage("Processing your order...");
     setTimeout(() => {
       setCart([]); // Clear the cart after checkout
       postOrder();
       setShowCheckout(true);
-    }, 2000);
-  };
-
-  const handleScrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    }, 3000);
   };
 
   if (showCheckout) {
@@ -135,7 +132,7 @@ export const Cart = () => {
                     {item.name_vol}
                   </h3>
                   <p className="pb-[8px]">Vol. {item.volume_no}</p>
-                  <p className="pb-[8px]">{item.author}</p>
+                  {/* <p className="pb-[8px]">{item.author}</p> */}
                   <p className="pb-[8px]">฿{item.price.toFixed(2)} </p>
 
                   <div className="grid grid-cols-2 place-content-between py-4">
@@ -210,11 +207,21 @@ export const Cart = () => {
             <form>
               <RadioGroupPayment className="py-10" />
             </form>
+            {error ? (
+              <div className="mb-4 rounded bg-red-100 px-4 py-2 text-center text-red-700">
+                {error}
+              </div>
+            ) : (
+              message && (
+                <div className="mb-4 rounded bg-green-100 px-4 py-2 text-center text-green-700">
+                  {message}
+                </div>
+              )
+            )}
             <button
               className="flex w-full justify-center rounded-2xl bg-[var(--color-buttonBrown)] p-2 text-xl text-[var(--color-white)] hover:cursor-pointer hover:bg-[#bc71427e] md:mt-[200px]"
               onClick={() => {
                 handleCheckoutComplete();
-                handleScrollToTop();
               }}
             >
               Check out
