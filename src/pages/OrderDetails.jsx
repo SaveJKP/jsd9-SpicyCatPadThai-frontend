@@ -152,8 +152,11 @@ export default function OrderDetails() {
                 <h4 className="pt-5 font-semibold">Shipping Address</h4>
                 <p>
                   {userDetails.name?.charAt(0).toUpperCase() +
-                    userDetails.name?.slice(1)}
+                    userDetails.name?.slice(1)}{" "}
+                  {userDetails.lastName?.charAt(0).toUpperCase() +
+                    userDetails.lastName?.slice(1)}
                 </p>
+
                 <p>{userDetails.address}</p>
                 <p>{userDetails.city_id?.name}</p>
                 <p>{userDetails.phoneNumber}</p>
