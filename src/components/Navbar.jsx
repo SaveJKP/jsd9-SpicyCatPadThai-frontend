@@ -42,7 +42,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 bg-[var(--color-greenBackground)]">
+      <div className="sticky top-0 z-50 py-4 bg-[var(--color-greenBackground)]">
         <div className="container__div">
           <div className="flex h-[64px] flex-row justify-between gap-1 px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-[10px]">
             <div className="flex flex-row">
@@ -104,7 +104,7 @@ export const Navbar = () => {
               <Link to={"/search"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute top-4 sm:max-[815px]:hidden"
+                  className="mt-4 absolute top-4 sm:max-[815px]:hidden"
                   viewBox="0 -960 960 960"
                   width="32px"
                   fill="#d9d9d9"
@@ -173,7 +173,7 @@ export const Navbar = () => {
       </div>
 
       {/* Category Navigation Bar */}
-      <div className="sticky top-[64px] z-40 bg-banner w-full text-white shadow-md">
+      {/* <div className="sticky top-[64px] z-40 bg-banner w-full text-white shadow-md">
         <div className="container__div">
           <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-2 sm:gap-x-4 md:gap-x-6 md:px-[24px]">
             {categories && categories.length > 0 ? ( // Ensure categories is not null/undefined before checking length
@@ -194,7 +194,7 @@ export const Navbar = () => {
             )}
           </ul>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
