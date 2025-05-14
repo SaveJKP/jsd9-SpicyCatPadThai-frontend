@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { ordersData } from "../data/Orders.js";
 import logo_katsubook_notext from "/logo_katsubook_onlylogo.png";
@@ -8,15 +7,31 @@ import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 import { UserPopover } from "./UserPopOver";
 import { LoginPopover } from "./LoginPopOver";
 import { useAuth } from "../context/userContext";
+import axios from "axios"
 
 export const Navbar = () => {
   const [searchText, setSearchText] = useState("");
+
+  const [ categories, setCategories ] = useState([]);
 
   const { user } = useAuth();
   const { totalQuantity } = useCart();
   const navigate = useNavigate();
 
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("https://katsubook-backend.onrender.com/api/category/get-all");
+    console.log("API response for categories:", response.data); // <-- Add this line
+      setCategories(response.data.category);
+    } catch (err) {
+    console.error("Error fetching categories:", err);
+      setCategories([]);
+    }
+  }
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   const handleSearch = () => {
     const textTrimmed = searchText.trim();
@@ -154,6 +169,30 @@ export const Navbar = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Category Navigation Bar */}
+      <div className="sticky top-[64px] z-40 bg-banner w-full text-white shadow-md">
+        <div className="container__div">
+          <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-2 sm:gap-x-4 md:gap-x-6 md:px-[24px]">
+            {categories && categories.length > 0 ? ( // Ensure categories is not null/undefined before checking length
+              categories
+                .filter(category => category.category_name && category.category_name.trim() !== "") // Filter out categories with empty or null names
+                .map((category) => (
+                  <li key={category._id || category.category_name}>
+                    <Link
+                      to={`/category/${encodeURIComponent(category.category_name)}`} // Add encodeURIComponent
+                      className="hover:text-gray-300 text-white"
+                    >
+                      {category.category_name}
+                    </Link>
+                  </li>
+                ))
+            ) : (
+              <li>Loading categories...</li>
+            )}
+          </ul>
         </div>
       </div>
     </>
