@@ -260,7 +260,7 @@ export default function AddToCart() {
                   );
                 })}
             </select>
-            <p className="text-2xl">{product.author_id.author_name}</p>
+            <p className="text-2xl">{product.author_id?.author_name}</p>
             <p className="py-5 text-3xl md:text-5xl">฿{product.price}</p>
 
             <div className="flex flex-row space-x-8 pb-15 md:items-center md:py-5">

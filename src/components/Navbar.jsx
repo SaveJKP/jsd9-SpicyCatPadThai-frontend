@@ -21,7 +21,6 @@ export const Navbar = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get("https://katsubook-backend.onrender.com/api/category/get-all");
-    console.log("API response for categories:", response.data); // <-- Add this line
       setCategories(response.data.category);
     } catch (err) {
     console.error("Error fetching categories:", err);
