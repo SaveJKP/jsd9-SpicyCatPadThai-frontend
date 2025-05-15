@@ -20,7 +20,7 @@ export default function CardSlider({ name }) {
         );
         setBanners(response.data.trending || []);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setBanners([]);
       }
     };
@@ -36,7 +36,6 @@ export default function CardSlider({ name }) {
       <Carousel
         opts={{
           align: "start",
-          // loop: true
         }}
         className="w-full"
       >
@@ -51,8 +50,6 @@ export default function CardSlider({ name }) {
             />
           ))}
         </CarouselContent>
-        {/*   <CarouselPrevious className="absolute left-[-10px] md:left-[-20px] top-1/2 -translate-y-1/2" />
-            <CarouselNext className="absolute right-[-10px] md:right-[-20px] top-1/2 -translate-y-1/2" /> */}
       </Carousel>
     </div>
   );

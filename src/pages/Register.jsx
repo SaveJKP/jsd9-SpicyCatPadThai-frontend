@@ -13,7 +13,6 @@ export default function Register() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  // const [gender, setGender] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -176,22 +175,6 @@ export default function Register() {
                     onChange={(e) => setDateOfBirth(e.target.value)}
                   />
                 </div>
-
-                {/* <div className="flex flex-row justify-between items-center w-full px-12">
-                    <label htmlFor="gender" className="w-1/3">Gender:</label>
-                    <ul className="flex flex-row gap-4 w-2/3">
-                            <li className="flex flex-row text-center gap-2">
-                                <input type="radio" id="gender_male" name="gender"
-                                value={gender} onChange={(e) => setGender(e.target.value)}/>
-                                <p>M</p>
-                            </li>
-                            <li className="flex flex-row text-center gap-2">
-                                <input type="radio" id="gender_female" name="gender"
-                                value={gender} onChange={(e) => setGender(e.target.value)}/>
-                                <p>F</p>
-                            </li>
-                        </ul>
-                  </div> */}
 
                 <div className="flex w-full flex-row items-center justify-between px-12">
                   <label htmlFor="email" className="w-1/3">
