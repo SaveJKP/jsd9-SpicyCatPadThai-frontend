@@ -91,9 +91,15 @@ export default function Register() {
       if (err.response && err.response.status === 409) {
         setError("Email was already in use.");
         toast.error("Sorry, This Email was already in use.");
+        return;
+      }  else if (err.response && err.response.status === 406) {
+        setError("Birth Date must be between 1 and 100 years old.")
+        toast.error("Birth Date must be between 1 and 100 years old.");
+        return;
       } else {
         setError("Something wrong with server. Please try again.");
         toast.error("Server Error, Please Try again.");
+        return;
       }
     }
   };
