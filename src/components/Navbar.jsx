@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { ordersData } from "../data/Orders.js";
 import logo_katsubook_notext from "/logo_katsubook_onlylogo.png";
 import { useCart } from "../context/CartContext";
 import logo_katsubook_text from "/logo_katsubook_onlytext.png";
 import { UserPopover } from "./UserPopOver";
 import { LoginPopover } from "./LoginPopOver";
 import { useAuth } from "../context/userContext";
-import axios from "axios"
+import axios from "axios";
 
 export const Navbar = () => {
   const [searchText, setSearchText] = useState("");
 
-  const [ categories, setCategories ] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const { user } = useAuth();
   const { totalQuantity } = useCart();
@@ -20,13 +19,15 @@ export const Navbar = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://katsubook-backend.onrender.com/api/category/get-all");
+      const response = await axios.get(
+        "https://katsubook-backend.onrender.com/api/category/get-all",
+      );
       setCategories(response.data.category);
     } catch (err) {
-    console.error("Error fetching categories:", err);
+      console.error("Error fetching categories:", err);
       setCategories([]);
     }
-  }
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -41,7 +42,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 py-4 bg-[var(--color-greenBackground)]">
+      <div className="sticky top-0 z-50 bg-[var(--color-greenBackground)] py-4">
         <div className="container__div">
           <div className="flex h-[64px] flex-row justify-between gap-1 px-[24px] py-1 text-[var(--color-text)] sm:max-md:px-[10px]">
             <div className="flex flex-row">
@@ -103,7 +104,7 @@ export const Navbar = () => {
               <Link to={"/search"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mt-4 absolute top-4 sm:max-[815px]:hidden"
+                  className="absolute top-4 mt-4 sm:max-[815px]:hidden"
                   viewBox="0 -960 960 960"
                   width="32px"
                   fill="#d9d9d9"

@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/userContext";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -49,7 +49,9 @@ export function SearchOrder() {
     <div className="bg-[var(--color-text)]">
       <div className="container__div">
         <h2 className="py-[16px] pl-[16px] text-2xl font-bold">Your Orders</h2>
-        <h3 className="py-[16px] pl-[16px] font-bold">Search Results</h3>
+        <h3 className="py-[16px] pl-[16px] font-bold">
+          Search Results: {query}
+        </h3>
         <div className="min-h-screen w-full p-4">
           {error && <p className="mt-2 text-red-500">{error}</p>}
 
@@ -96,7 +98,7 @@ export function SearchOrder() {
                     </p>
                     <p>Total: ฿{order.total_price.toFixed(2)}</p>
                     <p
-                      className="min-[1024px]]:hidden cursor-pointer py-5 text-[var(--color-greenBackground)] hover:text-[var(--color-box)]"
+                      className="cursor-pointer py-5 text-[var(--color-greenBackground)] hover:text-[var(--color-box)] min-[1024px]:hidden"
                       onClick={() => {
                         navigate(`/orders/${order.user_id}/${order.order_id}`);
                         handleScrollToTop();

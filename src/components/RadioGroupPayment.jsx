@@ -19,18 +19,6 @@ export const RadioGroupPayment = () => {
             <img src="/PromptPay2.png" className="max-w-20"></img>
           </Label>
         </div>
-        {/* <div className="flex items-center space-x-2">
-          <RadioGroupItem
-            value="option-two"
-            id="option-two"
-            className="border-gray-600 p-2"
-          />
-          <Label htmlFor="option-two" className="text-base">
-            Credit Card
-            <img src="/visa_logo.png" className="max-w-[40px]"></img>
-            <img src="/mastercard_logo.png" className="max-w-[40px]"></img>
-          </Label>
-        </div> */}
       </RadioGroup>
     </div>
   );

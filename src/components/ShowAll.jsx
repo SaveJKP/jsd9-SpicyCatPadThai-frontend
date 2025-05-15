@@ -89,13 +89,16 @@ export default function ShowAll() {
               />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" className="text-banner text-xl" isActive>
+              <PaginationLink className="text-banner text-xl" isActive>
                 {currentPage}
               </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              {/* <PaginationEllipsis className="text-text text-xl" /> */}
+              <PaginationEllipsis className="text-text text-xl" />
             </PaginationItem>
+            <PaginationLink className="text-banner text-xl" isActive>
+              {totalPages}
+            </PaginationLink>
             <PaginationItem>
               {/* Next Page */}
               <PaginationNext

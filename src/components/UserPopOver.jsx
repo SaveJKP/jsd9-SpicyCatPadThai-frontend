@@ -41,13 +41,7 @@ export function UserPopover() {
           >
             My Profile
           </Link>
-          {/* <Link
-            to="/about"
-            className="leading-none font-medium hover:text-[var(--color-radio)]"
-            onClick={() => setPopOverOpen(false)}
-          >
-            About Us
-          </Link> */}
+
           <button
             onClick={() => {
               logout();

@@ -11,7 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function BannerSlider() {
   const plugin = React.useRef(
-    Autoplay({ delay: 6000, stopOnInteraction: true }),
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
   );
 
   const bannerItems = [

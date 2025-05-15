@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useCart } from "../context/CartContext.jsx";
 import { isNewRelease } from "../components/NewReleaseTrigger.jsx";
@@ -16,13 +16,11 @@ export default function AddToCart() {
     handleRemove,
     quantity,
     product,
-    totalPrice,
     setProduct,
     setQuantity,
   } = useCart();
 
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const handleSetQuantity = (newQuantity) => {
     setQuantity(newQuantity);
@@ -155,20 +153,6 @@ export default function AddToCart() {
       </span>
     );
   });
-
-  const getRandomBooks = (products, categoryName, excludeId) => {
-    if (!products || !categoryName) return [];
-
-    const filteredBooks = products.filter(
-      (product) =>
-        product.categories?.some((cat) => cat.category_name === categoryName),
-      product.categories?.some((cat) => cat.category_name === categoryName),
-    );
-
-    return filteredBooks
-      .filter((item) => item.product_id !== excludeId)
-      .sort(() => Math.random() - 0.5);
-  };
 
   const similarBooks = similar.map((book, index) => (
     <div

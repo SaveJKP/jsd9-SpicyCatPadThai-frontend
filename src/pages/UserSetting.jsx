@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import BrownButton from "../components/BrownButton";
-import GreenButton from "../components/GreenButton";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -22,8 +20,6 @@ import Dropdown from "../components/Dropdown";
 
 export default function UserProfile() {
   const { userId } = useParams();
-  // const user = users.find(u => u.user_id === Number(userId));
-
   const [user, setUser] = useState(null); // Store user data
   const [updatedUser, setUpdatedUser] = useState({
     name: "",
@@ -43,7 +39,7 @@ export default function UserProfile() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [error, setError] = useState("");
-  const [message, setMessage ] = useState("");
+  const [message, setMessage] = useState("");
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -88,7 +84,6 @@ export default function UserProfile() {
   const handleChange = (e) => {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -367,7 +362,7 @@ export default function UserProfile() {
                         <button
                           type="button"
                           onClick={toggleShowConfirmPassword}
-                          className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-600 hover:cursor-pointer "
+                          className="absolute top-1/2 right-3 -translate-y-1/2 transform text-gray-600 hover:cursor-pointer"
                         >
                           {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>

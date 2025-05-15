@@ -3,10 +3,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// const [popOverOpen, setPopOverOpen] = useState(false);
 const togglePopOver = () => {
   setPopOverOpen(!popOverOpen);
 };
