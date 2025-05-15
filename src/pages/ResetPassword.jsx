@@ -62,7 +62,6 @@ export default function ResetPassword() {
       setMessage(
         "Password has been reset successfully! Redirecting to login...",
       );
-      console.log(response)
       setTimeout(() => {
         navigate("/login");
       }, 2000);

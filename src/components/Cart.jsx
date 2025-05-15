@@ -132,7 +132,7 @@ export const Cart = () => {
                     {item.name_vol}
                   </h3>
                   <p className="pb-[8px]">Vol. {item.volume_no}</p>
-                  {/* <p className="pb-[8px]">{item.author}</p> */}
+                  <p className="pb-[8px]">{item.author_id?.author_name}</p>
                   <p className="pb-[8px]">฿{item.price.toFixed(2)} </p>
 
                   <div className="grid grid-cols-2 place-content-between py-4">
