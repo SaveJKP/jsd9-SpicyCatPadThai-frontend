@@ -171,30 +171,6 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Category Navigation Bar */}
-      {/* <div className="sticky top-[64px] z-40 bg-banner w-full text-white shadow-md">
-        <div className="container__div">
-          <ul className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-2 sm:gap-x-4 md:gap-x-6 md:px-[24px]">
-            {categories && categories.length > 0 ? ( // Ensure categories is not null/undefined before checking length
-              categories
-                .filter(category => category.category_name && category.category_name.trim() !== "") // Filter out categories with empty or null names
-                .map((category) => (
-                  <li key={category._id || category.category_name}>
-                    <Link
-                      to={`/category/${encodeURIComponent(category.category_name)}`} // Add encodeURIComponent
-                      className="hover:text-gray-300 text-white"
-                    >
-                      {category.category_name}
-                    </Link>
-                  </li>
-                ))
-            ) : (
-              <li>Loading categories...</li>
-            )}
-          </ul>
-        </div>
-      </div> */}
     </>
   );
 };
