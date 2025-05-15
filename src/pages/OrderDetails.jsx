@@ -146,7 +146,7 @@ export default function OrderDetails() {
               <p className="font-semibold">Grand total:</p>
               <p>฿{order.total_price.toFixed(2)}</p>
             </div>
-            <p className="font-bold">Payment Information</p>
+
             <div className="flex flex-col sm:max-md:flex-col">
               <div className="sm:max-md:w-full">
                 <h4 className="pt-5 font-semibold">Shipping Address</h4>

@@ -68,12 +68,18 @@ export const Cart = () => {
       setError("Something went wrong. Please try again.");
     }
   };
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 2,
+      behavior: "smooth",
+    });
+  };
   const handleCheckoutComplete = () => {
     setMessage("Processing your order...");
     setTimeout(() => {
       setCart([]); // Clear the cart after checkout
       postOrder();
+      scrollToTop();
       setShowCheckout(true);
     }, 3000);
   };
@@ -83,7 +89,7 @@ export const Cart = () => {
       <div className="flex flex-col items-center space-y-10 py-[100px] md:w-[100%]">
         <p className="text-center text-xl leading-12 text-white">
           Thank you for shopping with us! <br />
-          Your order has been processed.
+          Your order has been placed.
         </p>
         <Link
           to={`/orders/${user?._id}`}
